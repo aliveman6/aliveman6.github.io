@@ -13,18 +13,25 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://aliveman6.github.io/"/>
+    <link rel="canonical" href="https://aliveman6.github.io/2024/05/07/linux权限详解/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://aliveman6.github.io/index.html">
+        <meta name="description" content="本文记录了Linux的权限详解（chmod、600、644、666、700、711、755、777、4755、6755、7755）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux权限详解">
+<meta property="og:url" content="https://aliveman6.github.io/2024/05/07/Linux%E6%9D%83%E9%99%90%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本文记录了Linux的权限详解（chmod、600、644、666、700、711、755、777、4755、6755、7755）。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Linux1.png">
+<meta property="article:published_time" content="2024-05-07T10:40:00.000Z">
+<meta property="article:modified_time" content="2024-05-07T15:20:30.535Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Linux1.png">
     
     
     <!--- Icon Part-->
@@ -35,6 +42,8 @@
     <!--- Page Info-->
     
     <title>
+        
+            Linux权限详解 -
         
         X Blog
     </title>
@@ -271,116 +280,6 @@
 <main class="page-container" id="swup">
 
     
-        
-    <style>
-        .home-banner-container {
-            background: none !important;
-        }
-        .home-article-item,
-        .sidebar-links,
-        .sidebar-content,
-        a.page-number,
-        a.extend,
-        .sidebar-links .links:hover,
-        .right-bottom-tools,
-        footer.footer {
-            background-color: var(--background-color-transparent-80) !important;
-        }
-        .right-bottom-tools:hover,
-        a.page-number:hover,
-        a.extend:hover {
-            background-color: var(--primary-color) !important;
-        }
-        .site-info,
-        .home-article-sticky-label {
-            background-color: var(--background-color-transparent-15) !important;
-        }
-        .home-article-sticky-label {
-            backdrop-filter: none !important;
-        }
-    </style>
-    <div class="home-banner-background transition-fade fixed top-0 left-0 w-screen h-screen scale-125 sm:scale-110 box-border will-change-transform bg-cover">
-        <img src="/images/wallhaven-wqery6-light.webp" alt="home-banner-background" class="w-full h-full object-cover dark:hidden">
-        <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/DJ.jpg" alt="home-banner-background" class="w-full h-full object-cover hidden dark:block">
-    </div>
-
-
-<div class="home-banner-container flex justify-center items-center transition-fade relative">
-    
-    <div class="content mt-8 flex flex-col justify-center items-center">
-        <div class="description flex flex-col justify-center items-center w-screen font-medium text-center"
-        
-        >
-            这是一个没想好名字的标题
-            
-            
-                <p><i id="subtitle"></i></p>
-            
-        </div>
-        
-            
-            <div class="absolute bottom-0.5 flex flex-row justify-between max-w-[1340px] items-center w-full px-8 sm:px-12">
-                <div class="flex p-3 bg-gray-300/50 dark:bg-gray-500/40 backdrop-blur-lg border border-white/20 dark:border-gray-500/30 group rounded-full cursor-pointer flex justify-center items-center aspect-square h-full shadow-redefine-flat hover:shadow-redefine-flat-hover transition-shadow" onclick="scrollToMain()" >
-                    <i class="fa-solid fa-arrow-down fa-fw fa-lg group-hover:translate-y-1 transition-transform"></i>
-                </div>
-                <div class="social-contacts px-6 py-3 bg-gray-300/50 dark:bg-gray-500/40 backdrop-blur-lg border border-white/20 dark:border-gray-500/30 shadow-redefine-flat rounded-full flex flex-row gap-3 items-center">
-                    
-                        
-                            
-                                <span class="social-contact-item github">
-                                    <a target="_blank" href="https://github.com/aliveman6">
-                                        <i class="fa-brands fa-fw fa-lg fa-github"></i>
-                                    </a>
-                                </span>
-                            
-                        
-                    
-                        
-                    
-                        
-                            
-                                <span class="social-contact-item zhihu">
-                                    <a target="_blank" href="https://www.zhihu.com/people/zhui-sha-zhe-hao-tian-ling">
-                                        <i class="fa-brands fa-fw fa-lg fa-zhihu"></i>
-                                    </a>
-                                </span>
-                            
-                        
-                    
-                        
-                            
-                                <span class="social-contact-item twitter">
-                                    <a target="_blank" href="https://twitter.com/Streamconsciou2">
-                                        <i class="fa-brands fa-fw fa-lg fa-twitter"></i>
-                                    </a>
-                                </span>
-                            
-                        
-                    
-                        
-                            
-                                <span class="social-contact-item email ">
-                                    <a href="mailto:1500937374@qq.com">
-                                        <i class="fa-solid fa-fw fa-at fa-lg"></i>
-                                    </a>
-                                </span>
-                            
-                        
-                    
-                    
-                </div>
-            </div>
-        
-    </div>
-    <script>
-        const scrollToMain = ()=> {
-            console.log('scroll');
-            const target = document.querySelector('.main-content-container');
-            target.scrollIntoView({ behavior: 'smooth'});
-        }
-    </script>
-</div>
-    
 
     <div class="main-content-container">
 
@@ -388,7 +287,7 @@
         <div class="main-content-header">
             <header class="navbar-container px-6 md:px-12">
 
-    <div class="navbar-content has-home-banner">
+    <div class="navbar-content ">
         <div class="left">
             
                 <a class="logo-image" href="/">
@@ -396,9 +295,9 @@
                 </a>
             
             <a class="logo-title" href="/">
-                <h1>
+                
                 X Blog
-                </h1>
+                
             </a>
         </div>
 
@@ -412,7 +311,7 @@
 
                             <li class="navbar-item">
                                 <!-- Menu -->
-                                <a class="active"
+                                <a class=""
                                    href="/index.html"
                                         >
                                     <i class="fa-regular fa-house fa-fw"></i>
@@ -515,7 +414,7 @@
 
                     <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
                         
-                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
                            href="/index.html"
                         >
                             <span>
@@ -555,7 +454,7 @@
 
                     <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
                         
-                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
                              navbar-data-toggle="submenu-Links"
                         >
                             <span>
@@ -652,50 +551,51 @@
             <div class="main-content">
 
                 
-                    <div class="home-content-container">
-    <ul class="home-article-list">
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                
+                
+                <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Linux.png" alt="Linux权限详解" class="w-full h-60 sm:h-72 md:h-80 object-cover sm:rounded-t-large dark:brightness-75"/>
+                
+                <div class="w-full flex items-center absolute bottom-0 justify-start">
+                    <h1 class="article-title-cover text-center mx-6 my-6 text-second-text-color bg-background-color-transparent px-4 py-3 text-3xl sm:text-4xl md:text-5xl font-bold backdrop-blur-lg rounded-xl border border-border-color ">Linux权限详解</h1>
+                </div>
+            
+            </div>
+
         
-            <li class="home-article-item">
-
-                
-
-                
-                    
-                
-
-                
-                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
-                        <a href="/2024/05/07/Linux%E6%9D%83%E9%99%90%E8%AF%A6%E8%A7%A3/">
-                            <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Linux.png" alt="Linux权限详解" class="w-full h-full object-cover dark:brightness-75 transition-all" />
-                        </a>
-                    </div>
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
-                    <h3 class="home-article-title">
-                        <a href="/2024/05/07/Linux%E6%9D%83%E9%99%90%E8%AF%A6%E8%A7%A3/">
-                            Linux权限详解
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            <p>本文记录了Linux的权限详解（chmod、600、644、666、700、711、755、777、4755、6755、7755）。</p>
-
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.png">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">StreamCons</span>
                         
                     </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Tue May 07 2024 18:40:00 GMT+0800">
-                
-                    2024-05-07
-                
-            </span>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-05-07 18:40</span>
+        <span class="mobile">2024-05-07 18:40</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-07 23:20:30</span>
+            <span class="mobile">2024-05-07 23:20:30</span>
+            <span class="hover-info">更新</span>
         </span>
-        
-            <span class="home-article-category">
-                <i class="fa-solid fa-folders"></i>&nbsp;
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
             <ul>
                 
                 
@@ -709,556 +609,250 @@
                 
             </ul>
         </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/Linux/">Linux</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2024/05/07/Linux%E6%9D%83%E9%99%90%E8%AF%A6%E8%A7%A3/">阅读全文<span class="seo-reader-text">Linux权限详解</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                
-                    
-                
-
-                
-                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
-                        <a href="/2024/05/06/%E8%AE%B0%E4%B8%80%E6%AC%A1VMware%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E4%B8%BB%E6%9C%BA%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%BC%8F/">
-                            <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Vmware.png" alt="记一次VMware的虚拟机和主机的三种配置模式" class="w-full h-full object-cover dark:brightness-75 transition-all" />
-                        </a>
-                    </div>
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
-                    <h3 class="home-article-title">
-                        <a href="/2024/05/06/%E8%AE%B0%E4%B8%80%E6%AC%A1VMware%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E4%B8%BB%E6%9C%BA%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%BC%8F/">
-                            记一次VMware的虚拟机和主机的三种配置模式
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            <p>本文记录了使用VMware的虚拟机与主机之间网络无法互通的问题而解决的方案。</p>
-
-                        
-                    </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Mon May 06 2024 16:40:00 GMT+0800">
-                
-                    2024-05-06
-                
-            </span>
-        </span>
-        
-            <span class="home-article-category">
-                <i class="fa-solid fa-folders"></i>&nbsp;
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
             <ul>
                 
-                
-                    
-                        
-                        <li>
-                            <a href="/categories/VMware/">VMware</a>&nbsp;
-                        </li>
-                    
-                    
+                    <li>
+                        <a href="/tags/Linux/">Linux</a>&nbsp;
+                    </li>
                 
             </ul>
         </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/VMware/">VMware</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
+    
 
-    <a href="/2024/05/06/%E8%AE%B0%E4%B8%80%E6%AC%A1VMware%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E4%B8%BB%E6%9C%BA%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%BC%8F/">阅读全文<span class="seo-reader-text">记一次VMware的虚拟机和主机的三种配置模式</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                
-                    
-                
-
-                
-                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
-                        <a href="/2024/05/05/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">
-                            <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/MySQL.png" alt="MySQL学习笔记（一）" class="w-full h-full object-cover dark:brightness-75 transition-all" />
-                        </a>
-                    </div>
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
-                    <h3 class="home-article-title">
-                        <a href="/2024/05/05/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">
-                            MySQL学习笔记（一）
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            <p>本文旨在记录学习MySQL过程的笔记。</p>
-
-                        
-                    </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Sun May 05 2024 22:25:00 GMT+0800">
-                
-                    2024-05-05
-                
-            </span>
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>2.5k 字</span>
         </span>
-        
-            <span class="home-article-category">
-                <i class="fa-solid fa-folders"></i>&nbsp;
-            <ul>
-                
-                
-                    
-                        
-                        <li>
-                            <a href="/categories/MySQL/">MySQL</a>&nbsp;
-                        </li>
-                    
-                    
-                
-            </ul>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>9 分钟</span>
         </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/MySQL/">MySQL</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2024/05/05/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">阅读全文<span class="seo-reader-text">MySQL学习笔记（一）</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                
-                    
-                
-
-                
-                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
-                        <a href="/2024/05/05/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">
-                            <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/shell.webp" alt="Shell脚本学习笔记（一）" class="w-full h-full object-cover dark:brightness-75 transition-all" />
-                        </a>
-                    </div>
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
-                    <h3 class="home-article-title">
-                        <a href="/2024/05/05/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">
-                            Shell脚本学习笔记（一）
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            <p>本文旨在记录学习Shell过程的笔记。</p>
-
-                        
-                    </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Sun May 05 2024 21:00:00 GMT+0800">
-                
-                    2024-05-05
-                
-            </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
         </span>
-        
-            <span class="home-article-category">
-                <i class="fa-solid fa-folders"></i>&nbsp;
-            <ul>
-                
-                
-                    
-                        
-                        <li>
-                            <a href="/categories/Shell/">Shell</a>&nbsp;
-                        </li>
-                    
-                    
-                
-            </ul>
-        </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/Shell/">Shell</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2024/05/05/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">阅读全文<span class="seo-reader-text">Shell脚本学习笔记（一）</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                
-                    
-                
-
-                
-                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
-                        <a href="/2024/05/05/%E4%BB%8E0%E5%88%B01%E4%BD%BF%E7%94%A8Hexo+Github-Pages+%E9%98%BF%E9%87%8C%E4%BA%91oss+Typora+PicGo%E6%90%AD%E5%BB%BA%E4%B8%80%E5%A5%97%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
-                            <img src="https://user-images.githubusercontent.com/68590232/226150786-248efc6b-9b0b-48e9-ab42-81954d104b66.png" alt="从0到1使用Hexo+Github Pages+Redefine+阿里云oss+Typora+PicGo搭建一套个人博客" class="w-full h-full object-cover dark:brightness-75 transition-all" />
-                        </a>
-                    </div>
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
-                    <h3 class="home-article-title">
-                        <a href="/2024/05/05/%E4%BB%8E0%E5%88%B01%E4%BD%BF%E7%94%A8Hexo+Github-Pages+%E9%98%BF%E9%87%8C%E4%BA%91oss+Typora+PicGo%E6%90%AD%E5%BB%BA%E4%B8%80%E5%A5%97%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
-                            从0到1使用Hexo+Github Pages+Redefine+阿里云oss+Typora+PicGo搭建一套个人博客
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            <p>本文介绍了如何使用Hexo搭建一个属于自己的博客。</p>
-
-                        
-                    </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Sun May 05 2024 12:00:00 GMT+0800">
-                
-                    2024-05-05
-                
-            </span>
-        </span>
-        
-            <span class="home-article-category">
-                <i class="fa-solid fa-folders"></i>&nbsp;
-            <ul>
-                
-                
-                    
-                        
-                        <li>
-                            <a href="/categories/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">搭建个人博客</a>&nbsp;
-                        </li>
-                    
-                    
-                
-            </ul>
-        </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">搭建个人博客</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/Hexo/">Hexo</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/PicGo/">PicGo</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2024/05/05/%E4%BB%8E0%E5%88%B01%E4%BD%BF%E7%94%A8Hexo+Github-Pages+%E9%98%BF%E9%87%8C%E4%BA%91oss+Typora+PicGo%E6%90%AD%E5%BB%BA%E4%B8%80%E5%A5%97%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">阅读全文<span class="seo-reader-text">从0到1使用Hexo+Github Pages+Redefine+阿里云oss+Typora+PicGo搭建一套个人博客</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                
-                    
-                
-
-                
-                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
-                        <a href="/2024/05/04/%E5%86%99%E4%BD%9C%E6%A8%A1%E6%9D%BF/">
-                            <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/%E5%A3%81%E7%BA%B811.jpg" alt="博客写作模板" class="w-full h-full object-cover dark:brightness-75 transition-all" />
-                        </a>
-                    </div>
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
-                    <h3 class="home-article-title">
-                        <a href="/2024/05/04/%E5%86%99%E4%BD%9C%E6%A8%A1%E6%9D%BF/">
-                            博客写作模板
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            <p>本文介绍了在官网上支持的写作模板。</p>
-
-                        
-                    </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Sat May 04 2024 12:00:00 GMT+0800">
-                
-                    2024-05-04
-                
-            </span>
-        </span>
-        
-            <span class="home-article-category">
-                <i class="fa-solid fa-folders"></i>&nbsp;
-            <ul>
-                
-                
-                    
-                        
-                        <li>
-                            <a href="/categories/%E5%86%99%E4%BD%9C%E6%A8%A1%E6%9D%BF/">写作模板</a>&nbsp;
-                        </li>
-                    
-                    
-                
-            </ul>
-        </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/Demo/">Demo</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/%E5%86%99%E4%BD%9C%E6%A8%A1%E6%9D%BF/">写作模板</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/first/">first</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2024/05/04/%E5%86%99%E4%BD%9C%E6%A8%A1%E6%9D%BF/">阅读全文<span class="seo-reader-text">博客写作模板</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                
-
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
-                    <h3 class="home-article-title">
-                        <a href="/2024/05/03/hello-world/">
-                            Hello World
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            Welcome to Hexo ! This is your very first post. Check documentation  for more info. If you get any problems when using Hexo, ...
-                        
-                    </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Fri May 03 2024 22:33:35 GMT+0800">
-                
-                    2024-05-03
-                
-            </span>
-        </span>
-        
-        
-    </div>
-
-    <a href="/2024/05/03/hello-world/">阅读全文<span class="seo-reader-text">Hello World</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
-    </ul>
-
-    <div class="home-paginator px-7 py-5">
-        <div class="paginator">
-    <span class="page-number current">1</span>
-</div>
-
-    </div>
-</div>
-
-                    <div class="comment-container pjax"></div>
-                
-
-            </div>
-
-            
-                <div class="home-sidebar-container">
-    <div class="sticky-container sticky">
-        
-        
-            
-                <div class="sidebar-links">
-                    <div class="site-info">
-                        <div class="site-name">X Blog</div>
-                        
-                            <div class="announcement">
-                                Debian，yyds!!
-                            </div>
-                        
-                    </div>
-                    
-                        
-                            
-                                <a class="links" href="/archives">
-                                    
-                                        <i class="fa-regular fa-archive icon-space"></i>
-                                    
-                                    <span class="link-name">Archives</span>
-                                </a>
-                            
-                        
-                            
-                                <a class="links" href="/tags">
-                                    
-                                        <i class="fa-regular fa-tags icon-space"></i>
-                                    
-                                    <span class="link-name">Tags</span>
-                                </a>
-                            
-                        
-                            
-                                <a class="links" href="/categories">
-                                    
-                                        <i class="fa-regular fa-folder icon-space"></i>
-                                    
-                                    <span class="link-name">Categories</span>
-                                </a>
-                            
-                        
-                    
-                </div>
-            
-            <div class="sidebar-content"  marginTop >
-                <div class="avatar flex justify-center">
-    <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.png">
-</div>
-                <div class="author flex flex-col justify-center my-2.5 mx-0">
-    <div class="name">StreamCons</div>
     
 </div>
-                <div class="statistics flex justify-around my-2.5">
-    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">11</div>
-        <div class="label text-third-text-color text-sm">标签</div>
-    </a>
-    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">6</div>
-        <div class="label text-third-text-color text-sm">分类</div>
-    </a>
-    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">7</div>
-        <div class="label text-third-text-color text-sm">文章</div>
-    </a>
-</div>
+
+                    </div>
+                </div>
             </div>
         
 
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <p>​	Linux系统上对文件的权限有着严格的控制，用于如果相对某个文件执行某种操作，必须具有对应的权限方可执行成功。</p>
+<p>Linux下文件的权限类型一般包括读，写，执行。对应字母为 r、w、x。</p>
+<p>Linux下权限的粒度有 拥有者 、群组 、其它组 三种。每个文件都可以针对三个粒度，设置不同的rwx(读写执行)权限。通常情况下，一个文件只能归属于一个用户和组， 如果其它的用户想有这个文件的权限，则可以将该用户加入具备权限的群组，一个用户可以同时归属于多个组。</p>
+<p>Linux上通常使用chmod命令对文件的权限进行设置和更改。</p>
+<h2 id="一、快速入门"><a href="#一、快速入门" class="headerlink" title="一、快速入门"></a>一、快速入门</h2><p>更改文件权限 （chmod命令）</p>
+<h3 id="一般使用格式"><a href="#一般使用格式" class="headerlink" title="一般使用格式"></a>一般使用格式</h3><p><code>chmod [可选项] &lt;mode&gt; &lt;file...&gt;</code></p>
+<p>参数说明：</p>
+<p>[可选项]</p>
+<p><code>-c</code>, –changes like verbose but report only when a change is made (若该档案权限确实已经更改，才显示其更改动作)</p>
+<p><code>-f</code>, –silent, –quiet suppress most error messages （若该档案权限无法被更改也不要显示错误讯息）</p>
+<p><code>-v</code>, –verbose output a diagnostic for every file processed（显示权限变更的详细资料）</p>
+<p>–no-preserve-root do not treat ‘&#x2F;‘ specially (the default)</p>
+<p>–preserve-root fail to operate recursively on ‘&#x2F;‘</p>
+<p>–reference&#x3D;RFILE use RFILE’s mode instead of MODE values</p>
+<p><code>-R</code>, –recursive change files and directories recursively （以递归的方式对目前目录下的所有档案与子目录进行相同的权限变更)</p>
+<p><code>--help</code> 显示此帮助信息</p>
+<p><code>--version</code> 显示版本信息</p>
+<p>[mode]</p>
+<p>权限设定字串，详细格式如下 ：</p>
+<p>【ugoa】【【+-&#x3D;】【rwxX】…】【,…】,</p>
+<p>其中</p>
+<p>【ugoa】</p>
+<p>u 表示该档案的拥有者，g 表示与该档案的拥有者属于同一个群体(group)者，o 表示其他以外的人，a 表示所有（包含上面三者）。</p>
+<p>【+-&#x3D;】</p>
+<p>+ 表示增加权限，- 表示取消权限，&#x3D; 表示唯一设定权限。</p>
+<p>【rwxX】</p>
+<p>r 表示可读取，w 表示可写入，x 表示可执行，X 表示只有当该档案是个子目录或者该档案已经被设定过为可执行。</p>
+<p>【file…】</p>
+<p>文件列表（单个或者多个文件、文件夹）</p>
+<p> 范例：</p>
+<p>设置所有用户可读取文件 a.conf</p>
+<p><code>chmod ugo+r a.conf</code><br>或<br><code>chmod a+r a.conf</code></p>
+<p>设置 c.sh 只有 拥有者可以读写及执行</p>
+<p><code>chmod u+rwx c.sh</code></p>
+<p>设置文件 a.conf 与 b.xml 权限为拥有者与其所属同一个群组 可读写，其它组可读不可写</p>
+<p><code>chmod a+r,ug+w,o-w a.conf b.xml</code></p>
+<p>设置当前目录下的所有档案与子目录皆设为任何人可读写</p>
+<p><code>chmod -R a+rw *</code></p>
+<h3 id="数字权限使用格式"><a href="#数字权限使用格式" class="headerlink" title="数字权限使用格式"></a>数字权限使用格式</h3><p>在这种使用方式中，首先我们需要了解数字如何表示权限。 首先，我们规定 数字 4 、2 和 1表示读、写、执行权限（具体原因可见下节权限详解内容），即 r&#x3D;4，w&#x3D;2，x&#x3D;1 。此时其他的权限组合也可以用其他的八进制数字表示出来，<br>如：<br>rwx &#x3D; 4 + 2 + 1 &#x3D; 7<br>rw &#x3D; 4 + 2 &#x3D; 6<br>rx &#x3D; 4 +1 &#x3D; 5</p>
+<p>即<br>若要同时设置 rwx (可读写运行） 权限则将该权限位 设置 为 4 + 2 + 1 &#x3D; 7<br>若要同时设置 rw- （可读写不可运行）权限则将该权限位 设置 为 4 + 2 &#x3D; 6<br>若要同时设置 r-x （可读可运行不可写）权限则将该权限位 设置 为 4 +1 &#x3D; 5</p>
+<p>上面我们提到，每个文件都可以针对三个粒度，设置不同的rwx(读写执行)权限。即我们可以用三个8进制数字分别表示 拥有者 、群组 、其它组( u、 g 、o)的权限详情，并用chmod直接加三个8进制数字的方式直接改变文件权限。语法格式为 ：</p>
+<p><code>chmod &lt;abc&gt; file...</code></p>
+<p>其中<br>a,b,c各为一个数字，分别代表User、Group、及Other的权限。<br>相当于简化版的<br>chmod u&#x3D;权限,g&#x3D;权限,o&#x3D;权限 file…<br>而此处的权限将用8进制的数字来表示User、Group、及Other的读、写、执行权限</p>
+<p>范例：<br>设置所有人可以读写及执行<br><code>chmod 777 file</code> (等价于 chmod u&#x3D;rwx,g&#x3D;rwx,o&#x3D;rwx file 或 chmod a&#x3D;rwx file)<br>设置拥有者可读写，其他人不可读写执行<br><code>chmod 600 file</code> (等价于 chmod u&#x3D;rw,g&#x3D;—,o&#x3D;— file 或 chmod u&#x3D;rw,go-rwx file )<br>更改文件拥有者（chown命令）<br>linux&#x2F;Unix 是多人多工作业系统，每个的文件都有拥有者（所有者），如果我们想变更文件的拥有者（利用 chown 将文件拥有者加以改变），一般只有系统管理员(root)拥有此操作权限，而普通用户则没有权限将自己或者别人的文件的拥有者设置为别人。</p>
+<p>语法格式：<br><code>chown [可选项] user[:group] file...</code></p>
+<p>使用权限：root</p>
+<p>说明：</p>
+<p>[可选项] : 同上文chmod</p>
+<p>user : 新的文件拥有者的使用者</p>
+<p>group : 新的文件拥有者的使用者群体(group)</p>
+<p>范例：</p>
+<p>设置文件 d.key、e.scrt的拥有者设为 users 群体的 tom</p>
+<p><code>chown tom:users file d.key e.scrt</code></p>
+<p>设置当前目录下与子目录下的所有文件的拥有者为 users 群体的 James</p>
+<p><code>chown -R James:users *</code></p>
+<h2 id="二、Linux权限详解"><a href="#二、Linux权限详解" class="headerlink" title="二、Linux权限详解"></a>二、Linux权限详解</h2><p>​	Linux系统上对文件的权限有着严格的控制，用于如果相对某个文件执行某种操作，必须具有对应的权限方可执行成功。这也是Linux有别于Windows的机制，也是基于这个权限机制，Linux可以有效防止病毒自我运行，因为运行的条件是必须要有运行的权限，而这个权限在Linux是用户所赋予的。</p>
+<p>Linux的文件权限有以下设定：</p>
+<p>Linux下文件的权限类型一般包括读，写，执行。对应字母为 r、w、x。</p>
+<p>Linux下权限的属组有 拥有者 、群组 、其它组 三种。每个文件都可以针对这三个属组（粒度），设置不同的rwx(读写执行)权限。</p>
+<p>通常情况下，一个文件只能归属于一个用户和组， 如果其它的用户想有这个文件的权限，则可以将该用户加入具备权限的群组，一个用户可以同时归属于多个组。</p>
+<p>如果我们要表示一个文件的所有权限详情，有两种方式：</p>
+<p>第一种是十位二进制表示法，(三个属组每个数组使用一个二进制位，再加一个最高位共十位)，可简化为三位八进制形式</p>
+<p>另外一种十二位二进制表示法(十二个二进制位)，可简化为四位八进制形式</p>
+<p>十位权限表示</p>
+<p>常见的权限表示形式有：</p>
+<p>-rw——- (600) 只有拥有者有读写权限。</p>
+<p>-rw-r–r– (644) 只有拥有者有读写权限；而属组用户和其他用户只有读权限。</p>
+<p>-rwx—— (700) 只有拥有者有读、写、执行权限。</p>
+<p>-rwxr-xr-x (755) 拥有者有读、写、执行权限；而属组用户和其他用户只有读、执行权限。</p>
+<p>-rwx–x–x (711) 拥有者有读、写、执行权限；而属组用户和其他用户只有执行权限。</p>
+<p>-rw-rw-rw- (666) 所有用户都有文件读、写权限。</p>
+<p>-rwxrwxrwx (777) 所有用户都有读、写、执行权限。</p>
+<p>后九位解析： 我们知道Linux权限总共有三个属组，这里我们给每个属组使用三个位置来定义三种操作（读、写、执行）权限，合起来则是权限的后九位。 上面我们用字符表示权限，其中 -代表无权限，r代表读权限，w代表写权限，x代表执行权限。</p>
+<p>实际上，后九位每个位置的意义（代表某个属组的某个权限）都是固定的，如果我们将各个位置权限的有无用二进制数 1和 0来代替，则只读、只写、只执行权限，可以用三位二进制数表示为</p>
+<p>r– &#x3D; 100</p>
+<p>-w- &#x3D; 010</p>
+<p>–x &#x3D; 001</p>
+<p>— &#x3D; 000</p>
+<p>转换成八进制数，则为 r&#x3D;4, w&#x3D;2, x&#x3D;1, -&#x3D;0（这也就是用数字设置权限时为何是4代表读，2代表写，1代表执行）</p>
+<p>实际上，我们可以将所有的权限用二进制形式表现出来，并进一步转变成八进制数字：</p>
+<p>rwx &#x3D; 111 &#x3D; 7</p>
+<p>rw- &#x3D; 110 &#x3D; 6</p>
+<p>r-x &#x3D; 101 &#x3D; 5</p>
+<p>r– &#x3D; 100 &#x3D; 4</p>
+<p>-wx &#x3D; 011 &#x3D; 3</p>
+<p>-w- &#x3D; 010 &#x3D; 2</p>
+<p>–x &#x3D; 001 &#x3D; 1</p>
+<p>— &#x3D; 000 &#x3D; 0</p>
+<p>由上可以得出，每个属组的所有的权限都可以用一位八进制数表示，每个数字都代表了不同的权限（权值）。如 最高的权限为是7，代表可读，可写，可执行。</p>
+<p>故 如果我们将每个属组的权限都用八进制数表示，则文件的权限可以表示为三位八进制数</p>
+<p>-rw——- &#x3D; 600</p>
+<p>-rw-rw-rw- &#x3D; 666</p>
+<p>-rwxrwxrwx &#x3D; 777</p>
+<p>关于第一位最高位的解释： 上面我们说到了权限表示中后九位的含义，剩下的第一位代表的是文件的类型，类型可以是下面几个中的一个：</p>
+<p>d代表的是目录(directroy)</p>
+<p>-代表的是文件(regular file)</p>
+<p>s代表的是套字文件(socket)</p>
+<p>p代表的管道文件(pipe)或命名管道文件(named pipe)</p>
+<p>l代表的是符号链接文件(symbolic link)</p>
+<p>b代表的是该文件是面向块的设备文件(block-oriented device file)</p>
+<p>c代表的是该文件是面向字符的设备文件(charcter-oriented device file)</p>
+<p>下图是文件权限的解释图：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Linux1.png"
+                     
+                ></p>
+<p>出处：<a class="link"   target="_blank" rel="noopener" href="https://javaforall.cn/130109.html" >https://javaforall.cn/130109.html <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>原文链接：<a class="link"   target="_blank" rel="noopener" href="https://javaforall.cn/" >https://javaforall.cn <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> Linux权限详解</li>
+        <li><strong>作者:</strong> StreamCons</li>
+        <li><strong>创建于
+                :</strong> 2024-05-07 18:40:00</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2024-05-07 23:20:30
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://aliveman6.github.io/2024/05/07/Linux权限详解/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/Linux/">#Linux</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2024/05/06/%E8%AE%B0%E4%B8%80%E6%AC%A1VMware%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E4%B8%BB%E6%9C%BA%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%BC%8F/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">记一次VMware的虚拟机和主机的三种配置模式</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">Linux权限详解</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-text">一、快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E4%BD%BF%E7%94%A8%E6%A0%BC%E5%BC%8F"><span class="nav-text">一般使用格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E6%9D%83%E9%99%90%E4%BD%BF%E7%94%A8%E6%A0%BC%E5%BC%8F"><span class="nav-text">数字权限使用格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Linux%E6%9D%83%E9%99%90%E8%AF%A6%E8%A7%A3"><span class="nav-text">二、Linux权限详解</span></a></li></ol>
+
     </div>
 </div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
 
             
 
@@ -1340,6 +934,23 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-side-tools-container">
@@ -1453,7 +1064,6 @@
         containers: ["#swup"],
     });
 </script>
-
 
 
 
