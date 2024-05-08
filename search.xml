@@ -122,26 +122,8 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2024/05/03/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>Shell脚本学习笔记（一）</title>
-    <url>/2024/05/05/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <url>/2024/05/05/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</url>
     <content><![CDATA[<h1 id="Shell大纲"><a href="#Shell大纲" class="headerlink" title="Shell大纲"></a>Shell大纲</h1><p>下图是我看网络课程所画出的思维导图：</p>
 <p><img  
                      lazyload
@@ -177,157 +159,22 @@
       </tags>
   </entry>
   <entry>
-    <title>记一次VMware的虚拟机和主机的三种配置模式</title>
-    <url>/2024/05/06/%E8%AE%B0%E4%B8%80%E6%AC%A1VMware%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E4%B8%BB%E6%9C%BA%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<h1 id="一、VMware的三种配置模式"><a href="#一、VMware的三种配置模式" class="headerlink" title="一、VMware的三种配置模式"></a>一、VMware的三种配置模式</h1><h2 id="1、桥接模式"><a href="#1、桥接模式" class="headerlink" title="1、桥接模式"></a>1、桥接模式</h2><p><strong>特点：</strong></p>
-<p>虚拟机和主机处于同等地位，并且和主机处于同一网段。</p>
-<p><strong>原理：</strong></p>
-<p>桥接模式，使用的是VMnet0虚拟网卡。</p>
-<p>vmnet0实际上就是一个*<u>虚拟的网桥</u>*(2层交换机)，这个网桥有若干个接口，一个端口用于连接你的Host主机，其余</p>
-<p>端口可以用于连接虚拟机，他们的位置是对等的，谁也不是谁的网关。所以桥接模式下，虚拟机和Host主机是同</p>
-<p>等地位的主机。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.png"
-                     
-                ></p>
-<h2 id="2、NAT模式"><a href="#2、NAT模式" class="headerlink" title="2、NAT模式"></a>2、NAT模式</h2><p><strong>原理：</strong></p>
-<p>NAT模式，就是让虚拟系统借助NAT（网络地址转换）功能，通过宿主机器所在的网络来访问公网。</p>
-<p>实际上VMnet8充当了路由器的作用，负责将虚拟机转发到VMnet8的包进行地址转换之后发送到实际的网络中，</p>
-<p>再将实际网络中返回的包进行地址转换后通过VMnet8发送给虚拟机。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Nat%E6%A8%A1%E5%BC%8F.png"
-                     
-                ></p>
+    <title>Hello World</title>
+    <url>/2024/05/03/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
 
-  <div class="note p-4 mb-4 rounded-small primary">
-    <p>虚拟机的IP都是由虚拟交换机决定的，由虚拟NAT负责连接外网，而虚拟网卡VMware Network Adapter Vmnet8只是负责主机与虚拟机之间的通信。</p>
+<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
 
-  </div>
+<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
 
-<h2 id="3、仅主机模式"><a href="#3、仅主机模式" class="headerlink" title="3、仅主机模式"></a>3、仅主机模式</h2><p><strong>特点：</strong></p>
-<p>只能和主机互相通信，不能上网，也不能访问其他主机，用于建立与外部隔离的网络环境。</p>
-<p><strong>原理：</strong></p>
+<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
 
-  <div class="note p-4 mb-4 rounded-small primary">
-    <p>Host-only模式使用的是VMnet1网卡，这种情况下虚拟机连接到VMnet1上，但系统并不为其提供任何路由服务，因此虚拟机只能和宿主机进行通信，不能连接到真正的网络上。</p>
-
-  </div>
-
-
-
-<h1 id="二、遇到的问题"><a href="#二、遇到的问题" class="headerlink" title="二、遇到的问题"></a>二、遇到的问题</h1><p>因学习需要，故想安装linux系统配合shell远程连接使用，但是发现原来默认VMware虚拟网络编辑器里的VMnet8（NAT模式）配置无法让虚拟机成功ping通主机。</p>
-<p><strong>这是VMware虚拟网络编辑器里VMnet8我更改后的配置：</strong></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware1.png"
-                     
-                ></p>
-<p>这是NAT设置里的内容，也就是NAT的网关。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware2.png"
-                     
-                ></p>
-<p>这是DHCP设置里的内容，也就是NAT的起始地址和结束地址。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware3.png"
-                     
-                ></p>
-<p>这是我的主机IP：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware4.png"
-                     
-                ></p>
-<p>这是我的虚拟机IP：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware8.png"
-                     
-                ></p>
-<p>此时，我尝试着从虚拟机ping主机ping：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware5.png"
-                     
-                ></p>
-<p>我尝试着虚拟机ping设置好的网关192.168.18.2：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware6.png"
-                     
-                ></p>
-<p>可以看出均无法ping通。</p>
-<p>但是我尝试着从主机ping虚拟机：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware7.png"
-                     
-                ></p>
-<p>可以看出它ping通了。</p>
-<p>后来经过查找网上大量资料后发现，NAT模式下并不能将子网IP（也就是DHCP分配的网段）设置成和主机的IP网段一致，并且网关IP不能被包含在DHCP设置里的起始地址和结束地址之间，由上面的配置可以看出，我把子网IP和主机IP的网段设为了一致，并且设置的默认网关IP（192.168.18.2）<strong>被包含</strong>在起始地址192.168.18.1~192.168.18.254内，所以我们需要把这两个地方更改一下，把子网IP的网段设置为和主机IP网段不一样，起始地址设置为192.168.xx.3即可（xx为即将设置的子网IP网段）。</p>
-<p>下面是更换后的配置：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware9.png"
-                     
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware10.png"
-                     
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware11.png"
-                     
-                ></p>
-<p>更改后的虚拟机IP：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware12.png"
-                     
-                ></p>
-<p>然后我们可以测试一下主机和虚拟机能否互相ping通：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware13.png"
-                     
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware14.png"
-                     
-                ></p>
-<p>至此，虚拟机和主机和外网都打通了，问题得到了解决。</p>
-<p>其实我们遇到这种情况一般都可以直接选择<strong>恢复默认设置</strong>这个选项，但我们在手动设置的时候出错后主动研究并解决问题可以培养一下自身解决问题的能力，我们显然选择后者更好。</p>
-<p>参考文章：<strong>VMware虚拟机网络配置-NAT篇 <a class="link"   href="https://juejin.cn/post/7244099508212744253" >https://juejin.cn/post/7244099508212744253 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></strong></p>
+<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 ]]></content>
-      <categories>
-        <category>VMware</category>
-      </categories>
-      <tags>
-        <tag>VMware</tag>
-      </tags>
   </entry>
   <entry>
     <title>博客写作模板</title>
@@ -723,6 +570,159 @@
         <tag>Hexo</tag>
         <tag>PicGo</tag>
         <tag>Typora</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记一次VMware的虚拟机和主机的三种配置模式</title>
+    <url>/2024/05/06/%E8%AE%B0%E4%B8%80%E6%AC%A1VMware%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E4%B8%BB%E6%9C%BA%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="一、VMware的三种配置模式"><a href="#一、VMware的三种配置模式" class="headerlink" title="一、VMware的三种配置模式"></a>一、VMware的三种配置模式</h1><h2 id="1、桥接模式"><a href="#1、桥接模式" class="headerlink" title="1、桥接模式"></a>1、桥接模式</h2><p><strong>特点：</strong></p>
+<p>虚拟机和主机处于同等地位，并且和主机处于同一网段。</p>
+<p><strong>原理：</strong></p>
+<p>桥接模式，使用的是VMnet0虚拟网卡。</p>
+<p>vmnet0实际上就是一个*<u>虚拟的网桥</u>*(2层交换机)，这个网桥有若干个接口，一个端口用于连接你的Host主机，其余</p>
+<p>端口可以用于连接虚拟机，他们的位置是对等的，谁也不是谁的网关。所以桥接模式下，虚拟机和Host主机是同</p>
+<p>等地位的主机。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.png"
+                     
+                ></p>
+<h2 id="2、NAT模式"><a href="#2、NAT模式" class="headerlink" title="2、NAT模式"></a>2、NAT模式</h2><p><strong>原理：</strong></p>
+<p>NAT模式，就是让虚拟系统借助NAT（网络地址转换）功能，通过宿主机器所在的网络来访问公网。</p>
+<p>实际上VMnet8充当了路由器的作用，负责将虚拟机转发到VMnet8的包进行地址转换之后发送到实际的网络中，</p>
+<p>再将实际网络中返回的包进行地址转换后通过VMnet8发送给虚拟机。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Nat%E6%A8%A1%E5%BC%8F.png"
+                     
+                ></p>
+
+  <div class="note p-4 mb-4 rounded-small primary">
+    <p>虚拟机的IP都是由虚拟交换机决定的，由虚拟NAT负责连接外网，而虚拟网卡VMware Network Adapter Vmnet8只是负责主机与虚拟机之间的通信。</p>
+
+  </div>
+
+<h2 id="3、仅主机模式"><a href="#3、仅主机模式" class="headerlink" title="3、仅主机模式"></a>3、仅主机模式</h2><p><strong>特点：</strong></p>
+<p>只能和主机互相通信，不能上网，也不能访问其他主机，用于建立与外部隔离的网络环境。</p>
+<p><strong>原理：</strong></p>
+
+  <div class="note p-4 mb-4 rounded-small primary">
+    <p>Host-only模式使用的是VMnet1网卡，这种情况下虚拟机连接到VMnet1上，但系统并不为其提供任何路由服务，因此虚拟机只能和宿主机进行通信，不能连接到真正的网络上。</p>
+
+  </div>
+
+
+
+<h1 id="二、遇到的问题"><a href="#二、遇到的问题" class="headerlink" title="二、遇到的问题"></a>二、遇到的问题</h1><p>因学习需要，故想安装linux系统配合shell远程连接使用，但是发现原来默认VMware虚拟网络编辑器里的VMnet8（NAT模式）配置无法让虚拟机成功ping通主机。</p>
+<p><strong>这是VMware虚拟网络编辑器里VMnet8我更改后的配置：</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware1.png"
+                     
+                ></p>
+<p>这是NAT设置里的内容，也就是NAT的网关。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware2.png"
+                     
+                ></p>
+<p>这是DHCP设置里的内容，也就是NAT的起始地址和结束地址。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware3.png"
+                     
+                ></p>
+<p>这是我的主机IP：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware4.png"
+                     
+                ></p>
+<p>这是我的虚拟机IP：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware8.png"
+                     
+                ></p>
+<p>此时，我尝试着从虚拟机ping主机ping：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware5.png"
+                     
+                ></p>
+<p>我尝试着虚拟机ping设置好的网关192.168.18.2：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware6.png"
+                     
+                ></p>
+<p>可以看出均无法ping通。</p>
+<p>但是我尝试着从主机ping虚拟机：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware7.png"
+                     
+                ></p>
+<p>可以看出它ping通了。</p>
+<p>后来经过查找网上大量资料后发现，NAT模式下并不能将子网IP（也就是DHCP分配的网段）设置成和主机的IP网段一致，并且网关IP不能被包含在DHCP设置里的起始地址和结束地址之间，由上面的配置可以看出，我把子网IP和主机IP的网段设为了一致，并且设置的默认网关IP（192.168.18.2）<strong>被包含</strong>在起始地址192.168.18.1~192.168.18.254内，所以我们需要把这两个地方更改一下，把子网IP的网段设置为和主机IP网段不一样，起始地址设置为192.168.xx.3即可（xx为即将设置的子网IP网段）。</p>
+<p>下面是更换后的配置：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware9.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware10.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware11.png"
+                     
+                ></p>
+<p>更改后的虚拟机IP：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware12.png"
+                     
+                ></p>
+<p>然后我们可以测试一下主机和虚拟机能否互相ping通：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware13.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware14.png"
+                     
+                ></p>
+<p>至此，虚拟机和主机和外网都打通了，问题得到了解决。</p>
+<p>其实我们遇到这种情况一般都可以直接选择<strong>恢复默认设置</strong>这个选项，但我们在手动设置的时候出错后主动研究并解决问题可以培养一下自身解决问题的能力，我们显然选择后者更好。</p>
+<p>参考文章：<strong>VMware虚拟机网络配置-NAT篇 <a class="link"   href="https://juejin.cn/post/7244099508212744253" >https://juejin.cn/post/7244099508212744253 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></strong></p>
+]]></content>
+      <categories>
+        <category>VMware</category>
+      </categories>
+      <tags>
+        <tag>VMware</tag>
       </tags>
   </entry>
 </search>
