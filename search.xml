@@ -122,6 +122,24 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2024/05/03/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Shell脚本学习笔记（一）</title>
     <url>/2024/05/05/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
     <content><![CDATA[<h1 id="Shell大纲"><a href="#Shell大纲" class="headerlink" title="Shell大纲"></a>Shell大纲</h1><p>下图是我看网络课程所画出的思维导图：</p>
@@ -159,204 +177,156 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2024/05/03/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>从0到1使用Hexo+Github Pages+Redefine+阿里云oss+Typora+PicGo搭建一套个人博客</title>
-    <url>/2024/05/05/%E4%BB%8E0%E5%88%B01%E4%BD%BF%E7%94%A8Hexo+Github-Pages+%E9%98%BF%E9%87%8C%E4%BA%91oss+Typora+PicGo%E6%90%AD%E5%BB%BA%E4%B8%80%E5%A5%97%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="一、搭建前的环境准备"><a href="#一、搭建前的环境准备" class="headerlink" title="一、搭建前的环境准备"></a>一、搭建前的环境准备</h1>
-  <div class="note-large blue">
-    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
-      <p>所需环境</p>
-
-    </div>
-    <div class="notel-content">
-      <p>1、Git：官网下载并安装到电脑上：<a class="link"   href="https://git-scm.com/" >https://git-scm.com/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>2、Node.js：官网下载并安装到电脑上：<a class="link"   href="https://nodejs.org/" >https://nodejs.org/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-
-    </div>
-  </div>
-
-
-
-<h1 id="二、安装hexo，并完成简单的本地页面展示"><a href="#二、安装hexo，并完成简单的本地页面展示" class="headerlink" title="二、安装hexo，并完成简单的本地页面展示"></a>二、安装hexo，并完成简单的本地页面展示</h1><h2 id="1、进入cmd输入指令"><a href="#1、进入cmd输入指令" class="headerlink" title="1、进入cmd输入指令"></a>1、进入cmd输入指令</h2><p>1.1 进入cmd输入指令：<code>npm install -g hexo-cli</code>，然后输入<code>hexo -v</code> 查看hexo版本顺便验证是否安装成功。</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">C:\Users\X&gt;npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line">added 53 packages <span class="keyword">in</span> 22s</span><br><span class="line"></span><br><span class="line">14 packages are looking <span class="keyword">for</span> funding</span><br><span class="line">  run `npm fund` <span class="keyword">for</span> details</span><br><span class="line">  </span><br><span class="line">E:\nodejs&gt;hexo -v</span><br><span class="line">hexo-cli: 4.3.2</span><br><span class="line">os: win32 10.0.19045 undefined</span><br><span class="line">node: 20.12.2</span><br><span class="line">acorn: 8.11.3</span><br><span class="line">ada: 2.7.6</span><br><span class="line">ares: 1.27.0</span><br><span class="line"><span class="built_in">base64</span>: 0.5.2</span><br><span class="line">brotli: 1.1.0</span><br><span class="line">cjs_module_lexer: 1.2.2</span><br><span class="line">cldr: 44.1</span><br><span class="line">icu: 74.2</span><br><span class="line">llhttp: 8.1.2</span><br><span class="line">modules: 115</span><br><span class="line">napi: 9</span><br><span class="line">nghttp2: 1.60.0</span><br><span class="line">nghttp3: 0.7.0</span><br><span class="line">ngtcp2: 0.8.1</span><br><span class="line">openssl: 3.0.13+quic</span><br><span class="line">simdutf: 4.0.8</span><br><span class="line">tz: 2024a</span><br><span class="line">undici: 5.28.4</span><br><span class="line">unicode: 15.1</span><br><span class="line">uv: 1.46.0</span><br><span class="line">uvwasi: 0.0.20</span><br><span class="line">v8: 11.3.244.8-node.19</span><br><span class="line">zlib: 1.3.0.1-motley-40e35a7</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="2、创建文件夹并初始化hexo"><a href="#2、创建文件夹并初始化hexo" class="headerlink" title="2、创建文件夹并初始化hexo"></a>2、创建文件夹并初始化hexo</h2><p>2.1 创建一个文件夹Test（这个文件夹用来存放hexo初始化后的文件），并在这个创建好的test文件夹下直接右键git bash打开。</p>
+    <title>记一次VMware的虚拟机和主机的三种配置模式</title>
+    <url>/2024/05/06/%E8%AE%B0%E4%B8%80%E6%AC%A1VMware%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E4%B8%BB%E6%9C%BA%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="一、VMware的三种配置模式"><a href="#一、VMware的三种配置模式" class="headerlink" title="一、VMware的三种配置模式"></a>一、VMware的三种配置模式</h1><h2 id="1、桥接模式"><a href="#1、桥接模式" class="headerlink" title="1、桥接模式"></a>1、桥接模式</h2><p><strong>特点：</strong></p>
+<p>虚拟机和主机处于同等地位，并且和主机处于同一网段。</p>
+<p><strong>原理：</strong></p>
+<p>桥接模式，使用的是VMnet0虚拟网卡。</p>
+<p>vmnet0实际上就是一个*<u>虚拟的网桥</u>*(2层交换机)，这个网桥有若干个接口，一个端口用于连接你的Host主机，其余</p>
+<p>端口可以用于连接虚拟机，他们的位置是对等的，谁也不是谁的网关。所以桥接模式下，虚拟机和Host主机是同</p>
+<p>等地位的主机。</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-03_223819.png"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.png"
                      
                 ></p>
-<p>2.2 查看是否能启动成功</p>
-<p><code>hexo s</code></p>
+<h2 id="2、NAT模式"><a href="#2、NAT模式" class="headerlink" title="2、NAT模式"></a>2、NAT模式</h2><p><strong>原理：</strong></p>
+<p>NAT模式，就是让虚拟系统借助NAT（网络地址转换）功能，通过宿主机器所在的网络来访问公网。</p>
+<p>实际上VMnet8充当了路由器的作用，负责将虚拟机转发到VMnet8的包进行地址转换之后发送到实际的网络中，</p>
+<p>再将实际网络中返回的包进行地址转换后通过VMnet8发送给虚拟机。</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-03_223925.png"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Nat%E6%A8%A1%E5%BC%8F.png"
                      
                 ></p>
- 
-  <div class="note-large red">
-    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
-      <p>指定文件夹目录</p>
 
-    </div>
-    <div class="notel-content">
-      <p>node_modules: 依赖包</p>
-<p>public：存放生成的页面</p>
-<p>scaffolds：生成文章的一些模板</p>
-<p>source：用来存放你的文章</p>
-<p>themes：主题</p>
-<p><strong>_config.yml: 博客的配置文件</strong></p>
-
-    </div>
-  </div>
-
-
-
-<p>2.3 复制网址打开</p>
-<p><code>http://localhost:4000/</code></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-03_224033.png"
-                     
-                ></p>
-<h1 id="三、将Hexo部署到github"><a href="#三、将Hexo部署到github" class="headerlink" title="三、将Hexo部署到github"></a>三、将Hexo部署到github</h1><h2 id="1、Github创建个人仓库"><a href="#1、Github创建个人仓库" class="headerlink" title="1、Github创建个人仓库"></a>1、Github创建个人仓库</h2>
-  <div class="note p-4 mb-4 rounded-small success">
-    <p>首先，需要有一个github账号。登上账号后建一个仓库：仓库名为你的用户名.github.io，<br>举例如下：<br>创建一个和你用户名相同的仓库，后面加.github.io，<br>只有这样，将来要部署到GitHub的时候，才会被识别，也就是xxxx.github.io，其中xxx就是你注册GitHub的用户名。</p>
-
-  </div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/a.png"
-                     
-                ></p>
-<h2 id="2、生成ssh添加到Github"><a href="#2、生成ssh添加到Github" class="headerlink" title="2、生成ssh添加到Github"></a>2、生成ssh添加到Github</h2>
   <div class="note p-4 mb-4 rounded-small primary">
-    <p>在Github上创建仓库完成之后，需要设置ssh免密登录</p>
+    <p>虚拟机的IP都是由虚拟交换机决定的，由虚拟NAT负责连接外网，而虚拟网卡VMware Network Adapter Vmnet8只是负责主机与虚拟机之间的通信。</p>
 
   </div>
 
+<h2 id="3、仅主机模式"><a href="#3、仅主机模式" class="headerlink" title="3、仅主机模式"></a>3、仅主机模式</h2><p><strong>特点：</strong></p>
+<p>只能和主机互相通信，不能上网，也不能访问其他主机，用于建立与外部隔离的网络环境。</p>
+<p><strong>原理：</strong></p>
 
-
-<p>2.1 打开cmd窗口：执行如下命令</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;yourname&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;youremail&quot;</span></span><br></pre></td></tr></table></figure></div>
-
-<p>防止输错可以检查：</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name</span><br><span class="line">git config user.email</span><br></pre></td></tr></table></figure></div>
-
-
-
-<p>2.2 接着进入家目录：C:\Users\X（这是你自己电脑上的家目录），右击打开git bash，输入：</p>
-<p><code>ssh-keygen -t rsa -C 1500937374@qq.com（这里填你自己的QQ邮箱）</code></p>
-<p>然后就敲三次回车：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/b.png"
-                     
-                ></p>
-<p>2.3 接着就会发现C：\Users\X 下多了一个.ssh目录，打开后有一个公钥，一个私钥。id_rsa.pub是公钥，我们需要打开它，复制里面的内容。</p>
-<p>然后进入github：</p>
-<p>点击<strong>setting</strong></p>
-<p>进行以下操作</p>
-<p>找到SSH and GPG keys选项——&gt;点击绿色按钮“New SSH key”——&gt;输入相应的title和key（key为上一步的id_rsa.pub里的内容）——&gt;然后点击Add SSH Key</p>
-<h2 id="3、进行部署"><a href="#3、进行部署" class="headerlink" title="3、进行部署"></a>3、进行部署</h2>
   <div class="note p-4 mb-4 rounded-small primary">
-    <p>这一步，我们就可以将hexo和GitHub关联起来，也就是将hexo生成的文章部署到GitHub上，打开站点配置文件 _config.yml，翻到最后，修改为YourgithubName（就是你的GitHub账户）。</p>
+    <p>Host-only模式使用的是VMnet1网卡，这种情况下虚拟机连接到VMnet1上，但系统并不为其提供任何路由服务，因此虚拟机只能和宿主机进行通信，不能连接到真正的网络上。</p>
 
   </div>
 
 
 
-<p>3.1 修改配置文件，然后修改内容：</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:goubin18/goubin18.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure></div>
-
-
-  <div class="note-large default">
-    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
-      <i class="notel-icon fa-solid fa-info"></i><p>注意</p>
-
-    </div>
-    <div class="notel-content">
-      <p>在这里我们需要注意的是在每一个类型下都有一个空格，因为配置文件<code>_config.redefine.yml</code>使用yaml语法，所以我们需要注意缩进。</p>
-
-    </div>
-  </div>
-
-<p><strong>repo：获取步骤如下</strong></p>
-<p><strong>点进自己刚刚创建的仓库，复制</strong></p>
+<h1 id="二、遇到的问题"><a href="#二、遇到的问题" class="headerlink" title="二、遇到的问题"></a>二、遇到的问题</h1><p>因学习需要，故想安装linux系统配合shell远程连接使用，但是发现原来默认VMware虚拟网络编辑器里的VMnet8（NAT模式）配置无法让虚拟机成功ping通主机。</p>
+<p><strong>这是VMware虚拟网络编辑器里VMnet8我更改后的配置：</strong></p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-05_154324.png"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware1.png"
                      
                 ></p>
-<p>3.2 找到自己的博客路径打开，这个时候需要先安装deploy-git ，也就是部署的命令,这样你才能用命令部署到GitHub。</p>
-<p><code>npm install hexo-deployer-git --save</code></p>
-<p>3.3 然后依次执行以下命令：</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean   		#清除缓存文件 db.json 和已生成的静态文件 public</span><br><span class="line">hexo generate       #生成网站静态文件到默认设置的 public 文件夹(hexo generate 的缩写)</span><br><span class="line">hexo deploy			#自动生成网站静态文件，并部署到设定的仓库(hexo deploy 的缩写)</span><br></pre></td></tr></table></figure></div>
-
-<p>注意在输入<code>hexo deploy</code>后会有一个提示让你手动输入yes&#x2F;no，我们直接输入yes。</p>
-<p>最后回到Github上查看自己的仓库：</p>
+<p>这是NAT设置里的内容，也就是NAT的网关。</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-05_155620.png"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware2.png"
                      
                 ></p>
-<p>上传成功。</p>
-<p>现在可以使用xxx.github.io就可以访问你的博客了。</p>
-<h1 id="四、使用Hexo的主题Redefine"><a href="#四、使用Hexo的主题Redefine" class="headerlink" title="四、使用Hexo的主题Redefine"></a>四、使用Hexo的主题Redefine</h1><p>现在我们可以进一步的美化博客，我选择的是Hexo的主题商店里的Redefine。</p>
-<p>Hexo官网主题：<a class="link"   href="https://hexo.io/themes/" >https://hexo.io/themes/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>Redefine部署及使用文档：<a class="link"   href="https://redefine-docs.ohevan.com/introduction" >https://redefine-docs.ohevan.com/introduction <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h2 id="1、安装主题"><a href="#1、安装主题" class="headerlink" title="1、安装主题"></a>1、安装主题</h2><p>在 Hexo 根目录执行以下命令安装主题，有两种方式：npm、git。</p>
-<p>我使用的是npm方式，git方式可以自己去官网文档查看：</p>
-<p><code>npm install hexo-theme-redefine@latest</code></p>
-<h2 id="2、启动主题"><a href="#2、启动主题" class="headerlink" title="2、启动主题"></a>2、启动主题</h2><p>在 Hexo 根目录的 <code>_config.yml</code> 文件中，将 <code>theme</code> 值修改为 <code>redefine</code>。</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">theme: redefine</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="3、创建主题配置文件"><a href="#3、创建主题配置文件" class="headerlink" title="3、创建主题配置文件"></a>3、创建主题配置文件</h2><p>在 Hexo 根目录下创建 <code>_config.redefine.yml</code> 文件。</p>
-<p>并将<a class="link"   href="https://github.com/EvanNotFound/hexo-theme-redefine/blob/main/_config.yml" >此处 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的所有内容复制进去。</p>
-<p>本文件会自动覆盖主题的配置项，创建本文件的目的是为了方便你在升级主题时，不会丢失你的配置。</p>
-<h2 id="4、创建成功"><a href="#4、创建成功" class="headerlink" title="4、创建成功"></a>4、创建成功</h2><p>现在就可以启动Hexo，看看效果了。</p>
-<p>后续的步骤请移步<a class="link"   href="https://redefine-docs.ohevan.com/" >官方文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>仔细查看使用方法。</p>
-<h2 id="5、属于Redefine的Typroa主题"><a href="#5、属于Redefine的Typroa主题" class="headerlink" title="5、属于Redefine的Typroa主题"></a>5、属于Redefine的Typroa主题</h2><p>我们可以在官方文档的写作指南上找到适合写文章的Typroa主题，也可点击 <a class="link"   href="https://github.com/EvanNotFound/typora-theme-redefine" >这里 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 直接进入下载。</p>
-<h1 id="五、关于在博客上使用图片的存储问题"><a href="#五、关于在博客上使用图片的存储问题" class="headerlink" title="五、关于在博客上使用图片的存储问题"></a>五、关于在博客上使用图片的存储问题</h1><p>因为在博客上写文章的时候需要引用自己的图片，所以我们可以使用<strong>阿里云OSS存储+Picgo</strong>的方式。</p>
-<p>具体细节可以参考这一篇文章来进行设置：<a class="link"   href="https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8" >https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>经过上述步骤后，我们就拥有了一个属于自己的个人博客。</p>
-<p><strong>参考文章：</strong>使用Hexo从0到1搭建个人博客详细教程（超详细，超简单）（<a class="link"   href="https://developer.aliyun.com/article/1218122%EF%BC%89" >https://developer.aliyun.com/article/1218122） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>手把手教你搭建阿里云图床(PicGo+Typora+阿里云OSS)，新手小白一看就会（<a class="link"   href="https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8%EF%BC%89" >https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>Redefine官网（<a class="link"   href="https://redefine-docs.ohevan.com/%EF%BC%89" >https://redefine-docs.ohevan.com/） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>这是DHCP设置里的内容，也就是NAT的起始地址和结束地址。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware3.png"
+                     
+                ></p>
+<p>这是我的主机IP：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware4.png"
+                     
+                ></p>
+<p>这是我的虚拟机IP：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware8.png"
+                     
+                ></p>
+<p>此时，我尝试着从虚拟机ping主机ping：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware5.png"
+                     
+                ></p>
+<p>我尝试着虚拟机ping设置好的网关192.168.18.2：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware6.png"
+                     
+                ></p>
+<p>可以看出均无法ping通。</p>
+<p>但是我尝试着从主机ping虚拟机：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware7.png"
+                     
+                ></p>
+<p>可以看出它ping通了。</p>
+<p>后来经过查找网上大量资料后发现，NAT模式下并不能将子网IP（也就是DHCP分配的网段）设置成和主机的IP网段一致，并且网关IP不能被包含在DHCP设置里的起始地址和结束地址之间，由上面的配置可以看出，我把子网IP和主机IP的网段设为了一致，并且设置的默认网关IP（192.168.18.2）<strong>被包含</strong>在起始地址192.168.18.1~192.168.18.254内，所以我们需要把这两个地方更改一下，把子网IP的网段设置为和主机IP网段不一样，起始地址设置为192.168.xx.3即可（xx为即将设置的子网IP网段）。</p>
+<p>下面是更换后的配置：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware9.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware10.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware11.png"
+                     
+                ></p>
+<p>更改后的虚拟机IP：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware12.png"
+                     
+                ></p>
+<p>然后我们可以测试一下主机和虚拟机能否互相ping通：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware13.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware14.png"
+                     
+                ></p>
+<p>至此，虚拟机和主机和外网都打通了，问题得到了解决。</p>
+<p>其实我们遇到这种情况一般都可以直接选择<strong>恢复默认设置</strong>这个选项，但我们在手动设置的时候出错后主动研究并解决问题可以培养一下自身解决问题的能力，我们显然选择后者更好。</p>
+<p>参考文章：<strong>VMware虚拟机网络配置-NAT篇 <a class="link"   href="https://juejin.cn/post/7244099508212744253" >https://juejin.cn/post/7244099508212744253 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></strong></p>
 ]]></content>
       <categories>
-        <category>搭建个人博客</category>
+        <category>VMware</category>
       </categories>
       <tags>
-        <tag>搭建个人博客</tag>
-        <tag>Hexo</tag>
-        <tag>PicGo</tag>
-        <tag>Typora</tag>
+        <tag>VMware</tag>
       </tags>
   </entry>
   <entry>
@@ -573,156 +543,186 @@
       </tags>
   </entry>
   <entry>
-    <title>记一次VMware的虚拟机和主机的三种配置模式</title>
-    <url>/2024/05/06/%E8%AE%B0%E4%B8%80%E6%AC%A1VMware%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E4%B8%BB%E6%9C%BA%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<h1 id="一、VMware的三种配置模式"><a href="#一、VMware的三种配置模式" class="headerlink" title="一、VMware的三种配置模式"></a>一、VMware的三种配置模式</h1><h2 id="1、桥接模式"><a href="#1、桥接模式" class="headerlink" title="1、桥接模式"></a>1、桥接模式</h2><p><strong>特点：</strong></p>
-<p>虚拟机和主机处于同等地位，并且和主机处于同一网段。</p>
-<p><strong>原理：</strong></p>
-<p>桥接模式，使用的是VMnet0虚拟网卡。</p>
-<p>vmnet0实际上就是一个*<u>虚拟的网桥</u>*(2层交换机)，这个网桥有若干个接口，一个端口用于连接你的Host主机，其余</p>
-<p>端口可以用于连接虚拟机，他们的位置是对等的，谁也不是谁的网关。所以桥接模式下，虚拟机和Host主机是同</p>
-<p>等地位的主机。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.png"
-                     
-                ></p>
-<h2 id="2、NAT模式"><a href="#2、NAT模式" class="headerlink" title="2、NAT模式"></a>2、NAT模式</h2><p><strong>原理：</strong></p>
-<p>NAT模式，就是让虚拟系统借助NAT（网络地址转换）功能，通过宿主机器所在的网络来访问公网。</p>
-<p>实际上VMnet8充当了路由器的作用，负责将虚拟机转发到VMnet8的包进行地址转换之后发送到实际的网络中，</p>
-<p>再将实际网络中返回的包进行地址转换后通过VMnet8发送给虚拟机。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Nat%E6%A8%A1%E5%BC%8F.png"
-                     
-                ></p>
+    <title>从0到1使用Hexo+Github Pages+Redefine+阿里云oss+Typora+PicGo搭建一套个人博客</title>
+    <url>/2024/05/05/%E4%BB%8E0%E5%88%B01%E4%BD%BF%E7%94%A8Hexo+Github-Pages+%E9%98%BF%E9%87%8C%E4%BA%91oss+Typora+PicGo%E6%90%AD%E5%BB%BA%E4%B8%80%E5%A5%97%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="一、搭建前的环境准备"><a href="#一、搭建前的环境准备" class="headerlink" title="一、搭建前的环境准备"></a>一、搭建前的环境准备</h1>
+  <div class="note-large blue">
+    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
+      <p>所需环境</p>
 
-  <div class="note p-4 mb-4 rounded-small primary">
-    <p>虚拟机的IP都是由虚拟交换机决定的，由虚拟NAT负责连接外网，而虚拟网卡VMware Network Adapter Vmnet8只是负责主机与虚拟机之间的通信。</p>
+    </div>
+    <div class="notel-content">
+      <p>1、Git：官网下载并安装到电脑上：<a class="link"   href="https://git-scm.com/" >https://git-scm.com/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>2、Node.js：官网下载并安装到电脑上：<a class="link"   href="https://nodejs.org/" >https://nodejs.org/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 
-  </div>
-
-<h2 id="3、仅主机模式"><a href="#3、仅主机模式" class="headerlink" title="3、仅主机模式"></a>3、仅主机模式</h2><p><strong>特点：</strong></p>
-<p>只能和主机互相通信，不能上网，也不能访问其他主机，用于建立与外部隔离的网络环境。</p>
-<p><strong>原理：</strong></p>
-
-  <div class="note p-4 mb-4 rounded-small primary">
-    <p>Host-only模式使用的是VMnet1网卡，这种情况下虚拟机连接到VMnet1上，但系统并不为其提供任何路由服务，因此虚拟机只能和宿主机进行通信，不能连接到真正的网络上。</p>
-
+    </div>
   </div>
 
 
 
-<h1 id="二、遇到的问题"><a href="#二、遇到的问题" class="headerlink" title="二、遇到的问题"></a>二、遇到的问题</h1><p>因学习需要，故想安装linux系统配合shell远程连接使用，但是发现原来默认VMware虚拟网络编辑器里的VMnet8（NAT模式）配置无法让虚拟机成功ping通主机。</p>
-<p><strong>这是VMware虚拟网络编辑器里VMnet8我更改后的配置：</strong></p>
+<h1 id="二、安装hexo，并完成简单的本地页面展示"><a href="#二、安装hexo，并完成简单的本地页面展示" class="headerlink" title="二、安装hexo，并完成简单的本地页面展示"></a>二、安装hexo，并完成简单的本地页面展示</h1><h2 id="1、进入cmd输入指令"><a href="#1、进入cmd输入指令" class="headerlink" title="1、进入cmd输入指令"></a>1、进入cmd输入指令</h2><p>1.1 进入cmd输入指令：<code>npm install -g hexo-cli</code>，然后输入<code>hexo -v</code> 查看hexo版本顺便验证是否安装成功。</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">C:\Users\X&gt;npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line">added 53 packages <span class="keyword">in</span> 22s</span><br><span class="line"></span><br><span class="line">14 packages are looking <span class="keyword">for</span> funding</span><br><span class="line">  run `npm fund` <span class="keyword">for</span> details</span><br><span class="line">  </span><br><span class="line">E:\nodejs&gt;hexo -v</span><br><span class="line">hexo-cli: 4.3.2</span><br><span class="line">os: win32 10.0.19045 undefined</span><br><span class="line">node: 20.12.2</span><br><span class="line">acorn: 8.11.3</span><br><span class="line">ada: 2.7.6</span><br><span class="line">ares: 1.27.0</span><br><span class="line"><span class="built_in">base64</span>: 0.5.2</span><br><span class="line">brotli: 1.1.0</span><br><span class="line">cjs_module_lexer: 1.2.2</span><br><span class="line">cldr: 44.1</span><br><span class="line">icu: 74.2</span><br><span class="line">llhttp: 8.1.2</span><br><span class="line">modules: 115</span><br><span class="line">napi: 9</span><br><span class="line">nghttp2: 1.60.0</span><br><span class="line">nghttp3: 0.7.0</span><br><span class="line">ngtcp2: 0.8.1</span><br><span class="line">openssl: 3.0.13+quic</span><br><span class="line">simdutf: 4.0.8</span><br><span class="line">tz: 2024a</span><br><span class="line">undici: 5.28.4</span><br><span class="line">unicode: 15.1</span><br><span class="line">uv: 1.46.0</span><br><span class="line">uvwasi: 0.0.20</span><br><span class="line">v8: 11.3.244.8-node.19</span><br><span class="line">zlib: 1.3.0.1-motley-40e35a7</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="2、创建文件夹并初始化hexo"><a href="#2、创建文件夹并初始化hexo" class="headerlink" title="2、创建文件夹并初始化hexo"></a>2、创建文件夹并初始化hexo</h2><p>2.1 创建一个文件夹Test（这个文件夹用来存放hexo初始化后的文件），并在这个创建好的test文件夹下直接右键git bash打开。</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware1.png"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-03_223819.png"
                      
                 ></p>
-<p>这是NAT设置里的内容，也就是NAT的网关。</p>
+<p>2.2 查看是否能启动成功</p>
+<p><code>hexo s</code></p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware2.png"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-03_223925.png"
                      
                 ></p>
-<p>这是DHCP设置里的内容，也就是NAT的起始地址和结束地址。</p>
+ 
+  <div class="note-large red">
+    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
+      <p>指定文件夹目录</p>
+
+    </div>
+    <div class="notel-content">
+      <p>node_modules: 依赖包</p>
+<p>public：存放生成的页面</p>
+<p>scaffolds：生成文章的一些模板</p>
+<p>source：用来存放你的文章</p>
+<p>themes：主题</p>
+<p><strong>_config.yml: 博客的配置文件</strong></p>
+
+    </div>
+  </div>
+
+
+
+<p>2.3 复制网址打开</p>
+<p><code>http://localhost:4000/</code></p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware3.png"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-03_224033.png"
                      
                 ></p>
-<p>这是我的主机IP：</p>
+<h1 id="三、将Hexo部署到github"><a href="#三、将Hexo部署到github" class="headerlink" title="三、将Hexo部署到github"></a>三、将Hexo部署到github</h1><h2 id="1、Github创建个人仓库"><a href="#1、Github创建个人仓库" class="headerlink" title="1、Github创建个人仓库"></a>1、Github创建个人仓库</h2>
+  <div class="note p-4 mb-4 rounded-small success">
+    <p>首先，需要有一个github账号。登上账号后建一个仓库：仓库名为你的用户名.github.io，<br>举例如下：<br>创建一个和你用户名相同的仓库，后面加.github.io，<br>只有这样，将来要部署到GitHub的时候，才会被识别，也就是xxxx.github.io，其中xxx就是你注册GitHub的用户名。</p>
+
+  </div>
+
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware4.png"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/a.png"
                      
                 ></p>
-<p>这是我的虚拟机IP：</p>
+<h2 id="2、生成ssh添加到Github"><a href="#2、生成ssh添加到Github" class="headerlink" title="2、生成ssh添加到Github"></a>2、生成ssh添加到Github</h2>
+  <div class="note p-4 mb-4 rounded-small primary">
+    <p>在Github上创建仓库完成之后，需要设置ssh免密登录</p>
+
+  </div>
+
+
+
+<p>2.1 打开cmd窗口：执行如下命令</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;yourname&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;youremail&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>防止输错可以检查：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name</span><br><span class="line">git config user.email</span><br></pre></td></tr></table></figure></div>
+
+
+
+<p>2.2 接着进入家目录：C:\Users\X（这是你自己电脑上的家目录），右击打开git bash，输入：</p>
+<p><code>ssh-keygen -t rsa -C 1500937374@qq.com（这里填你自己的QQ邮箱）</code></p>
+<p>然后就敲三次回车：</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware8.png"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/b.png"
                      
                 ></p>
-<p>此时，我尝试着从虚拟机ping主机ping：</p>
+<p>2.3 接着就会发现C：\Users\X 下多了一个.ssh目录，打开后有一个公钥，一个私钥。id_rsa.pub是公钥，我们需要打开它，复制里面的内容。</p>
+<p>然后进入github：</p>
+<p>点击<strong>setting</strong></p>
+<p>进行以下操作</p>
+<p>找到SSH and GPG keys选项——&gt;点击绿色按钮“New SSH key”——&gt;输入相应的title和key（key为上一步的id_rsa.pub里的内容）——&gt;然后点击Add SSH Key</p>
+<h2 id="3、进行部署"><a href="#3、进行部署" class="headerlink" title="3、进行部署"></a>3、进行部署</h2>
+  <div class="note p-4 mb-4 rounded-small primary">
+    <p>这一步，我们就可以将hexo和GitHub关联起来，也就是将hexo生成的文章部署到GitHub上，打开站点配置文件 _config.yml，翻到最后，修改为YourgithubName（就是你的GitHub账户）。</p>
+
+  </div>
+
+
+
+<p>3.1 修改配置文件，然后修改内容：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:goubin18/goubin18.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure></div>
+
+
+  <div class="note-large default">
+    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
+      <i class="notel-icon fa-solid fa-info"></i><p>注意</p>
+
+    </div>
+    <div class="notel-content">
+      <p>在这里我们需要注意的是在每一个类型下都有一个空格，因为配置文件<code>_config.redefine.yml</code>使用yaml语法，所以我们需要注意缩进。</p>
+
+    </div>
+  </div>
+
+<p><strong>repo：获取步骤如下</strong></p>
+<p><strong>点进自己刚刚创建的仓库，复制</strong></p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware5.png"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-05_154324.png"
                      
                 ></p>
-<p>我尝试着虚拟机ping设置好的网关192.168.18.2：</p>
+<p>3.2 找到自己的博客路径打开，这个时候需要先安装deploy-git ，也就是部署的命令,这样你才能用命令部署到GitHub。</p>
+<p><code>npm install hexo-deployer-git --save</code></p>
+<p>3.3 然后依次执行以下命令：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean   		#清除缓存文件 db.json 和已生成的静态文件 public</span><br><span class="line">hexo generate       #生成网站静态文件到默认设置的 public 文件夹(hexo generate 的缩写)</span><br><span class="line">hexo deploy			#自动生成网站静态文件，并部署到设定的仓库(hexo deploy 的缩写)</span><br></pre></td></tr></table></figure></div>
+
+<p>注意在输入<code>hexo deploy</code>后会有一个提示让你手动输入yes&#x2F;no，我们直接输入yes。</p>
+<p>最后回到Github上查看自己的仓库：</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware6.png"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-05_155620.png"
                      
                 ></p>
-<p>可以看出均无法ping通。</p>
-<p>但是我尝试着从主机ping虚拟机：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware7.png"
-                     
-                ></p>
-<p>可以看出它ping通了。</p>
-<p>后来经过查找网上大量资料后发现，NAT模式下并不能将子网IP（也就是DHCP分配的网段）设置成和主机的IP网段一致，并且网关IP不能被包含在DHCP设置里的起始地址和结束地址之间，由上面的配置可以看出，我把子网IP和主机IP的网段设为了一致，并且设置的默认网关IP（192.168.18.2）<strong>被包含</strong>在起始地址192.168.18.1~192.168.18.254内，所以我们需要把这两个地方更改一下，把子网IP的网段设置为和主机IP网段不一样，起始地址设置为192.168.xx.3即可（xx为即将设置的子网IP网段）。</p>
-<p>下面是更换后的配置：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware9.png"
-                     
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware10.png"
-                     
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware11.png"
-                     
-                ></p>
-<p>更改后的虚拟机IP：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware12.png"
-                     
-                ></p>
-<p>然后我们可以测试一下主机和虚拟机能否互相ping通：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware13.png"
-                     
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/VMware14.png"
-                     
-                ></p>
-<p>至此，虚拟机和主机和外网都打通了，问题得到了解决。</p>
-<p>其实我们遇到这种情况一般都可以直接选择<strong>恢复默认设置</strong>这个选项，但我们在手动设置的时候出错后主动研究并解决问题可以培养一下自身解决问题的能力，我们显然选择后者更好。</p>
-<p>参考文章：<strong>VMware虚拟机网络配置-NAT篇 <a class="link"   href="https://juejin.cn/post/7244099508212744253" >https://juejin.cn/post/7244099508212744253 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></strong></p>
+<p>上传成功。</p>
+<p>现在可以使用xxx.github.io就可以访问你的博客了。</p>
+<h1 id="四、使用Hexo的主题Redefine"><a href="#四、使用Hexo的主题Redefine" class="headerlink" title="四、使用Hexo的主题Redefine"></a>四、使用Hexo的主题Redefine</h1><p>现在我们可以进一步的美化博客，我选择的是Hexo的主题商店里的Redefine。</p>
+<p>Hexo官网主题：<a class="link"   href="https://hexo.io/themes/" >https://hexo.io/themes/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>Redefine部署及使用文档：<a class="link"   href="https://redefine-docs.ohevan.com/introduction" >https://redefine-docs.ohevan.com/introduction <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="1、安装主题"><a href="#1、安装主题" class="headerlink" title="1、安装主题"></a>1、安装主题</h2><p>在 Hexo 根目录执行以下命令安装主题，有两种方式：npm、git。</p>
+<p>我使用的是npm方式，git方式可以自己去官网文档查看：</p>
+<p><code>npm install hexo-theme-redefine@latest</code></p>
+<h2 id="2、启动主题"><a href="#2、启动主题" class="headerlink" title="2、启动主题"></a>2、启动主题</h2><p>在 Hexo 根目录的 <code>_config.yml</code> 文件中，将 <code>theme</code> 值修改为 <code>redefine</code>。</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">theme: redefine</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="3、创建主题配置文件"><a href="#3、创建主题配置文件" class="headerlink" title="3、创建主题配置文件"></a>3、创建主题配置文件</h2><p>在 Hexo 根目录下创建 <code>_config.redefine.yml</code> 文件。</p>
+<p>并将<a class="link"   href="https://github.com/EvanNotFound/hexo-theme-redefine/blob/main/_config.yml" >此处 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的所有内容复制进去。</p>
+<p>本文件会自动覆盖主题的配置项，创建本文件的目的是为了方便你在升级主题时，不会丢失你的配置。</p>
+<h2 id="4、创建成功"><a href="#4、创建成功" class="headerlink" title="4、创建成功"></a>4、创建成功</h2><p>现在就可以启动Hexo，看看效果了。</p>
+<p>后续的步骤请移步<a class="link"   href="https://redefine-docs.ohevan.com/" >官方文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>仔细查看使用方法。</p>
+<h2 id="5、属于Redefine的Typroa主题"><a href="#5、属于Redefine的Typroa主题" class="headerlink" title="5、属于Redefine的Typroa主题"></a>5、属于Redefine的Typroa主题</h2><p>我们可以在官方文档的写作指南上找到适合写文章的Typroa主题，也可点击 <a class="link"   href="https://github.com/EvanNotFound/typora-theme-redefine" >这里 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 直接进入下载。</p>
+<h1 id="五、关于在博客上使用图片的存储问题"><a href="#五、关于在博客上使用图片的存储问题" class="headerlink" title="五、关于在博客上使用图片的存储问题"></a>五、关于在博客上使用图片的存储问题</h1><p>因为在博客上写文章的时候需要引用自己的图片，所以我们可以使用<strong>阿里云OSS存储+Picgo</strong>的方式。</p>
+<p>具体细节可以参考这一篇文章来进行设置：<a class="link"   href="https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8" >https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>经过上述步骤后，我们就拥有了一个属于自己的个人博客。</p>
+<p><strong>参考文章：</strong>使用Hexo从0到1搭建个人博客详细教程（超详细，超简单）（<a class="link"   href="https://developer.aliyun.com/article/1218122%EF%BC%89" >https://developer.aliyun.com/article/1218122） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>手把手教你搭建阿里云图床(PicGo+Typora+阿里云OSS)，新手小白一看就会（<a class="link"   href="https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8%EF%BC%89" >https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>Redefine官网（<a class="link"   href="https://redefine-docs.ohevan.com/%EF%BC%89" >https://redefine-docs.ohevan.com/） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 ]]></content>
       <categories>
-        <category>VMware</category>
+        <category>搭建个人博客</category>
       </categories>
       <tags>
-        <tag>VMware</tag>
+        <tag>搭建个人博客</tag>
+        <tag>Hexo</tag>
+        <tag>PicGo</tag>
+        <tag>Typora</tag>
       </tags>
   </entry>
 </search>
