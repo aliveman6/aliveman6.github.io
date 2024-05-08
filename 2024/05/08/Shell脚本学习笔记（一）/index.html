@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="StreamCons">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://aliveman6.github.io/2024/05/08/shell脚本学习笔记（一）/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="本文旨在记录学习Shell过程的高级变量篇。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell脚本学习笔记（一）">
+<meta property="og:url" content="https://aliveman6.github.io/2024/05/08/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本文旨在记录学习Shell过程的高级变量篇。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Shell%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.png">
+<meta property="article:published_time" content="2024-05-08T13:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-08T15:56:35.396Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Shell">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Shell%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/512.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/512.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/512.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Shell脚本学习笔记（一） -
+        
+        X Blog
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+        <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    
+<script src="/js/libs/anime.min.js"></script>
+
+    <h1 class="ml13">
+        X Blog
+    </h1>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+
+        anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [100,0],
+                translateZ: 0,
+                opacity: [0,1],
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i
+            }).add({
+            targets: '.ml13 .letter',
+            translateY: [0,-100],
+            opacity: [1,0],
+            easing: "easeInExpo",
+            duration: 1200,
+            delay: (el, i) => 100 + 30 * i
+        });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            hidePreloaderAfterTimeout(1000); // Hide after 1000 milliseconds once the window has loaded
+        });
+
+        // Backup failsafe: Hide preloader after a maximum of 5000 milliseconds, regardless of the window load event
+        hidePreloaderAfterTimeout(5000);
+
+        function hidePreloaderAfterTimeout(delay) {
+            setTimeout(function () {
+                var preloader = document.querySelector('.preloader');
+                preloader.style.opacity = '0';
+                setTimeout(function () {
+                    preloader.style.display = 'none';
+                }, 200);
+            }, delay);
+        }
+    </script>
+</div>
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    <!--- Font Part-->
+    
+    
+    
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    
+
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"aliveman6.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"5rem","h2":"4rem","h3":"2.8rem","h4":"2.5rem","h5":"2.2rem","h6":"2rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":6,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap"},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/home_1.jpg","dark":"https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/dark_1.jpg"},"title":"这是一个没想好名字的标题","subtitle":{"text":["我 亦 无 他 , 惟 手 熟 尔 。"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/aliveman6","instagram":null,"zhihu":"https://www.zhihu.com/people/zhui-sha-zhe-hao-tian-ling","twitter":"https://twitter.com/Streamconsciou2","email":"1500937374@qq.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.1","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":40},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/index.html","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Links":{"icon":"fa-regular fa-link","submenus":{"Github":"https://github.com/aliveman6","Blog":"https://aliveman6.github.io","Tags":"/tags/","Photos":"/masonry/"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"right","first_item":"menu","announcement":"Debian，yyds!!","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2024/5/4 00:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":true};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+        
+<link rel="stylesheet" href="/fontawesome/sharp-solid.min.css">
+
+    
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Debian.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                X Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/index.html"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-link fa-fw"></i>
+                                    链接
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://github.com/aliveman6">
+                                                    GITHUB
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="https://aliveman6.github.io">
+                                                    BLOG
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/tags/">
+                                                    标签
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/masonry/">
+                                                    PHOTOS
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/index.html"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-Links"
+                        >
+                            <span>
+                                链接
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-Links">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://github.com/aliveman6">GITHUB</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="https://aliveman6.github.io">BLOG</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/tags/">标签</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/masonry/">PHOTOS</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">10</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">5</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">6</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                
+                
+                <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/shell.webp" alt="Shell脚本学习笔记（一）" class="w-full h-60 sm:h-72 md:h-80 object-cover sm:rounded-t-large dark:brightness-75"/>
+                
+                <div class="w-full flex items-center absolute bottom-0 justify-start">
+                    <h1 class="article-title-cover text-center mx-6 my-6 text-second-text-color bg-background-color-transparent px-4 py-3 text-3xl sm:text-4xl md:text-5xl font-bold backdrop-blur-lg rounded-xl border border-border-color ">Shell脚本学习笔记（一）</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.png">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">StreamCons</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-05-08 21:00</span>
+        <span class="mobile">2024-05-08 21:00</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-08 23:56:35</span>
+            <span class="mobile">2024-05-08 23:56:35</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/Shell/">Shell</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Shell/">Shell</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>3.9k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>18 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <h1 id="Shell大纲"><a href="#Shell大纲" class="headerlink" title="Shell大纲"></a>Shell大纲</h1><p>下图是我看网络课程所画出的思维导图：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Shell%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.png"
+                     
+                ></p>
+<h2 id="一、变量替换和测试"><a href="#一、变量替换和测试" class="headerlink" title="一、变量替换和测试"></a>一、变量替换和测试</h2><h3 id="1、-变量-匹配规则"><a href="#1、-变量-匹配规则" class="headerlink" title="1、${变量#匹配规则}"></a>1、${变量#匹配规则}</h3><p>从头开始匹配，最短删除（匹配后相应的规则后只删除第一个匹配到的）</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@XQH:/TestShell# variable_2=&quot;I love you,Do you love me?&quot;</span><br><span class="line">root@XQH:/TestShell# echo $variable_2</span><br><span class="line">I love you,Do you love me?</span><br><span class="line">root@XQH:/TestShell# var1=$&#123;variable_2#*ov&#125;</span><br><span class="line">root@XQH:/TestShell# echo $var1</span><br><span class="line">e you,Do you love me?</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="2、-变量-匹配规则"><a href="#2、-变量-匹配规则" class="headerlink" title="2、${变量##匹配规则}"></a>2、${变量##匹配规则}</h3><p>从头开始匹配，最长删除</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@XQH:/TestShell# var2=$&#123;variable_2##*ov&#125;</span><br><span class="line">root@XQH:/TestShell# echo $var2</span><br><span class="line">e me?</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="3、-变量-匹配规则"><a href="#3、-变量-匹配规则" class="headerlink" title="3、${变量%匹配规则}"></a>3、${变量%匹配规则}</h3><p>从尾开始匹配，最短删除</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@XQH:/TestShell# var3=$&#123;variable_2%ov*&#125;</span><br><span class="line">root@XQH:/TestShell# echo $var3</span><br><span class="line">I love you,Do you l</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="4、-变量-匹配规则"><a href="#4、-变量-匹配规则" class="headerlink" title="4、${变量%%匹配规则}"></a>4、${变量%%匹配规则}</h3><p>从尾开始匹配，最短删除</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@XQH:/TestShell# var3=$&#123;variable_2%%ov*&#125;</span><br><span class="line">root@XQH:/TestShell# echo $var3             </span><br><span class="line">I l</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="5、-变量-旧字符串-新字符串"><a href="#5、-变量-旧字符串-新字符串" class="headerlink" title="5、${变量&#x2F;旧字符串&#x2F;新字符串}"></a>5、${变量&#x2F;旧字符串&#x2F;新字符串}</h3><p>替换变量内的旧字符串，只替换第一处</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@XQH:/TestShell# echo $PATH</span><br><span class="line">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><br><span class="line"></span><br><span class="line">root@XQH:/TestShell# var5=$&#123;PATH/bin/BIN&#125;</span><br><span class="line">root@XQH:/TestShell# echo $var5</span><br><span class="line">/usr/local/sBIN:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="6、-变量-旧字符串-新字符串"><a href="#6、-变量-旧字符串-新字符串" class="headerlink" title="6、${变量&#x2F;&#x2F;旧字符串&#x2F;新字符串}"></a>6、${变量&#x2F;&#x2F;旧字符串&#x2F;新字符串}</h3><p>替换变量内的旧字符串，全部替换</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@XQH:/TestShell# var6=$&#123;PATH//bin/BIN&#125;</span><br><span class="line">root@XQH:/TestShell# echo $var6</span><br><span class="line">/usr/local/sBIN:/usr/local/BIN:/usr/sBIN:/usr/BIN:/sBIN:/BIN</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="二、字符串处理"><a href="#二、字符串处理" class="headerlink" title="二、字符串处理"></a>二、字符串处理</h2><p><strong>有用到expr这个关键字的话索引下下标从1开始，没有用到expr关键字的话检索时索引下标都是从0开始</strong></p>
+<h3 id="1、计算字符串长度"><a href="#1、计算字符串长度" class="headerlink" title="1、计算字符串长度"></a>1、计算字符串长度</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用命令$&#123;#string&#125;</span><br><span class="line">root@XQH:/TestShell# varA1=&quot;Hello World&quot;</span><br><span class="line">root@XQH:/TestShell# len=$&#123;#varA1&#125;</span><br><span class="line">root@XQH:/TestShell# echo $len</span><br><span class="line">11</span><br></pre></td></tr></table></figure></div>
+
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用命令expr length $string</span><br><span class="line">root@XQH:/TestShell# len=`expr length &quot;$varA1&quot;`</span><br><span class="line">root@XQH:/TestShell# echo $len</span><br><span class="line">11</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="2、获取字符索引位置（这里的索引下标是从1开始的）"><a href="#2、获取字符索引位置（这里的索引下标是从1开始的）" class="headerlink" title="2、获取字符索引位置（这里的索引下标是从1开始的）"></a>2、获取字符索引位置（这里的索引下标是从1开始的）</h3><h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p><strong><code>expr index &quot;$string&quot; substr</code></strong></p>
+
+  <div class="note p-4 mb-4 rounded-small info">
+    <p>这里的获取字符索引时它是根据字符串一个个拆分出来，然后直接寻找最先找到的字符，然后显示最先找到的字符的位置</p>
+
+  </div>
+
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@XQH:/TestShell# varA2=&quot;quaickstart is a app&quot; </span><br><span class="line">root@XQH:/TestShell# ind=`expr index &quot;$varA2&quot; start`</span><br><span class="line">root@XQH:/TestShell# echo $ind</span><br><span class="line">3</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="3、获取子串长度"><a href="#3、获取子串长度" class="headerlink" title="3、获取子串长度"></a>3、获取子串长度</h3><h4 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h4><p><strong><code>expr match &quot;$string&quot; substr</code></strong></p>
+
+  <div class="note p-4 mb-4 rounded-small info">
+    <p>实际上这个方法的弊端很多，所以不经常用，会有替代方法</p>
+
+  </div>
+
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">root@XQH:/TestShell# echo $varA2</span><br><span class="line">quaickstart is a app</span><br><span class="line">root@XQH:/TestShell# sub_len=`expr match &quot;$varA2&quot; app`</span><br><span class="line">root@XQH:/TestShell# echo $sub_len</span><br><span class="line">0</span><br><span class="line">(从这里可以看出如果从后面的字符开始索引，无法获取出字串长度)</span><br><span class="line">root@XQH:/TestShell# sub_len=`expr match &quot;$varA2&quot; quick` </span><br><span class="line">root@XQH:/TestShell# echo $sub_len                      </span><br><span class="line">0</span><br><span class="line">(从这里可以看出我并没有正确打出需要索引的第一个字符，所以也无法获取出字串长度)</span><br><span class="line">root@XQH:/TestShell# sub_len=`expr match &quot;$varA2&quot; quaick`</span><br><span class="line">root@XQH:/TestShell# echo $sub_len                       </span><br><span class="line">6</span><br><span class="line">(从这里可以看出我正确打出了第一个字符，所以成功获取到了字串长度)</span><br><span class="line">root@XQH:/TestShell# sub_len=`expr match &quot;$varA2&quot; qu.*`  </span><br><span class="line">root@XQH:/TestShell# </span><br><span class="line">root@XQH:/TestShell# echo $sub_len                     </span><br><span class="line">20</span><br><span class="line">(从这里可以看出我使用了通配符，所以成功获取了整个字符串的长度)</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="4、抽取字符串中的子串"><a href="#4、抽取字符串中的子串" class="headerlink" title="4、抽取字符串中的子串"></a>4、抽取字符串中的子串</h3><h4 id="方法一-1"><a href="#方法一-1" class="headerlink" title="方法一"></a><strong>方法一</strong></h4><p><strong>（1）<code>$&#123;string:position&#125;</code>（2）<code>$&#123;string:position:length&#125;</code>（3）<code>$&#123;stirng: -position&#125;</code> 或者 <code>$&#123;string:（position）&#125;</code></strong></p>
+<h4 id="方法二-1"><a href="#方法二-1" class="headerlink" title="方法二"></a><strong>方法二</strong></h4><p><strong><code>expr substr $string $position $length</code></strong></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">root@debian:/# var1=&quot;This is a Test file.&quot;</span><br><span class="line">root@debian:/# echo $var1 </span><br><span class="line">root@debian:/# substr_1=$&#123;var1:10&#125;</span><br><span class="line">root@debian:/# echo $substr_1 </span><br><span class="line">Test file.</span><br><span class="line">root@debian:/# substr_2=$&#123;var1:10:6&#125;</span><br><span class="line">root@debian:/# echo $substr_2</span><br><span class="line">Test f</span><br><span class="line">root@debian:/# substr_3=$&#123;var1: -5&#125;</span><br><span class="line">root@debian:/# echo $substr_3</span><br><span class="line">file.</span><br><span class="line">root@debian:/# substr_4=$&#123;var1:(-5)&#125;</span><br><span class="line">root@debian:/# echo $substr_4</span><br><span class="line">file.</span><br><span class="line">（这里的（-5）和空格后-5的效果一致）</span><br><span class="line">root@debian:/# substr_5=$&#123;var1:(-5):2&#125;</span><br><span class="line">root@debian:/# echo $substr_5</span><br><span class="line">fi</span><br><span class="line">root@debian:/# substr_6=`expr substr &quot;$var1&quot; 5 6`</span><br><span class="line">root@debian:/# echo $substr_6</span><br><span class="line">is a</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="三、字符串处理完整脚本"><a href="#三、字符串处理完整脚本" class="headerlink" title="三、字符串处理完整脚本"></a>三、字符串处理完整脚本</h2><h3 id="1、需求描述"><a href="#1、需求描述" class="headerlink" title="1、需求描述"></a><strong>1、需求描述</strong></h3><p>​	变量string&#x3D;”This is a Test file,The Test file will press the Enter.”</p>
+<p>​	执行脚本后，打印输出string字符串变量，并给出用户以下选项：</p>
+<p>（1）打印string长度</p>
+<p>（2）删除字符串中所有的Test</p>
+<p>（3）替换第一个Test为Nothing</p>
+<p>（4）替换全部的Test为Nothing</p>
+<p>用户输入1|2|3|4，可以执行对应项的功能；输入q|Q则退出交互模式。</p>
+<h3 id="2、思路分析"><a href="#2、思路分析" class="headerlink" title="2、思路分析"></a><strong>2、思路分析</strong></h3><p>​	1、划分不同的功能模块，并编写函数</p>
+<p>​	（1）function print_tips					（打印字符串）</p>
+<p>​	（2）function len_of_string				（打印字符串长度）</p>
+<p>​	（3）function del_Test					（删除字符串中所有的Test）</p>
+<p>​	（4）function rep_Test_Nothing_first		（替换第一个Test为Nothing）</p>
+<p>​	（5）function rep_Test_Nothing_all			（替换所有的Test为Nothing）</p>
+<p>接下来就是写好代码：</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash                                           <span class="comment">###（固定格式）</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"></span></span><br><span class="line">string=&quot;This is a Test file,The Test file will press the Enter.&quot;</span><br><span class="line"></span><br><span class="line">function print_tips</span><br><span class="line">&#123;</span><br><span class="line">	echo &quot;**********************************&quot;</span><br><span class="line">	echo &quot;（1）打印string长度&quot;</span><br><span class="line">	echo &quot;（2）删除字符串中所有的Test&quot;</span><br><span class="line">	echo &quot;（3）替换第一个Test为nothing&quot;</span><br><span class="line">	echo &quot;（4）替换全部Test为Nothing&quot;</span><br><span class="line">	echo &quot;**********************************&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">print_tips											###（直接输入函数名即可输出相应结果）</span><br><span class="line"></span><br><span class="line">function len_of_string</span><br><span class="line">&#123;</span><br><span class="line">	echo &quot;$&#123;#string&#125;&quot;								###像这样的写法其实并没有任何实际意义，这里是为了学习使用。</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function del_Test</span><br><span class="line">&#123;</span><br><span class="line">	echo &quot;$&#123;string//Test/&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function rep_Test_Nothing_first</span><br><span class="line">&#123;</span><br><span class="line">	echo &quot;$&#123;string/Test/Nothing&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function rep_Test_Nothing_all</span><br><span class="line">&#123;</span><br><span class="line">	echo &quot;$&#123;string//Test/Nothing&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">len_of_string</span><br><span class="line">del_Test</span><br><span class="line">rep_Test_Nothing_first</span><br><span class="line">rep_Test_Nothing_all</span><br></pre></td></tr></table></figure></div>
+
+<p>这是输出结果：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">root@debian:/Shell# ./StringTest1.sh </span><br><span class="line">**********************************</span><br><span class="line">（1）打印string长度</span><br><span class="line">（2）删除字符串中所有的Test</span><br><span class="line">（3）替换第一个Test为nothing</span><br><span class="line">（4）替换全部Test为Nothing</span><br><span class="line">**********************************</span><br><span class="line">55</span><br><span class="line">This is a  file,The  file will press the Enter.</span><br><span class="line">This is a Nothing file,The Test file will press the Enter.</span><br><span class="line">This is a Nothing file,The Nothing file will press the Enter.</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>这中间有一个小插曲，一般Linux有两个shell环境，<code>sh</code>和<code>bash</code>；他们都是Unix和Linux系统中常见的shell环境。他们之间存在一些重要的区别：</p>
+<p>sh提供了基本的shell功能，如命令行解释、变量替换、流程控制等，bash包含了许多额外的特性，如命令行编辑、命令历史记录、命令别名等。此外，<code>bash</code>还</p>
+<p>增加了一些编程功能，如函数、数组等。</p>
+<p>我按照教学视频里进行”<code>sh StringTest1.sh</code> “操作后出现了报错function not found，因此我们可以看出在sh环境下类似于<code>function</code>、</p>
+<p><code>$&#123;string//Test/Nothing&#125;</code>这样的语法并不被<code>sh</code>环境支持，所以这里有两种解决方法：</p>
+<p>（1）输入命令使用bash环境运行（推荐使用）：</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x your_script.sh</span><br><span class="line">./your_script.sh</span><br></pre></td></tr></table></figure></div>
+
+<p>（2）强制修改.sh文件执行bash环境：</p>
+<p>可以在你的脚本的第一行明确指定使用bash，而不是sh。你可以将你的脚本的第一行改为<code>#!/usr/bin/env bash</code>，这样无论你如何运行你的脚本，它都会在</p>
+<p>bash环境中运行。</p>
+<h3 id="3、实现全部需求"><a href="#3、实现全部需求" class="headerlink" title="3、实现全部需求"></a><strong>3、实现全部需求</strong></h3><p><strong>接下来我们来实现”用户输入1|2|3|4，可以执行对应项的功能；输入q|Q则退出交互模式。“这个需求：</strong></p>
+<p>首先我们需要进行模块分析：</p>
+<p>需要一个while true的判定，然后首先我们打印出四个选项的内容，使用<code>read -p &quot;请选择你的数字：&quot;  choice</code>这样的形式来输出选择的选项，再然后使用<code>case $XXX in</code>来判定用户输入相应数字的情况，所以整合后的代码为：</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"></span></span><br><span class="line">string=&quot;This is a Test file,The Test file will press the Enter.&quot;</span><br><span class="line"></span><br><span class="line">function print_tips</span><br><span class="line">&#123;</span><br><span class="line">	echo &quot;**********************************&quot;</span><br><span class="line">	echo &quot;（1）打印string长度&quot;</span><br><span class="line">	echo &quot;（2）删除字符串中所有的Test&quot;</span><br><span class="line">	echo &quot;（3）替换第一个Test为nothing&quot;</span><br><span class="line">	echo &quot;（4）替换全部Test为Nothing&quot;</span><br><span class="line">	echo &quot;**********************************&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function len_of_string</span><br><span class="line">&#123;</span><br><span class="line">	echo &quot;$&#123;#string&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function del_Test</span><br><span class="line">&#123;</span><br><span class="line">	echo &quot;$&#123;string//Test/&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function rep_Test_Nothing_first</span><br><span class="line">&#123;</span><br><span class="line">	echo &quot;$&#123;string/Test/Nothing&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function rep_Test_Nothing_all</span><br><span class="line">&#123;</span><br><span class="line">	echo &quot;$&#123;string//Test/Nothing&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">	echo &quot;【string=$string】&quot;</span><br><span class="line">	echo </span><br><span class="line">	print_tips</span><br><span class="line">	read -p &quot;Please input your choice（1|2|3|4|q|Q）：&quot; choice				##choice关键字</span><br><span class="line"></span><br><span class="line">	case $choice in													###声明choice变量</span><br><span class="line">		1)</span><br><span class="line">			len_of_string</span><br><span class="line">			;;</span><br><span class="line">		2)</span><br><span class="line">			del_Test</span><br><span class="line">			;;</span><br><span class="line">		3)</span><br><span class="line">			rep_Test_Nothing_first</span><br><span class="line">			;;</span><br><span class="line">		4)</span><br><span class="line">			rep_Test_Nothing_all</span><br><span class="line">			;;</span><br><span class="line">		q|Q)</span><br><span class="line">			exit</span><br><span class="line">			;;</span><br><span class="line">		*)</span><br><span class="line">			echo &quot;Error Number,input only in &#123;1|2|3|4|q|Q&#125;&quot;			###*号代表输入除上述的数字以外的所有数字</span><br><span class="line">	esac</span><br><span class="line">done</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+
+<p>执行脚本后我们可以看到，需求已经达成：</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">root@debian:/Shell# ./StringTest1.sh </span><br><span class="line">【string=This is a Test file,The Test file will press the Enter.】</span><br><span class="line"></span><br><span class="line">**********************************</span><br><span class="line">（1）打印string长度</span><br><span class="line">（2）删除字符串中所有的Test</span><br><span class="line">（3）替换第一个Test为nothing</span><br><span class="line">（4）替换全部Test为Nothing</span><br><span class="line">**********************************</span><br><span class="line">Please input your choice（1|2|3|4|q|Q）：1</span><br><span class="line">55</span><br><span class="line">【string=This is a Test file,The Test file will press the Enter.】</span><br><span class="line"></span><br><span class="line">**********************************</span><br><span class="line">（1）打印string长度</span><br><span class="line">（2）删除字符串中所有的Test</span><br><span class="line">（3）替换第一个Test为nothing</span><br><span class="line">（4）替换全部Test为Nothing</span><br><span class="line">**********************************</span><br><span class="line">Please input your choice（1|2|3|4|q|Q）：2</span><br><span class="line">This is a  file,The  file will press the Enter.</span><br><span class="line">【string=This is a Test file,The Test file will press the Enter.】</span><br><span class="line"></span><br><span class="line">**********************************</span><br><span class="line">（1）打印string长度</span><br><span class="line">（2）删除字符串中所有的Test</span><br><span class="line">（3）替换第一个Test为nothing</span><br><span class="line">（4）替换全部Test为Nothing</span><br><span class="line">**********************************</span><br><span class="line">Please input your choice（1|2|3|4|q|Q）：3</span><br><span class="line">This is a Nothing file,The Test file will press the Enter.</span><br><span class="line">【string=This is a Test file,The Test file will press the Enter.】</span><br><span class="line"></span><br><span class="line">**********************************</span><br><span class="line">（1）打印string长度</span><br><span class="line">（2）删除字符串中所有的Test</span><br><span class="line">（3）替换第一个Test为nothing</span><br><span class="line">（4）替换全部Test为Nothing</span><br><span class="line">**********************************</span><br><span class="line">Please input your choice（1|2|3|4|q|Q）：Q</span><br><span class="line">root@debian:/Shell# </span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="四、命令替换"><a href="#四、命令替换" class="headerlink" title="四、命令替换"></a>四、命令替换</h2><p><strong>语法格式：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>语法格式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>方法一</td>
+<td><code>command</code></td>
+</tr>
+<tr>
+<td>方法二</td>
+<td>$(command)</td>
+</tr>
+</tbody></table>
+<h3 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h3><p><strong>获取系统的所有用户并输出。</strong></p>
+<p>首先我们使用cat etc&#x2F;passwd命令进行查看所有用户：</p>
+<div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">root@debian:/<span class="title">Shell</span># <span class="title">cat</span> /<span class="title">etc</span>/<span class="title">passwd</span></span></span><br><span class="line"><span class="function"><span class="title">root:x</span>:0:0:<span class="title">root</span>:/<span class="title">root</span>:/<span class="title">bin</span>/<span class="title">bash</span></span></span><br><span class="line"><span class="function"><span class="title">daemon:x</span>:1:1:<span class="title">daemon</span>:/<span class="title">usr</span>/<span class="title">sbin</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">bin:x</span>:2:2:<span class="title">bin</span>:/<span class="title">bin</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">sys:x</span>:3:3:<span class="title">sys</span>:/<span class="title">dev</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">sync:x</span>:4:65534:<span class="title">sync</span>:/<span class="title">bin</span>:/<span class="title">bin</span>/<span class="title">sync</span></span></span><br><span class="line"><span class="function"><span class="title">games:x</span>:5:60:<span class="title">games</span>:/<span class="title">usr</span>/<span class="title">games</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">man:x</span>:6:12:<span class="title">man</span>:/<span class="title">var</span>/<span class="title">cache</span>/<span class="title">man</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">lp:x</span>:7:7:<span class="title">lp</span>:/<span class="title">var</span>/<span class="title">spool</span>/<span class="title">lpd</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">mail:x</span>:8:8:<span class="title">mail</span>:/<span class="title">var</span>/<span class="title">mail</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">news:x</span>:9:9:<span class="title">news</span>:/<span class="title">var</span>/<span class="title">spool</span>/<span class="title">news</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">uucp:x</span>:10:10:<span class="title">uucp</span>:/<span class="title">var</span>/<span class="title">spool</span>/<span class="title">uucp</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">proxy:x</span>:13:13:<span class="title">proxy</span>:/<span class="title">bin</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">www</span>-<span class="title">data:x</span>:33:33:<span class="title">www</span>-<span class="title">data</span>:/<span class="title">var</span>/<span class="title">www</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">backup:x</span>:34:34:<span class="title">backup</span>:/<span class="title">var</span>/<span class="title">backups</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">list:x</span>:38:38:<span class="title">Mailing</span> <span class="title">List</span> <span class="title">Manager</span>:/<span class="title">var</span>/<span class="title">list</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">irc:x</span>:39:39:<span class="title">ircd</span>:/<span class="title">run</span>/<span class="title">ircd</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">gnats:x</span>:41:41:<span class="title">Gnats</span> <span class="title">Bug</span>-<span class="title">Reporting</span> <span class="title">System</span> (<span class="title">admin</span>):/<span class="title">var</span>/<span class="title">lib</span>/<span class="title">gnats</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">nobody:x</span>:65534:65534:<span class="title">nobody</span>:/<span class="title">nonexistent</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">_apt:x</span>:100:65534::/<span class="title">nonexistent</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">systemd</span>-<span class="title">timesync:x</span>:101:101:<span class="title">systemd</span> <span class="title">Time</span> <span class="title">Synchronization</span>,,,:/<span class="title">run</span>/<span class="title">systemd</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">systemd</span>-<span class="title">network:x</span>:102:103:<span class="title">systemd</span> <span class="title">Network</span> <span class="title">Management</span>,,,:/<span class="title">run</span>/<span class="title">systemd</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">systemd</span>-<span class="title">resolve:x</span>:103:104:<span class="title">systemd</span> <span class="title">Resolver</span>,,,:/<span class="title">run</span>/<span class="title">systemd</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">tss:x</span>:104:110:<span class="title">TPM</span> <span class="title">software</span> <span class="title">stack</span>,,,:/<span class="title">var</span>/<span class="title">lib</span>/<span class="title">tpm</span>:/<span class="title">bin</span>/<span class="title">false</span></span></span><br><span class="line"><span class="function"><span class="title">messagebus:x</span>:105:111::/<span class="title">nonexistent</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">usbmux:x</span>:106:46:<span class="title">usbmux</span> <span class="title">daemon</span>,,,:/<span class="title">var</span>/<span class="title">lib</span>/<span class="title">usbmux</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">rtkit:x</span>:107:114:<span class="title">RealtimeKit</span>,,,:/<span class="title">proc</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">sshd:x</span>:108:65534::/<span class="title">run</span>/<span class="title">sshd</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">dnsmasq:x</span>:109:65534:<span class="title">dnsmasq</span>,,,:/<span class="title">var</span>/<span class="title">lib</span>/<span class="title">misc</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">avahi:x</span>:110:115:<span class="title">Avahi</span> <span class="title">mDNS</span> <span class="title">daemon</span>,,,:/<span class="title">run</span>/<span class="title">avahi</span>-<span class="title">daemon</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">speech</span>-<span class="title">dispatcher:x</span>:111:29:<span class="title">Speech</span> <span class="title">Dispatcher</span>,,,:/<span class="title">run</span>/<span class="title">speech</span>-<span class="title">dispatcher</span>:/<span class="title">bin</span>/<span class="title">false</span></span></span><br><span class="line"><span class="function"><span class="title">pulse:x</span>:112:116:<span class="title">PulseAudio</span> <span class="title">daemon</span>,,,:/<span class="title">run</span>/<span class="title">pulse</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">saned:x</span>:113:119::/<span class="title">var</span>/<span class="title">lib</span>/<span class="title">saned</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">colord:x</span>:114:120:<span class="title">colord</span> <span class="title">colour</span> <span class="title">management</span> <span class="title">daemon</span>,,,:/<span class="title">var</span>/<span class="title">lib</span>/<span class="title">colord</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">geoclue:x</span>:115:121::/<span class="title">var</span>/<span class="title">lib</span>/<span class="title">geoclue</span>:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br><span class="line"><span class="function"><span class="title">gnome</span>-<span class="title">initial</span>-<span class="title">setup:x</span>:116:65534::/<span class="title">run</span>/<span class="title">gnome</span>-<span class="title">initial</span>-<span class="title">setup</span>/:/<span class="title">bin</span>/<span class="title">false</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-<span class="title">gdm:x</span>:117:122:<span class="title">Gnome</span> <span class="title">Display</span> <span class="title">Manager</span>:/<span class="title">var</span>/<span class="title">lib</span>/<span class="title">gdm3</span>:/<span class="title">bin</span>/<span class="title">false</span></span></span><br><span class="line"><span class="function"><span class="title">x:x</span>:1000:1000:<span class="title">x</span>,,,:/<span class="title">home</span>/<span class="title">x</span>:/<span class="title">bin</span>/<span class="title">bash</span></span></span><br><span class="line"><span class="function"><span class="title">systemd</span>-<span class="title">coredump:x</span>:999:999:<span class="title">systemd</span> <span class="title">Core</span> <span class="title">Dumper</span>:/:/<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nologin</span></span></span><br></pre></td></tr></table></figure></div>
+
+<p>接着我们可以使用cut -d ”:“ 来指定用”：“来做分隔符，同时使用-f 1来指定只取第1个：</p>
+<p>整合起来后：<code>cut -d &quot;:&quot; -f 1</code></p>
+<div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">root@debian:/<span class="title">Shell</span># <span class="title">cat</span> /<span class="title">etc</span>/<span class="title">passwd</span> | <span class="title">cut</span> -<span class="title">d</span> &quot;:&quot; -<span class="title">f</span> 1</span></span><br><span class="line"><span class="function"><span class="title">root</span></span></span><br><span class="line"><span class="function"><span class="title">daemon</span></span></span><br><span class="line"><span class="function"><span class="title">bin</span></span></span><br><span class="line"><span class="function"><span class="title">sys</span></span></span><br><span class="line"><span class="function"><span class="title">sync</span></span></span><br><span class="line"><span class="function"><span class="title">games</span></span></span><br><span class="line"><span class="function"><span class="title">man</span></span></span><br><span class="line"><span class="function"><span class="title">lp</span></span></span><br><span class="line"><span class="function"><span class="title">mail</span></span></span><br><span class="line"><span class="function"><span class="title">news</span></span></span><br><span class="line"><span class="function"><span class="title">uucp</span></span></span><br><span class="line"><span class="function"><span class="title">proxy</span></span></span><br><span class="line"><span class="function"><span class="title">www</span>-<span class="title">data</span></span></span><br><span class="line"><span class="function"><span class="title">backup</span></span></span><br><span class="line"><span class="function"><span class="title">list</span></span></span><br><span class="line"><span class="function"><span class="title">irc</span></span></span><br><span class="line"><span class="function"><span class="title">gnats</span></span></span><br><span class="line"><span class="function"><span class="title">nobody</span></span></span><br><span class="line"><span class="function"><span class="title">_apt</span></span></span><br><span class="line"><span class="function"><span class="title">systemd</span>-<span class="title">timesync</span></span></span><br><span class="line"><span class="function"><span class="title">systemd</span>-<span class="title">network</span></span></span><br><span class="line"><span class="function"><span class="title">systemd</span>-<span class="title">resolve</span></span></span><br><span class="line"><span class="function"><span class="title">tss</span></span></span><br><span class="line"><span class="function"><span class="title">messagebus</span></span></span><br><span class="line"><span class="function"><span class="title">usbmux</span></span></span><br><span class="line"><span class="function"><span class="title">rtkit</span></span></span><br><span class="line"><span class="function"><span class="title">sshd</span></span></span><br><span class="line"><span class="function"><span class="title">dnsmasq</span></span></span><br><span class="line"><span class="function"><span class="title">avahi</span></span></span><br><span class="line"><span class="function"><span class="title">speech</span>-<span class="title">dispatcher</span></span></span><br><span class="line"><span class="function"><span class="title">pulse</span></span></span><br><span class="line"><span class="function"><span class="title">saned</span></span></span><br><span class="line"><span class="function"><span class="title">colord</span></span></span><br><span class="line"><span class="function"><span class="title">geoclue</span></span></span><br><span class="line"><span class="function"><span class="title">gnome</span>-<span class="title">initial</span>-<span class="title">setup</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-<span class="title">gdm</span></span></span><br><span class="line"><span class="function"><span class="title">x</span></span></span><br><span class="line"><span class="function"><span class="title">systemd</span>-<span class="title">coredump</span></span></span><br></pre></td></tr></table></figure></div>
+
+<p>接下来，我们可以使用for …..  in  来循环所有抓取的用户：</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">root@debian:/Shell# vim Test.sh</span><br><span class="line">root@debian:/Shell# cat Test.sh </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"></span></span><br><span class="line">index=1</span><br><span class="line"></span><br><span class="line">for user in `cat /etc/passwd | cut -d &quot;:&quot; -f 1`			##for....in循环</span><br><span class="line">do</span><br><span class="line">	echo &quot;This is $index user：$user&quot;		##输出“This is（循环）user：（得到的用户名）”</span><br><span class="line">	index=$(($index + 1))					##index自增</span><br><span class="line">done</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>得到的结果就实现了我们的需求：</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">root@debian:/Shell# chmod +x Test.sh </span><br><span class="line">root@debian:/Shell# ./Test.sh </span><br><span class="line">This is 1 user：root</span><br><span class="line">This is 2 user：daemon</span><br><span class="line">This is 3 user：bin</span><br><span class="line">This is 4 user：sys</span><br><span class="line">This is 5 user：sync</span><br><span class="line">This is 6 user：games</span><br><span class="line">This is 7 user：man</span><br><span class="line">This is 8 user：lp</span><br><span class="line">This is 9 user：mail</span><br><span class="line">This is 10 user：news</span><br><span class="line">This is 11 user：uucp</span><br><span class="line">This is 12 user：proxy</span><br><span class="line">This is 13 user：www-data</span><br><span class="line">This is 14 user：backup</span><br><span class="line">This is 15 user：list</span><br><span class="line">This is 16 user：irc</span><br><span class="line">This is 17 user：gnats</span><br><span class="line">This is 18 user：nobody</span><br><span class="line">This is 19 user：_apt</span><br><span class="line">This is 20 user：systemd-timesync</span><br><span class="line">This is 21 user：systemd-network</span><br><span class="line">This is 22 user：systemd-resolve</span><br><span class="line">This is 23 user：tss</span><br><span class="line">This is 24 user：messagebus</span><br><span class="line">This is 25 user：usbmux</span><br><span class="line">This is 26 user：rtkit</span><br><span class="line">This is 27 user：sshd</span><br><span class="line">This is 28 user：dnsmasq</span><br><span class="line">This is 29 user：avahi</span><br><span class="line">This is 30 user：speech-dispatcher</span><br><span class="line">This is 31 user：pulse</span><br><span class="line">This is 32 user：saned</span><br><span class="line">This is 33 user：colord</span><br><span class="line">This is 34 user：geoclue</span><br><span class="line">This is 35 user：gnome-initial-setup</span><br><span class="line">This is 36 user：Debian-gdm</span><br><span class="line">This is 37 user：x</span><br><span class="line">This is 38 user：systemd-coredump</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="例子2"><a href="#例子2" class="headerlink" title="例子2"></a>例子2</h3><p><strong>根据系统时间计算今年或明年。</strong></p>
+<p>首先我们进行思路分析：</p>
+<p>使用<code>date +%Y</code>这个命令（为什么是+%Y这个问题可以使用man命令查看date命令的参数解释）就可以获取到今年是什么年，然后我们可以在<code>date +%Y</code>的基础上再+1就可以获取到明年是什么年：</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@debian:/Shell# date +%Y</span><br><span class="line">2024</span><br><span class="line">root@debian:/Shell# echo &quot;This is $(date +%Y) year.&quot;</span><br><span class="line">This is 2024 year.</span><br><span class="line">root@debian:/Shell# echo &quot;The next year is $(($(date +%Y) + 1)).&quot;</span><br><span class="line">The next year is 2025.</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="例子3"><a href="#例子3" class="headerlink" title="例子3"></a>例子3</h3><p><strong>根据系统时间获取今年还剩下多少个星期，已经过了多少个星期。</strong></p>
+<p>首先进行思路分析：</p>
+<p>使用<code>date +%j</code>这个命令来获取day of years，也就是今年已经过去了多少天，然后我们可以再这个<code>date +%j</code></p>
+<p>的基础上除以7得到我们已经过了多少个星期；最后用365减<code>date +%j</code>然后再除以7得到我们还剩下多少个星期：</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">root@debian:/Shell# vim Test1.sh</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="built_in">echo</span> <span class="string">&quot;This year have passed <span class="subst">$(date +%j)</span> days.&quot;</span></span></span><br><span class="line">echo &quot;This year have passed $(($(date +%j) / 7)).&quot;</span><br><span class="line">echo &quot;There is $((365 - $(date +%j))) days before new year.&quot;</span><br><span class="line">echo &quot;There is $(((365 - $(date +%j)) / 7)) weeks before new year.&quot;</span><br><span class="line">root@debian:/Shell# chmod +x Test1.sh </span><br><span class="line">root@debian:/Shell# ./Test1.sh </span><br><span class="line">This year have passed 128 days.</span><br><span class="line">This year have passed 18.</span><br><span class="line">There is 237 days before new year.</span><br><span class="line">There is 33 weeks before new year.</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="例子4"><a href="#例子4" class="headerlink" title="例子4"></a>例子4</h3><p>判定nginx进程是否存在，若不存在则自动拉起进程。</p>
+<p>首先进行思路分析：</p>
+<p>使用命令 <code>ps -ef |  grep nginx</code> 来输出nginx在linux下的进程列表：</p>
+<div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">root@debian:/<span class="title">Shell</span># <span class="title">ps</span> -<span class="title">ef</span> | <span class="title">grep</span> <span class="title">nginx</span></span></span><br><span class="line"><span class="function"><span class="title">root</span>        1740       1  0 22:17 ?        00:00:00 <span class="title">nginx</span>: <span class="title">master</span> <span class="title">process</span> /<span class="title">usr</span>/<span class="title">sbin</span>/<span class="title">nginx</span> -<span class="title">g</span> <span class="title">daemon</span> <span class="title">on</span>; <span class="title">master_process</span> <span class="title">on</span>;</span></span><br><span class="line"><span class="function"><span class="title">www</span>-<span class="title">data</span>    1742    1740  0 22:17 ?        00:00:00 <span class="title">nginx</span>: <span class="title">worker</span> <span class="title">process</span></span></span><br><span class="line"><span class="function"><span class="title">www</span>-<span class="title">data</span>    1743    1740  0 22:17 ?        00:00:00 <span class="title">nginx</span>: <span class="title">worker</span> <span class="title">process</span></span></span><br><span class="line"><span class="function"><span class="title">root</span>        1807     948  0 22:25 <span class="title">pts</span>/0    00:00:00 <span class="title">grep</span> <span class="title">nginx</span></span></span><br></pre></td></tr></table></figure></div>
+
+<p>但是我们发现如果要模拟出nginx完全宕机的这种情况下还需要额外的过滤掉<code>root        1807     948  0 22:25 pts/0    00:00:00 grep nginx</code>这一行的状态（因为这行进程是始终都在那里），所以我们需要使用<code>grep -v grep</code> 来过滤掉grep的nginx进程，最后使用<code>wc -l</code>这个命令来计数我们选中了多少行：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@debian:/Shell# ps -ef | grep nginx | grep -v grep </span><br><span class="line">root        1740       1  0 22:17 ?        00:00:00 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;</span><br><span class="line">www-data    1742    1740  0 22:17 ?        00:00:00 nginx: worker process</span><br><span class="line">www-data    1743    1740  0 22:17 ?        00:00:00 nginx: worker process</span><br><span class="line">root@debian:/Shell# ps -ef | grep nginx | grep -v grep | wc -l</span><br><span class="line">3</span><br></pre></td></tr></table></figure></div>
+
+<p>接下来我们就可以编写脚本了：</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">root@debian:/Shell# vim Test2.sh</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"></span></span><br><span class="line">nginx_process_num=$(ps -ef | grep nginx | grep -v grep | wc -l)</span><br><span class="line"></span><br><span class="line">if [ $nginx_process_num -eq 0 ];then</span><br><span class="line">	systemctl start nginx</span><br><span class="line">fi</span><br><span class="line">root@debian:/Shell# systemctl stop nginx</span><br><span class="line">root@debian:/Shell# ps -ef | grep nginx</span><br><span class="line">root        1863     948  0 22:37 pts/0    00:00:00 grep nginx</span><br><span class="line">root@debian:/Shell# ./Test2.sh </span><br><span class="line">root@debian:/Shell# ps -ef | grep nginx</span><br><span class="line">root        1874       1  0 22:37 ?        00:00:00 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;</span><br><span class="line">www-data    1875    1874  0 22:37 ?        00:00:00 nginx: worker process</span><br><span class="line">www-data    1876    1874  0 22:37 ?        00:00:00 nginx: worker process</span><br><span class="line">root        1878     948  0 22:38 pts/0    00:00:00 grep nginx</span><br></pre></td></tr></table></figure></div>
+
+<p>由此可看出需求已经实现。</p>
+<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><p>&#96;&#96;和$()两者是等价的，但推荐初学者使用$()，易于掌握；缺点是极少数UNIX可能不支持</p>
+<p>$（（））主要是用来进行整数运算，包括加减乘除，引用变量前面可以加$，也可以不加$</p>
+<p>例：</p>
+<p>num1&#x3D;20，num2&#x3D;30</p>
+<p>（（num++））</p>
+<p>（（num–））</p>
+<p>$(($num1+$num2*2))</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> Shell脚本学习笔记（一）</li>
+        <li><strong>作者:</strong> StreamCons</li>
+        <li><strong>创建于
+                :</strong> 2024-05-08 21:00:00</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2024-05-08 23:56:35
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://aliveman6.github.io/2024/05/08/Shell脚本学习笔记（一）/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/Shell/">#Shell</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2024/05/07/Linux%E6%9D%83%E9%99%90%E8%AF%A6%E8%A7%A3/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Linux权限详解</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">Shell脚本学习笔记（一）</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Shell%E5%A4%A7%E7%BA%B2"><span class="nav-text">Shell大纲</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%8F%98%E9%87%8F%E6%9B%BF%E6%8D%A2%E5%92%8C%E6%B5%8B%E8%AF%95"><span class="nav-text">一、变量替换和测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81-%E5%8F%98%E9%87%8F-%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99"><span class="nav-text">1、${变量#匹配规则}</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81-%E5%8F%98%E9%87%8F-%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99"><span class="nav-text">2、${变量##匹配规则}</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81-%E5%8F%98%E9%87%8F-%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99"><span class="nav-text">3、${变量%匹配规则}</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81-%E5%8F%98%E9%87%8F-%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99"><span class="nav-text">4、${变量%%匹配规则}</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81-%E5%8F%98%E9%87%8F-%E6%97%A7%E5%AD%97%E7%AC%A6%E4%B8%B2-%E6%96%B0%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">5、${变量&#x2F;旧字符串&#x2F;新字符串}</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81-%E5%8F%98%E9%87%8F-%E6%97%A7%E5%AD%97%E7%AC%A6%E4%B8%B2-%E6%96%B0%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">6、${变量&#x2F;&#x2F;旧字符串&#x2F;新字符串}</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86"><span class="nav-text">二、字符串处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E8%AE%A1%E7%AE%97%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6"><span class="nav-text">1、计算字符串长度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E8%8E%B7%E5%8F%96%E5%AD%97%E7%AC%A6%E7%B4%A2%E5%BC%95%E4%BD%8D%E7%BD%AE%EF%BC%88%E8%BF%99%E9%87%8C%E7%9A%84%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%A0%87%E6%98%AF%E4%BB%8E1%E5%BC%80%E5%A7%8B%E7%9A%84%EF%BC%89"><span class="nav-text">2、获取字符索引位置（这里的索引下标是从1开始的）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E8%8E%B7%E5%8F%96%E5%AD%90%E4%B8%B2%E9%95%BF%E5%BA%A6"><span class="nav-text">3、获取子串长度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-1"><span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E6%8A%BD%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%AD%90%E4%B8%B2"><span class="nav-text">4、抽取字符串中的子串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80-1"><span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C-1"><span class="nav-text">方法二</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%AE%8C%E6%95%B4%E8%84%9A%E6%9C%AC"><span class="nav-text">三、字符串处理完整脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E9%9C%80%E6%B1%82%E6%8F%8F%E8%BF%B0"><span class="nav-text">1、需求描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90"><span class="nav-text">2、思路分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%AE%9E%E7%8E%B0%E5%85%A8%E9%83%A8%E9%9C%80%E6%B1%82"><span class="nav-text">3、实现全部需求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%91%BD%E4%BB%A4%E6%9B%BF%E6%8D%A2"><span class="nav-text">四、命令替换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%901"><span class="nav-text">例子1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%902"><span class="nav-text">例子2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%903"><span class="nav-text">例子3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%904"><span class="nav-text">例子4</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-text">五、总结</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2024</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-sync fa-spin" style="--fa-animation-duration: 1.5s; color: #0DEDC4"></i>&nbsp;&nbsp;<a href="/">StreamCons</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 6 篇文章
+                    </span>
+                    
+                        <span>
+                            共 9.9k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.1</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+
+<script src="/js/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+    
+<script src="/js/libs/minimasonry.min.js"></script>
+
+    
+<script src="/js/plugins/masonry.js" type="module"></script>
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>
