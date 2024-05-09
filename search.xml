@@ -1,6 +1,590 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Linux命令学习笔记（一）</title>
+    <url>/2024/05/09/Linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="Linux命令"><a href="#Linux命令" class="headerlink" title="Linux命令"></a>Linux命令</h1><p>近期整理了下常用的Linux命令，现在想将他们整理在博客中，因此开了这篇文章。</p>
+<h2 id="ps、date、wc命令"><a href="#ps、date、wc命令" class="headerlink" title="ps、date、wc命令"></a>ps、date、wc命令</h2><h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><p>​	Linux下会运行各种各样的进程，如果要进行监控我们必须对这些进程进行监控；ps命令可以看到<strong>进程的运行状态</strong>、<strong>进程是否结束</strong>、<strong>哪些进程占用了过多的资源</strong>等。但注意，<strong>ps命令是<code>显示瞬间进程的状态</code>，并不会动态连续跟进进程状态，如果想对进程进行实时监控应该用<code>top命令</code>。</strong></p>
+<h3 id="date"><a href="#date" class="headerlink" title="date"></a>date</h3><p>​	date命令可以<strong>按照指定格式显示日期</strong>，只键入date则可以默认显示当前时间。</p>
+<h3 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h3><p>​	在Linux下wc命令用于计算字数，利用wc指令我们可以<strong>计算文件的Bytes数、字数、或是列数</strong>。</p>
+<p>下面是三个命令对应参数的使用方法：</p>
+<div class="tabs" id="tab-first-unique-name"><ul class="nav-tabs"><li class="tab active"><a class="#first-unique-name-1">First Tab</a></li><li class="tab"><a class="#first-unique-name-2">Second Tab</a></li><li class="tab"><a class="#first-unique-name-3">Third Tab</a></li></ul><div class="tab-content"><div class="tab-pane active" id="first-unique-name-1"><p>ps [选项]</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-A</td>
+<td>显示所有进程，跟-e效果一样</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>显示现行终端机下的所有进程，包括其他用户的进程</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>显示当前用户的进程状态</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>通常与-a一起使用，方便列出完整的信息</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>较长，较详细的将PID的信息列出</td>
+</tr>
+<tr>
+<td>-j</td>
+<td>工作的格式（jobs format）</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>把进程的所有信息都显示出来</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>表示所有继承</td>
+</tr>
+</tbody></table></div><div class="tab-pane" id="first-unique-name-2"><p>date ”+今天是%Y“（格式）</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%n</td>
+<td>下一行</td>
+</tr>
+<tr>
+<td>%t</td>
+<td>跳格</td>
+</tr>
+<tr>
+<td>%H</td>
+<td>小时（1-12）</td>
+</tr>
+<tr>
+<td>%k</td>
+<td>小时（0-23）</td>
+</tr>
+<tr>
+<td>%l</td>
+<td>小时（1-12）</td>
+</tr>
+<tr>
+<td>%M</td>
+<td>分钟（00-59）</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>显示本地AM或PM</td>
+</tr>
+<tr>
+<td>%r</td>
+<td>直接显示（24小时制）</td>
+</tr>
+<tr>
+<td>%S</td>
+<td>秒</td>
+</tr>
+<tr>
+<td>%A</td>
+<td>显示星期几（Sunday格式）</td>
+</tr>
+<tr>
+<td>%B</td>
+<td>月份</td>
+</tr>
+<tr>
+<td>%j</td>
+<td>一年中的第几天</td>
+</tr>
+<tr>
+<td>%Y</td>
+<td>年</td>
+</tr>
+<tr>
+<td>%m</td>
+<td>月</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>日</td>
+</tr>
+<tr>
+<td>%x</td>
+<td>直接显示日期</td>
+</tr>
+</tbody></table></div><div class="tab-pane" id="first-unique-name-3"><p>wc [-c -l -w] [-help] [–version] [文件]</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c（–chars）</td>
+<td>只显示bytes数</td>
+</tr>
+<tr>
+<td>-l（–lines）</td>
+<td>只显示行数</td>
+</tr>
+<tr>
+<td>-w（–words）</td>
+<td>只显示字数</td>
+</tr>
+<tr>
+<td>–help</td>
+<td>在线帮助</td>
+</tr>
+<tr>
+<td>–version</td>
+<td>显示版本信息</td>
+</tr>
+</tbody></table></div></div></div>
+
+<h3 id="终端下使用例子"><a href="#终端下使用例子" class="headerlink" title="终端下使用例子"></a>终端下使用例子</h3><h4 id="ps命令例子"><a href="#ps命令例子" class="headerlink" title="ps命令例子"></a>ps命令例子</h4><div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">root@debian:~# <span class="title">ps</span> -<span class="title">l</span></span></span><br><span class="line"><span class="function"><span class="title">F</span> <span class="title">S</span>   <span class="title">UID</span>     <span class="title">PID</span>    <span class="title">PPID</span>  <span class="title">C</span> <span class="title">PRI</span>  <span class="title">NI</span> <span class="title">ADDR</span> <span class="title">SZ</span> <span class="title">WCHAN</span>  <span class="title">TTY</span>          <span class="title">TIME</span> <span class="title">CMD</span></span></span><br><span class="line"><span class="function">4 <span class="title">S</span>     0    1042    1018  0  80   0 -  2033 -      <span class="title">pts</span>/0    00:00:00 <span class="title">bash</span></span></span><br><span class="line"><span class="function">4 <span class="title">R</span>     0    1054    1042  0  80   0 -  2476 -      <span class="title">pts</span>/0    00:00:00 <span class="title">ps</span></span></span><br><span class="line"><span class="function"><span class="title">root</span>@<span class="title">debian</span>:~# <span class="title">ps</span> -<span class="title">aux</span></span></span><br><span class="line"><span class="function">    <span class="title">PID</span> <span class="title">TTY</span>          <span class="title">TIME</span> <span class="title">CMD</span></span></span><br><span class="line"><span class="function">    661 <span class="title">tty1</span>     00:00:00 <span class="title">dbus</span>-<span class="title">run</span>-<span class="title">sessio</span></span></span><br><span class="line"><span class="function">    662 <span class="title">tty1</span>     00:00:00 <span class="title">dbus</span>-<span class="title">daemon</span></span></span><br><span class="line"><span class="function">    665 <span class="title">tty1</span>     00:00:00 <span class="title">gnome</span>-<span class="title">session</span>-<span class="title">b</span></span></span><br><span class="line"><span class="function">    709 <span class="title">tty1</span>     00:00:03 <span class="title">gnome</span>-<span class="title">shell</span></span></span><br><span class="line"><span class="function">    786 <span class="title">tty1</span>     00:00:00 <span class="title">at</span>-<span class="title">spi</span>-<span class="title">bus</span>-<span class="title">laun</span></span></span><br><span class="line"><span class="function">    791 <span class="title">tty1</span>     00:00:00 <span class="title">dbus</span>-<span class="title">daemon</span></span></span><br><span class="line"><span class="function">    795 <span class="title">tty1</span>     00:00:00 <span class="title">Xwayland</span></span></span><br><span class="line"><span class="function">    818 <span class="title">tty1</span>     00:00:00 <span class="title">xdg</span>-<span class="title">permission</span>-</span></span><br><span class="line"><span class="function">    832 <span class="title">tty1</span>     00:00:00 <span class="title">gjs</span></span></span><br><span class="line"><span class="function">    833 <span class="title">tty1</span>     00:00:00 <span class="title">at</span>-<span class="title">spi2</span>-<span class="title">registr</span></span></span><br><span class="line"><span class="function">    835 <span class="title">tty1</span>     00:00:00 <span class="title">gsd</span>-<span class="title">sharing</span></span></span><br><span class="line"><span class="function">    841 <span class="title">tty1</span>     00:00:00 <span class="title">gsd</span>-<span class="title">wacom</span></span></span><br><span class="line"><span class="function">    844 <span class="title">tty1</span>     00:00:00 <span class="title">gsd</span>-<span class="title">color</span></span></span><br><span class="line"><span class="function">    846 <span class="title">tty1</span>     00:00:00 <span class="title">gsd</span>-<span class="title">keyboard</span></span></span><br><span class="line"><span class="function">    847 <span class="title">tty1</span>     00:00:00 <span class="title">gsd</span>-<span class="title">print</span>-<span class="title">notif</span></span></span><br><span class="line"><span class="function">    848 <span class="title">tty1</span>     00:00:00 <span class="title">gsd</span>-<span class="title">rfkill</span></span></span><br><span class="line"><span class="function">    850 <span class="title">tty1</span>     00:00:00 <span class="title">gsd</span>-<span class="title">smartcard</span></span></span><br><span class="line"><span class="function">    856 <span class="title">tty1</span>     00:00:00 <span class="title">gsd</span>-<span class="title">datetime</span></span></span><br><span class="line"><span class="function">    860 <span class="title">tty1</span>     00:00:00 <span class="title">gsd</span>-<span class="title">media</span>-<span class="title">keys</span></span></span><br><span class="line"><span class="function">    863 <span class="title">tty1</span>     00:00:00 <span class="title">gsd</span>-<span class="title">screensaver</span></span></span><br><span class="line"><span class="function">    865 <span class="title">tty1</span>     00:00:00 <span class="title">gsd</span>-<span class="title">sound</span></span></span><br><span class="line"><span class="function">    872 <span class="title">tty1</span>     00:00:00 <span class="title">gsd</span>-<span class="title">a11y</span>-<span class="title">settin</span></span></span><br><span class="line"><span class="function">    875 <span class="title">tty1</span>     00:00:00 <span class="title">gsd</span>-<span class="title">housekeepin</span></span></span><br><span class="line"><span class="function">    880 <span class="title">tty1</span>     00:00:00 <span class="title">gsd</span>-<span class="title">power</span></span></span><br><span class="line"><span class="function">    905 <span class="title">tty1</span>     00:00:00 <span class="title">gsd</span>-<span class="title">printer</span></span></span><br><span class="line"><span class="function">    945 <span class="title">tty1</span>     00:00:00 <span class="title">ibus</span>-<span class="title">daemon</span></span></span><br><span class="line"><span class="function">    963 <span class="title">tty1</span>     00:00:00 <span class="title">ibus</span>-<span class="title">dconf</span></span></span><br><span class="line"><span class="function">    967 <span class="title">tty1</span>     00:00:00 <span class="title">ibus</span>-<span class="title">extension</span>-</span></span><br><span class="line"><span class="function">    970 <span class="title">tty1</span>     00:00:00 <span class="title">ibus</span>-<span class="title">x11</span></span></span><br><span class="line"><span class="function">    975 <span class="title">tty1</span>     00:00:00 <span class="title">ibus</span>-<span class="title">portal</span></span></span><br><span class="line"><span class="function">   1007 <span class="title">tty1</span>     00:00:00 <span class="title">ibus</span>-<span class="title">engine</span>-<span class="title">sim</span></span></span><br><span class="line"><span class="function">   1055 <span class="title">pts</span>/0    00:00:00 <span class="title">ps</span></span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">root@debian:~# <span class="title">ps</span> -<span class="title">ef</span> | <span class="title">grep</span> <span class="title">php</span></span></span><br><span class="line"><span class="function"><span class="title">root</span>        1142    1042  0 23:01 <span class="title">pts</span>/0    00:00:00 <span class="title">grep</span> <span class="title">php</span></span></span><br><span class="line"><span class="function"><span class="title">root</span>@<span class="title">debian</span>:~# <span class="title">ps</span> -<span class="title">auf</span></span></span><br><span class="line"><span class="function"><span class="title">USER</span>         <span class="title">PID</span> %<span class="title">CPU</span> %<span class="title">MEM</span>    <span class="title">VSZ</span>   <span class="title">RSS</span> <span class="title">TTY</span>      <span class="title">STAT</span> <span class="title">START</span>   <span class="title">TIME</span> <span class="title">COMMAND</span></span></span><br><span class="line"><span class="function"><span class="title">root</span>        1042  0.0  0.2   8280  4808 <span class="title">pts</span>/0    <span class="title">Ss</span>   22:57   0:00 -<span class="title">bash</span></span></span><br><span class="line"><span class="function"><span class="title">root</span>        1208  0.0  0.1  10328  3644 <span class="title">pts</span>/0    <span class="title">R</span>+   23:05   0:00  \<span class="title">_</span> <span class="title">ps</span> -<span class="title">auf</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     650  0.0  0.2 159276  5588 <span class="title">tty1</span>     <span class="title">Ssl</span>+ 22:56   0:00 /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gdm</span>-<span class="title">wayland</span>-<span class="title">session</span> <span class="title">dbus</span>-<span class="title">run</span>-<span class="title">session</span> -- <span class="title">gnome</span>-<span class="title">session</span> --</span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     661  0.0  0.0   6112  1164 <span class="title">tty1</span>     <span class="title">S</span>+   22:56   0:00  \<span class="title">_</span> <span class="title">dbus</span>-<span class="title">run</span>-<span class="title">session</span> -- <span class="title">gnome</span>-<span class="title">session</span> --<span class="title">autostart</span> /<span class="title">usr</span>/<span class="title">share</span>/<span class="title">gdm</span>/<span class="title">gree</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     662  0.0  0.2   8528  4944 <span class="title">tty1</span>     <span class="title">S</span>+   22:56   0:00      \<span class="title">_</span> <span class="title">dbus</span>-<span class="title">daemon</span> --<span class="title">nofork</span> --<span class="title">print</span>-<span class="title">address</span> 4 --<span class="title">session</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     665  0.0  0.9 593900 19408 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00      \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gnome</span>-<span class="title">session</span>-<span class="title">binary</span> --<span class="title">systemd</span> --<span class="title">autostart</span> /<span class="title">usr</span>/</span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     709  0.5 10.8 3949816 215504 <span class="title">tty1</span>   <span class="title">Sl</span>+  22:56   0:03          \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">bin</span>/<span class="title">gnome</span>-<span class="title">shell</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     795  0.0  2.4 750112 47796 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00          |   \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">bin</span>/<span class="title">Xwayland</span> :1024 -<span class="title">rootless</span> -<span class="title">noreset</span> -<span class="title">accessx</span> -</span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     945  0.0  0.5 312092 11752 <span class="title">tty1</span>     <span class="title">Sl</span>   22:56   0:00          |   \<span class="title">_</span> <span class="title">ibus</span>-<span class="title">daemon</span> --<span class="title">panel</span> <span class="title">disable</span> -<span class="title">r</span> --<span class="title">xim</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     963  0.0  0.3 234256  7104 <span class="title">tty1</span>     <span class="title">Sl</span>   22:56   0:00          |       \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">ibus</span>-<span class="title">dconf</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     967  0.1  1.4 346844 29104 <span class="title">tty1</span>     <span class="title">Sl</span>   22:56   0:00          |       \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">ibus</span>-<span class="title">extension</span>-<span class="title">gtk3</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+    1007  0.0  0.3 160428  7104 <span class="title">tty1</span>     <span class="title">Sl</span>   22:56   0:00          |       \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">ibus</span>-<span class="title">engine</span>-<span class="title">simple</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     835  0.0  0.6 462948 12224 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00          \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gsd</span>-<span class="title">sharing</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     841  0.0  1.1 342640 22248 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00          \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gsd</span>-<span class="title">wacom</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     844  0.0  1.3 525316 27316 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00          \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gsd</span>-<span class="title">color</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     846  0.0  1.2 342300 24196 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00          \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gsd</span>-<span class="title">keyboard</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     847  0.0  0.5 247056 11320 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00          \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gsd</span>-<span class="title">print</span>-<span class="title">notifications</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     848  0.0  0.3 454748  6084 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00          \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gsd</span>-<span class="title">rfkill</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     850  0.0  0.5 313144 10092 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00          \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gsd</span>-<span class="title">smartcard</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     856  0.0  0.9 376748 18296 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00          \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gsd</span>-<span class="title">datetime</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     860  0.0  1.5 932140 29928 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00          \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gsd</span>-<span class="title">media</span>-<span class="title">keys</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     863  0.0  0.2 233180  5868 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00          \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gsd</span>-<span class="title">screensaver</span>-<span class="title">proxy</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     865  0.0  0.6 320120 12236 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00          \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gsd</span>-<span class="title">sound</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     872  0.0  0.4 307472  8780 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00          \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gsd</span>-<span class="title">a11y</span>-<span class="title">settings</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     875  0.0  0.3 309484  7492 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00          \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gsd</span>-<span class="title">housekeeping</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     880  0.0  1.3 377352 27376 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00          \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gsd</span>-<span class="title">power</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     975  0.0  0.3 234240  7236 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00 /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">ibus</span>-<span class="title">portal</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     970  0.0  2.6 921360 52300 <span class="title">tty1</span>     <span class="title">Sl</span>   22:56   0:00 /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">ibus</span>-<span class="title">x11</span> --<span class="title">kill</span>-<span class="title">daemon</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     905  0.0  0.7 345284 15392 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00 /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">gsd</span>-<span class="title">printer</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     833  0.0  0.3 165732  6940 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00 /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">at</span>-<span class="title">spi2</span>-<span class="title">registryd</span> --<span class="title">use</span>-<span class="title">gnome</span>-<span class="title">session</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     832  0.0  1.5 2600904 30356 <span class="title">tty1</span>    <span class="title">Sl</span>+  22:56   0:00 /<span class="title">usr</span>/<span class="title">bin</span>/<span class="title">gjs</span> /<span class="title">usr</span>/<span class="title">share</span>/<span class="title">gnome</span>-<span class="title">shell</span>/<span class="title">org.gnome.Shell.Notifications</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     818  0.0  0.2 233344  4616 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00 /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">xdg</span>-<span class="title">permission</span>-<span class="title">store</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     786  0.0  0.3 307364  6352 <span class="title">tty1</span>     <span class="title">Sl</span>+  22:56   0:00 /<span class="title">usr</span>/<span class="title">libexec</span>/<span class="title">at</span>-<span class="title">spi</span>-<span class="title">bus</span>-<span class="title">launcher</span></span></span><br><span class="line"><span class="function"><span class="title">Debian</span>-+     791  0.0  0.2   8096  4288 <span class="title">tty1</span>     <span class="title">S</span>+   22:56   0:00  \<span class="title">_</span> /<span class="title">usr</span>/<span class="title">bin</span>/<span class="title">dbus</span>-<span class="title">daemon</span> --<span class="title">config</span>-<span class="title">file</span>=/<span class="title">usr</span>/<span class="title">share</span>/<span class="title">defaults</span>/<span class="title">at</span>-<span class="title">spi2</span>/<span class="title">ac</span></span></span><br></pre></td></tr></table></figure></div>
+
+<h4 id="date命令例子"><a href="#date命令例子" class="headerlink" title="date命令例子"></a>date命令例子</h4><div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">root@debian:~# <span class="title">date</span> &quot;+现在时间是：%<span class="title">Y</span>-%<span class="title">m</span>-%<span class="title">d</span> %<span class="title">H</span>:%<span class="title">M</span>:%<span class="title">S</span>&quot;			###输出“现在时间是<span class="title">xxxxxx</span>”</span></span><br><span class="line"><span class="function">现在时间是：2024-05-09 23:11:20</span></span><br><span class="line"><span class="function"><span class="title">root</span>@<span class="title">debian</span>:~# <span class="title">date</span> &quot;+%<span class="title">Y</span>-%<span class="title">m</span>-%<span class="title">d</span> %<span class="title">H</span>:%<span class="title">M</span>:%<span class="title">S</span>&quot; -<span class="title">d</span> &quot;-3 <span class="title">year</span>&quot;		###输出现在时间后减3年的年月日、实时时间</span></span><br><span class="line"><span class="function">2021-05-09 23:14:15</span></span><br><span class="line"><span class="function"><span class="title">root</span>@<span class="title">debian</span>:~# <span class="title">time</span>=`<span class="title">date</span> &quot;+%<span class="title">s</span>&quot;`							###输出从1970年1月1日到目前为止的秒数</span></span><br><span class="line"><span class="function"><span class="title">root</span>@<span class="title">debian</span>:~# <span class="title">echo</span> $<span class="title">time</span> </span></span><br><span class="line"><span class="function">1715267700</span></span><br><span class="line"><span class="function"><span class="title">root</span>@<span class="title">debian</span>:~# <span class="title">date</span> +%<span class="title">x</span>										###输出当前的年月日</span></span><br><span class="line"><span class="function">2024年05月09日</span></span><br><span class="line"><span class="function"><span class="title">root</span>@<span class="title">debian</span>:~# <span class="title">date</span> +%<span class="title">c</span>										###输出当前时间的年月日、实时时间</span></span><br><span class="line"><span class="function">2024年05月09日 星期四 23时16分21秒</span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure></div>
+
+<h4 id="wc命令例子"><a href="#wc命令例子" class="headerlink" title="wc命令例子"></a>wc命令例子</h4><div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">root@debian:/<span class="title">test</span># <span class="title">cat</span> <span class="title">test.txt</span> 					###<span class="title">cat</span>命令抓取<span class="title">test</span>内容</span></span><br><span class="line"><span class="function"><span class="title">View</span> <span class="title">the</span> <span class="title">passwords</span> <span class="title">stored</span> <span class="title">by</span> <span class="title">your</span> <span class="title">Web</span> <span class="title">browser</span> (<span class="title">Supports</span> <span class="title">Internet</span> <span class="title">Explorer</span>, <span class="title">Firefox</span>, <span class="title">Chrome</span>, <span class="title">Safari</span>, <span class="title">and</span> <span class="title">Opera</span>)</span></span><br><span class="line"><span class="function"> <span class="title">Extract</span> <span class="title">passwords</span> <span class="title">and</span> <span class="title">other</span> <span class="title">information</span> <span class="title">from</span> <span class="title">router</span> <span class="title">backup</span> <span class="title">file</span> (<span class="title">For</span> <span class="title">supported</span> <span class="title">routers</span>).</span></span><br><span class="line"><span class="function"><span class="title">Recovers</span> <span class="title">the</span> <span class="title">passwords</span> <span class="title">of</span> <span class="title">dialup</span> <span class="title">entries</span> (<span class="title">VPN</span> <span class="title">and</span> <span class="title">Internet</span> <span class="title">connections</span>). <span class="title">Works</span> <span class="title">also</span> <span class="title">under</span> <span class="title">Windows</span> 2000/<span class="title">XP.i</span></span></span><br><span class="line"><span class="function"><span class="title">Freeware</span> <span class="title">utility</span> <span class="title">that</span> <span class="title">recovers</span> <span class="title">the</span> <span class="title">network</span> <span class="title">passwords</span> <span class="title">stored</span> <span class="title">by</span> <span class="title">Windows</span> <span class="title">XP</span> (<span class="title">Credentials</span> <span class="title">file</span>).</span></span><br><span class="line"><span class="function"><span class="title">displays</span> <span class="title">useful</span> <span class="title">information</span> <span class="title">about</span> <span class="title">your</span> <span class="title">network</span> <span class="title">adapters</span>: <span class="title">IP</span> <span class="title">addresses</span>, <span class="title">Hardware</span> <span class="title">address</span>, <span class="title">WINS</span> <span class="title">servers</span>, <span class="title">DNS</span> <span class="title">servers</span>, <span class="title">MTU</span> <span class="title">value</span>, <span class="title">Number</span> <span class="title">of</span> <span class="title">bytes</span> <span class="title">received</span> <span class="title">or</span> <span class="title">sent</span>, <span class="title">The</span> <span class="title">current</span> <span class="title">transfer</span> <span class="title">speed</span></span></span><br><span class="line"><span class="function"><span class="title">root</span>@<span class="title">debian</span>:/<span class="title">test</span># <span class="title">wc</span> <span class="title">test.txt</span> 						###5为文件行数，83为文件总单词数，591为文件总字节数</span></span><br><span class="line"><span class="function">  5  83 591 <span class="title">test.txt</span></span></span><br><span class="line"><span class="function"><span class="title">root</span>@<span class="title">debian</span>:/<span class="title">test</span># <span class="title">cat</span> <span class="title">test.txt</span> | <span class="title">wc</span> -<span class="title">l</span>				###单独统计文件的行数</span></span><br><span class="line"><span class="function">5</span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure></div>
+
+
+
+<h2 id="cat、rm、echo命令"><a href="#cat、rm、echo命令" class="headerlink" title="cat、rm、echo命令"></a>cat、rm、echo命令</h2><h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><p>​	在终端设备上<strong>显示文件内容</strong>，cat命令只适合<strong>查看内容较少的文件</strong>。对于内容多的文件可以用more命令查看。</p>
+<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><p>​	删除文件或目录，<strong>一次可以删除多个文件</strong>，或递归删除目录及其内的所有子文件。</p>
+<h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><p>​	在终端设备上<strong>输出指定字符串或变量提取后的值</strong>，可以将输出的指定字符串内容同管道符一起传递给后续命令作为标准输入信息进行二次处理，还可以和输出重定向符一起操作，将信息直接写入文件。</p>
+<p>下面是三个命令对应参数的使用方法：</p>
+<div class="tabs" id="tab-first-unique-name"><ul class="nav-tabs"><li class="tab active"><a class="#first-unique-name-1">First Tab</a></li><li class="tab"><a class="#first-unique-name-2">Second Tab</a></li><li class="tab"><a class="#first-unique-name-3">Third Tab</a></li></ul><div class="tab-content"><div class="tab-pane active" id="first-unique-name-1"><p>cat [参数] [文件名]</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-A</td>
+<td>等价于-vET参数组合</td>
+</tr>
+<tr>
+<td>-b</td>
+<td>显示行数（空数不编号）</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>等价于-vE组合</td>
+</tr>
+<tr>
+<td>-E</td>
+<td>每行结束处显示$符号</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>显示行数（空行也编号）</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>显示行数（多个空行显示一个编号）</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>等价于-vT组合</td>
+</tr>
+<tr>
+<td>-T</td>
+<td>将TAB字符显示为^|符号</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>使用^和M-引用</td>
+</tr>
+<tr>
+<td>–help</td>
+<td>显示帮助信息</td>
+</tr>
+<tr>
+<td>–version</td>
+<td>显示版本信息</td>
+</tr>
+</tbody></table></div><div class="tab-pane" id="first-unique-name-2"><p>rm [参数] [文件名]</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-d</td>
+<td>仅删除无子文件的空目录</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>强制删除文件而不询问</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>删除文件前询问用户是否确认</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>递归删除目录及其内全部子文件</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示执行过程的详细信息</td>
+</tr>
+<tr>
+<td>–help</td>
+<td>显示帮助信息</td>
+</tr>
+<tr>
+<td>–version</td>
+<td>显示版本信息</td>
+</tr>
+</tbody></table></div><div class="tab-pane" id="first-unique-name-3"><p>echo [参数] [字符串或$变量名]</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-e “\a”</td>
+<td>发出警告音</td>
+</tr>
+<tr>
+<td>-e “\b”</td>
+<td>删除前面一个字符</td>
+</tr>
+<tr>
+<td>-e “\c”</td>
+<td>结尾不加换行符</td>
+</tr>
+<tr>
+<td>-e “\f”</td>
+<td>换行后光标仍停留在原来的位置</td>
+</tr>
+<tr>
+<td>-e “\n”</td>
+<td>换行后光标移至行首</td>
+</tr>
+<tr>
+<td>-e “\r”</td>
+<td>光标移至行首但不换行</td>
+</tr>
+<tr>
+<td>-E</td>
+<td>禁止反斜杠转义</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>不输出结尾的换行符</td>
+</tr>
+<tr>
+<td>–version</td>
+<td>显示版本信息</td>
+</tr>
+<tr>
+<td>–help</td>
+<td>显示帮助信息</td>
+</tr>
+</tbody></table></div></div></div>
+
+<h3 id="终端下使用例子-1"><a href="#终端下使用例子-1" class="headerlink" title="终端下使用例子"></a>终端下使用例子</h3><h4 id="cat命令例子"><a href="#cat命令例子" class="headerlink" title="cat命令例子"></a>cat命令例子</h4><div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">root@debian:/<span class="title">test</span># <span class="title">cat</span> <span class="title">test.txt</span> -<span class="title">A</span></span></span><br><span class="line"><span class="function"><span class="title">View</span> <span class="title">the</span> <span class="title">passwords</span> <span class="title">stored</span> <span class="title">by</span> <span class="title">your</span> <span class="title">Web</span> <span class="title">browser</span> (<span class="title">Supports</span> <span class="title">Internet</span> <span class="title">Explorer</span>, <span class="title">Firefox</span>, <span class="title">Chrome</span>, <span class="title">Safari</span>, <span class="title">and</span> <span class="title">Opera</span>)$</span></span><br><span class="line"><span class="function"> <span class="title">Extract</span> <span class="title">passwords</span> <span class="title">and</span> <span class="title">other</span> <span class="title">information</span> <span class="title">from</span> <span class="title">router</span> <span class="title">backup</span> <span class="title">file</span> (<span class="title">For</span> <span class="title">supported</span> <span class="title">routers</span>).$</span></span><br><span class="line"><span class="function"><span class="title">Recovers</span> <span class="title">the</span> <span class="title">passwords</span> <span class="title">of</span> <span class="title">dialup</span> <span class="title">entries</span> (<span class="title">VPN</span> <span class="title">and</span> <span class="title">Internet</span> <span class="title">connections</span>). <span class="title">Works</span> <span class="title">also</span> <span class="title">under</span> <span class="title">Windows</span> 2000/<span class="title">XP.i</span>$</span></span><br><span class="line"><span class="function"><span class="title">Freeware</span> <span class="title">utility</span> <span class="title">that</span> <span class="title">recovers</span> <span class="title">the</span> <span class="title">network</span> <span class="title">passwords</span> <span class="title">stored</span> <span class="title">by</span> <span class="title">Windows</span> <span class="title">XP</span> (<span class="title">Credentials</span> <span class="title">file</span>).$</span></span><br><span class="line"><span class="function"><span class="title">displays</span> <span class="title">useful</span> <span class="title">information</span> <span class="title">about</span> <span class="title">your</span> <span class="title">network</span> <span class="title">adapters</span>: <span class="title">IP</span> <span class="title">addresses</span>, <span class="title">Hardware</span> <span class="title">address</span>, <span class="title">WINS</span> <span class="title">servers</span>, <span class="title">DNS</span> <span class="title">servers</span>, <span class="title">MTU</span> <span class="title">value</span>, <span class="title">Number</span> <span class="title">of</span> <span class="title">bytes</span> <span class="title">received</span> <span class="title">or</span> <span class="title">sent</span>, <span class="title">The</span> <span class="title">current</span> <span class="title">transfer</span> <span class="title">speed</span>$</span></span><br><span class="line"><span class="function"><span class="title">root</span>@<span class="title">debian</span>:/<span class="title">test</span># <span class="title">cat</span> <span class="title">test.txt</span> -<span class="title">b</span></span></span><br><span class="line"><span class="function">     1	<span class="title">View</span> <span class="title">the</span> <span class="title">passwords</span> <span class="title">stored</span> <span class="title">by</span> <span class="title">your</span> <span class="title">Web</span> <span class="title">browser</span> (<span class="title">Supports</span> <span class="title">Internet</span> <span class="title">Explorer</span>, <span class="title">Firefox</span>, <span class="title">Chrome</span>, <span class="title">Safari</span>, <span class="title">and</span> <span class="title">Opera</span>)</span></span><br><span class="line"><span class="function">     2	 <span class="title">Extract</span> <span class="title">passwords</span> <span class="title">and</span> <span class="title">other</span> <span class="title">information</span> <span class="title">from</span> <span class="title">router</span> <span class="title">backup</span> <span class="title">file</span> (<span class="title">For</span> <span class="title">supported</span> <span class="title">routers</span>).</span></span><br><span class="line"><span class="function">     3	<span class="title">Recovers</span> <span class="title">the</span> <span class="title">passwords</span> <span class="title">of</span> <span class="title">dialup</span> <span class="title">entries</span> (<span class="title">VPN</span> <span class="title">and</span> <span class="title">Internet</span> <span class="title">connections</span>). <span class="title">Works</span> <span class="title">also</span> <span class="title">under</span> <span class="title">Windows</span> 2000/<span class="title">XP.i</span></span></span><br><span class="line"><span class="function">     4	<span class="title">Freeware</span> <span class="title">utility</span> <span class="title">that</span> <span class="title">recovers</span> <span class="title">the</span> <span class="title">network</span> <span class="title">passwords</span> <span class="title">stored</span> <span class="title">by</span> <span class="title">Windows</span> <span class="title">XP</span> (<span class="title">Credentials</span> <span class="title">file</span>).</span></span><br><span class="line"><span class="function">     5	<span class="title">displays</span> <span class="title">useful</span> <span class="title">information</span> <span class="title">about</span> <span class="title">your</span> <span class="title">network</span> <span class="title">adapters</span>: <span class="title">IP</span> <span class="title">addresses</span>, <span class="title">Hardware</span> <span class="title">address</span>, <span class="title">WINS</span> <span class="title">servers</span>, <span class="title">DNS</span> <span class="title">servers</span>, <span class="title">MTU</span> <span class="title">value</span>, <span class="title">Number</span> <span class="title">of</span> <span class="title">bytes</span> <span class="title">received</span> <span class="title">or</span> <span class="title">sent</span>, <span class="title">The</span> <span class="title">current</span> <span class="title">transfer</span> <span class="title">speed</span></span></span><br><span class="line"><span class="function"><span class="title">root</span>@<span class="title">debian</span>:/<span class="title">test</span># <span class="title">cat</span> <span class="title">test.txt</span> -<span class="title">Ab</span></span></span><br><span class="line"><span class="function">     1	<span class="title">View</span> <span class="title">the</span> <span class="title">passwords</span> <span class="title">stored</span> <span class="title">by</span> <span class="title">your</span> <span class="title">Web</span> <span class="title">browser</span> (<span class="title">Supports</span> <span class="title">Internet</span> <span class="title">Explorer</span>, <span class="title">Firefox</span>, <span class="title">Chrome</span>, <span class="title">Safari</span>, <span class="title">and</span> <span class="title">Opera</span>)$</span></span><br><span class="line"><span class="function">     2	 <span class="title">Extract</span> <span class="title">passwords</span> <span class="title">and</span> <span class="title">other</span> <span class="title">information</span> <span class="title">from</span> <span class="title">router</span> <span class="title">backup</span> <span class="title">file</span> (<span class="title">For</span> <span class="title">supported</span> <span class="title">routers</span>).$</span></span><br><span class="line"><span class="function">     3	<span class="title">Recovers</span> <span class="title">the</span> <span class="title">passwords</span> <span class="title">of</span> <span class="title">dialup</span> <span class="title">entries</span> (<span class="title">VPN</span> <span class="title">and</span> <span class="title">Internet</span> <span class="title">connections</span>). <span class="title">Works</span> <span class="title">also</span> <span class="title">under</span> <span class="title">Windows</span> 2000/<span class="title">XP.i</span>$</span></span><br><span class="line"><span class="function">     4	<span class="title">Freeware</span> <span class="title">utility</span> <span class="title">that</span> <span class="title">recovers</span> <span class="title">the</span> <span class="title">network</span> <span class="title">passwords</span> <span class="title">stored</span> <span class="title">by</span> <span class="title">Windows</span> <span class="title">XP</span> (<span class="title">Credentials</span> <span class="title">file</span>).$</span></span><br><span class="line"><span class="function">     5	<span class="title">displays</span> <span class="title">useful</span> <span class="title">information</span> <span class="title">about</span> <span class="title">your</span> <span class="title">network</span> <span class="title">adapters</span>: <span class="title">IP</span> <span class="title">addresses</span>, <span class="title">Hardware</span> <span class="title">address</span>, <span class="title">WINS</span> <span class="title">servers</span>, <span class="title">DNS</span> <span class="title">servers</span>, <span class="title">MTU</span> <span class="title">value</span>, <span class="title">Number</span> <span class="title">of</span> <span class="title">bytes</span> <span class="title">received</span> <span class="title">or</span> <span class="title">sent</span>, <span class="title">The</span> <span class="title">current</span> <span class="title">transfer</span> <span class="title">speed</span>$</span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure></div>
+
+<h4 id="rm命令例子"><a href="#rm命令例子" class="headerlink" title="rm命令例子"></a>rm命令例子</h4><div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">root@debian:/<span class="title">test</span># <span class="title">rm</span> -<span class="title">rfv</span> <span class="title">test.txt</span> </span></span><br><span class="line"><span class="function">已删除 &#x27;<span class="title">test.txt</span>&#x27;</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="ping、netstat、ssh命令"><a href="#ping、netstat、ssh命令" class="headerlink" title="ping、netstat、ssh命令"></a>ping、netstat、ssh命令</h2><h3 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h3><p>​	测试主机间网络的连通性，发送出基于ICMP传输协议的数据包，要求对方主机予以回复。</p>
+<h3 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h3><p>​	显示各种网络相关信息，例如网络连接状态、路由表信息、接口状态、NAT、多播成员等。这个命令还可在windows所有系统上运行。</p>
+<h3 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h3><p>​	安全的远程连接服务器主机系统。</p>
+<p>下面是三个命令对应参数的使用方法：</p>
+<div class="tabs" id="tab-first-unique-name"><ul class="nav-tabs"><li class="tab active"><a class="#first-unique-name-1">First Tab</a></li><li class="tab"><a class="#first-unique-name-2">Second Tab</a></li><li class="tab"><a class="#first-unique-name-3">Third Tab</a></li></ul><div class="tab-content"><div class="tab-pane active" id="first-unique-name-1"><p>ping [参数] [域名或IP地址]</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-4</td>
+<td>基于IPv4协议</td>
+</tr>
+<tr>
+<td>-6</td>
+<td>基于IPv6协议</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>发送数据包时发出蜂鸣声</td>
+</tr>
+<tr>
+<td>-b</td>
+<td>允许ping一个广播地址</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>设置发送数据包的次数</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>使用接口的SO_DEBUG功能</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>使用泛洪模式大量向目标发送数据包</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>显示帮助信息</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>设置收发信息的间隔时间</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>使用指定的网络接口送出数据包</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>仅输出数值</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>设置填满数据包的范本样式</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>静默执行模式</td>
+</tr>
+<tr>
+<td>-R</td>
+<td>记录路由过程信息</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>设置数据包的大小</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>设置存活数值TTL的大小</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示执行过程详细信息</td>
+</tr>
+<tr>
+<td>-V</td>
+<td>显示版本信息</td>
+</tr>
+</tbody></table></div><div class="tab-pane" id="first-unique-name-2"><p>netstat [参数]</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>显示所有连接中的接口信息</td>
+</tr>
+<tr>
+<td>-A</td>
+<td>设置网络连接类型</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>持续显示网络状态</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>显示路由配置信息</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>显示路由缓存信息</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>显示多重广播功能群组成员名单</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>显示帮助信息</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>显示网络界面信息表单</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>仅显示正在监听的服务状态</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>直接使用IP地址而不是域名</td>
+</tr>
+<tr>
+<td>-N</td>
+<td>显示网络硬件外围设备的符号链接名称</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>显示计时器数据信息</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>显示正在使用接口的程序识别码和名称</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>显示路由表信息</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>显示网络工作信息统计表信息</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>显示TCP传输协议的连线状态</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>显示UDP传输协议的连线状态</td>
+</tr>
+<tr>
+<td>-V</td>
+<td>显示版本信息</td>
+</tr>
+</tbody></table></div><div class="tab-pane" id="first-unique-name-3"><p>ssh [参数] [域名或IP地址]</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-1</td>
+<td>使用SSH协议版本1</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>使用SSH协议版本2</td>
+</tr>
+<tr>
+<td>-4</td>
+<td>基于IPv4协议</td>
+</tr>
+<tr>
+<td>-6</td>
+<td>基于IPv6协议</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>关闭认证代理连接转发功能</td>
+</tr>
+<tr>
+<td>-A</td>
+<td>开启认证代理连接转发功能</td>
+</tr>
+<tr>
+<td>-b</td>
+<td>设置本地对外提供服务的IP地址</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>设置会话的密码算法</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>压缩所有数据</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>后台执行ssh命令</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>设置配置文件</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>允许远程主机连接本机的转发端口</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>设置密钥文件</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>设置登录名</td>
+</tr>
+<tr>
+<td>-N</td>
+<td>不执行远程指令</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>设置配置参数选项</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>设置远程服务器上的端口号</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>静默执行模式</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>请求远程主机上的子系统调用</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示执行过程详细信息</td>
+</tr>
+<tr>
+<td>-V</td>
+<td>显示版本信息</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>关闭x11转发功能</td>
+</tr>
+<tr>
+<td>-X</td>
+<td>开启x11转发功能</td>
+</tr>
+<tr>
+<td>-y</td>
+<td>信任x11转发功能</td>
+</tr>
+</tbody></table></div></div></div>
+
+<h3 id="终端下使用例子-2"><a href="#终端下使用例子-2" class="headerlink" title="终端下使用例子"></a>终端下使用例子</h3><h4 id="ping命令例子"><a href="#ping命令例子" class="headerlink" title="ping命令例子"></a>ping命令例子</h4><div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="code"><pre><span class="line">###	<span class="built_in">ping</span> <span class="number">192</span>.<span class="number">168</span>.<span class="number">18</span>.<span class="number">20</span> <span class="number">5</span>次</span><br><span class="line"><span class="function">root@debian:/<span class="title">test</span># <span class="title">ping</span> 192.168.18.20 -<span class="title">c</span> 5</span></span><br><span class="line"><span class="function"><span class="title">PING</span> 192.168.18.20 (192.168.18.20) 56(84) <span class="title">bytes</span> <span class="title">of</span> <span class="title">data</span>.</span></span><br><span class="line"><span class="function">64 <span class="title">bytes</span> <span class="title">from</span> 192.168.18.20: <span class="title">icmp_seq</span>=1 <span class="title">ttl</span>=128 <span class="title">time</span>=0.398 <span class="title">ms</span></span></span><br><span class="line"><span class="function">64 <span class="title">bytes</span> <span class="title">from</span> 192.168.18.20: <span class="title">icmp_seq</span>=2 <span class="title">ttl</span>=128 <span class="title">time</span>=0.439 <span class="title">ms</span></span></span><br><span class="line"><span class="function">64 <span class="title">bytes</span> <span class="title">from</span> 192.168.18.20: <span class="title">icmp_seq</span>=3 <span class="title">ttl</span>=128 <span class="title">time</span>=0.437 <span class="title">ms</span></span></span><br><span class="line"><span class="function">64 <span class="title">bytes</span> <span class="title">from</span> 192.168.18.20: <span class="title">icmp_seq</span>=4 <span class="title">ttl</span>=128 <span class="title">time</span>=0.448 <span class="title">ms</span></span></span><br><span class="line"><span class="function">64 <span class="title">bytes</span> <span class="title">from</span> 192.168.18.20: <span class="title">icmp_seq</span>=5 <span class="title">ttl</span>=128 <span class="title">time</span>=0.484 <span class="title">ms</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">--- 192.168.18.20 <span class="title">ping</span> <span class="title">statistics</span> ---</span></span><br><span class="line"><span class="function">5 <span class="title">packets</span> <span class="title">transmitted</span>, 5 <span class="title">received</span>, 0% <span class="title">packet</span> <span class="title">loss</span>, <span class="title">time</span> 4105<span class="title">ms</span></span></span><br><span class="line"><span class="function"><span class="title">rtt</span> <span class="title">min</span>/<span class="title">avg</span>/<span class="title">max</span>/<span class="title">mdev</span> = 0.398/0.441/0.484/0.027 <span class="title">ms</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">###	<span class="title">ping</span> 192.168.18.20 5次，每次相隔2秒</span></span><br><span class="line"><span class="function"><span class="title">root</span>@<span class="title">debian</span>:/<span class="title">test</span># <span class="title">ping</span> 192.168.18.20 -<span class="title">c</span> 5 -<span class="title">i</span> 2</span></span><br><span class="line"><span class="function"><span class="title">PING</span> 192.168.18.20 (192.168.18.20) 56(84) <span class="title">bytes</span> <span class="title">of</span> <span class="title">data</span>.</span></span><br><span class="line"><span class="function">64 <span class="title">bytes</span> <span class="title">from</span> 192.168.18.20: <span class="title">icmp_seq</span>=1 <span class="title">ttl</span>=128 <span class="title">time</span>=0.475 <span class="title">ms</span></span></span><br><span class="line"><span class="function">64 <span class="title">bytes</span> <span class="title">from</span> 192.168.18.20: <span class="title">icmp_seq</span>=2 <span class="title">ttl</span>=128 <span class="title">time</span>=0.435 <span class="title">ms</span></span></span><br><span class="line"><span class="function">64 <span class="title">bytes</span> <span class="title">from</span> 192.168.18.20: <span class="title">icmp_seq</span>=3 <span class="title">ttl</span>=128 <span class="title">time</span>=0.400 <span class="title">ms</span></span></span><br><span class="line"><span class="function">64 <span class="title">bytes</span> <span class="title">from</span> 192.168.18.20: <span class="title">icmp_seq</span>=4 <span class="title">ttl</span>=128 <span class="title">time</span>=0.413 <span class="title">ms</span></span></span><br><span class="line"><span class="function">64 <span class="title">bytes</span> <span class="title">from</span> 192.168.18.20: <span class="title">icmp_seq</span>=5 <span class="title">ttl</span>=128 <span class="title">time</span>=0.337 <span class="title">ms</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">--- 192.168.18.20 <span class="title">ping</span> <span class="title">statistics</span> ---</span></span><br><span class="line"><span class="function">5 <span class="title">packets</span> <span class="title">transmitted</span>, 5 <span class="title">received</span>, 0% <span class="title">packet</span> <span class="title">loss</span>, <span class="title">time</span> 8063<span class="title">ms</span></span></span><br><span class="line"><span class="function"><span class="title">rtt</span> <span class="title">min</span>/<span class="title">avg</span>/<span class="title">max</span>/<span class="title">mdev</span> = 0.337/0.412/0.475/0.045 <span class="title">ms</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">###	<span class="title">ping</span> <span class="title">bing</span>的官网 5次</span></span><br><span class="line"><span class="function"><span class="title">root</span>@<span class="title">debian</span>:/<span class="title">test</span># <span class="title">ping</span> <span class="title">www.bing.com</span> -<span class="title">c</span> 5</span></span><br><span class="line"><span class="function"><span class="title">PING</span> <span class="title">china.bing123.com</span> (202.89.233.100) 56(84) <span class="title">bytes</span> <span class="title">of</span> <span class="title">data</span>.</span></span><br><span class="line"><span class="function">64 <span class="title">bytes</span> <span class="title">from</span> 202.89.233.100 (202.89.233.100): <span class="title">icmp_seq</span>=1 <span class="title">ttl</span>=128 <span class="title">time</span>=48.2 <span class="title">ms</span></span></span><br><span class="line"><span class="function">64 <span class="title">bytes</span> <span class="title">from</span> 202.89.233.100 (202.89.233.100): <span class="title">icmp_seq</span>=2 <span class="title">ttl</span>=128 <span class="title">time</span>=49.0 <span class="title">ms</span></span></span><br><span class="line"><span class="function">64 <span class="title">bytes</span> <span class="title">from</span> 202.89.233.100 (202.89.233.100): <span class="title">icmp_seq</span>=3 <span class="title">ttl</span>=128 <span class="title">time</span>=50.7 <span class="title">ms</span></span></span><br><span class="line"><span class="function">64 <span class="title">bytes</span> <span class="title">from</span> 202.89.233.100 (202.89.233.100): <span class="title">icmp_seq</span>=4 <span class="title">ttl</span>=128 <span class="title">time</span>=103 <span class="title">ms</span></span></span><br><span class="line"><span class="function">64 <span class="title">bytes</span> <span class="title">from</span> 202.89.233.100 (202.89.233.100): <span class="title">icmp_seq</span>=5 <span class="title">ttl</span>=128 <span class="title">time</span>=76.2 <span class="title">ms</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">--- <span class="title">china.bing123.com</span> <span class="title">ping</span> <span class="title">statistics</span> ---</span></span><br><span class="line"><span class="function">5 <span class="title">packets</span> <span class="title">transmitted</span>, 5 <span class="title">received</span>, 0% <span class="title">packet</span> <span class="title">loss</span>, <span class="title">time</span> 4007<span class="title">ms</span></span></span><br><span class="line"><span class="function"><span class="title">rtt</span> <span class="title">min</span>/<span class="title">avg</span>/<span class="title">max</span>/<span class="title">mdev</span> = 48.234/65.394/102.764/21.410 <span class="title">ms</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">###	<span class="title">ping</span> <span class="title">bing</span>官网 5次，每次相隔3秒，设置发送包的大小为1024，设置<span class="title">ttl</span>值为255</span></span><br><span class="line"><span class="function"><span class="title">root</span>@<span class="title">debian</span>:/<span class="title">test</span># <span class="title">ping</span> <span class="title">www.bing.com</span> -<span class="title">i</span> 3 -<span class="title">s</span> 1024 -<span class="title">t</span> 255 -<span class="title">c</span> 5</span></span><br><span class="line"><span class="function"><span class="title">PING</span> <span class="title">china.bing123.com</span> (202.89.233.100) 1024(1052) <span class="title">bytes</span> <span class="title">of</span> <span class="title">data</span>.</span></span><br><span class="line"><span class="function">1032 <span class="title">bytes</span> <span class="title">from</span> 202.89.233.100 (202.89.233.100): <span class="title">icmp_seq</span>=1 <span class="title">ttl</span>=128 <span class="title">time</span>=46.4 <span class="title">ms</span></span></span><br><span class="line"><span class="function">1032 <span class="title">bytes</span> <span class="title">from</span> 202.89.233.100 (202.89.233.100): <span class="title">icmp_seq</span>=2 <span class="title">ttl</span>=128 <span class="title">time</span>=46.0 <span class="title">ms</span></span></span><br><span class="line"><span class="function">1032 <span class="title">bytes</span> <span class="title">from</span> 202.89.233.100 (202.89.233.100): <span class="title">icmp_seq</span>=3 <span class="title">ttl</span>=128 <span class="title">time</span>=47.1 <span class="title">ms</span></span></span><br><span class="line"><span class="function">1032 <span class="title">bytes</span> <span class="title">from</span> 202.89.233.100 (202.89.233.100): <span class="title">icmp_seq</span>=4 <span class="title">ttl</span>=128 <span class="title">time</span>=46.9 <span class="title">ms</span></span></span><br><span class="line"><span class="function">1032 <span class="title">bytes</span> <span class="title">from</span> 202.89.233.100 (202.89.233.100): <span class="title">icmp_seq</span>=5 <span class="title">ttl</span>=128 <span class="title">time</span>=46.3 <span class="title">ms</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">--- <span class="title">china.bing123.com</span> <span class="title">ping</span> <span class="title">statistics</span> ---</span></span><br><span class="line"><span class="function">5 <span class="title">packets</span> <span class="title">transmitted</span>, 5 <span class="title">received</span>, 0% <span class="title">packet</span> <span class="title">loss</span>, <span class="title">time</span> 12016<span class="title">ms</span></span></span><br><span class="line"><span class="function"><span class="title">rtt</span> <span class="title">min</span>/<span class="title">avg</span>/<span class="title">max</span>/<span class="title">mdev</span> = 46.049/46.550/47.075/0.374 <span class="title">ms</span></span></span><br></pre></td></tr></table></figure></div>]]></content>
+      <categories>
+        <category>Linux命令</category>
+      </categories>
+      <tags>
+        <tag>Linux命令</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux权限详解</title>
     <url>/2024/05/07/Linux%E6%9D%83%E9%99%90%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<p>​	Linux系统上对文件的权限有着严格的控制，用于如果相对某个文件执行某种操作，必须具有对应的权限方可执行成功。</p>
@@ -119,189 +703,6 @@
       </categories>
       <tags>
         <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>从0到1使用Hexo+Github Pages+Redefine+阿里云oss+Typora+PicGo搭建一套个人博客</title>
-    <url>/2024/05/05/%E4%BB%8E0%E5%88%B01%E4%BD%BF%E7%94%A8Hexo+Github-Pages+%E9%98%BF%E9%87%8C%E4%BA%91oss+Typora+PicGo%E6%90%AD%E5%BB%BA%E4%B8%80%E5%A5%97%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="一、搭建前的环境准备"><a href="#一、搭建前的环境准备" class="headerlink" title="一、搭建前的环境准备"></a>一、搭建前的环境准备</h1>
-  <div class="note-large blue">
-    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
-      <p>所需环境</p>
-
-    </div>
-    <div class="notel-content">
-      <p>1、Git：官网下载并安装到电脑上：<a class="link"   href="https://git-scm.com/" >https://git-scm.com/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>2、Node.js：官网下载并安装到电脑上：<a class="link"   href="https://nodejs.org/" >https://nodejs.org/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-
-    </div>
-  </div>
-
-
-
-<h1 id="二、安装hexo，并完成简单的本地页面展示"><a href="#二、安装hexo，并完成简单的本地页面展示" class="headerlink" title="二、安装hexo，并完成简单的本地页面展示"></a>二、安装hexo，并完成简单的本地页面展示</h1><h2 id="1、进入cmd输入指令"><a href="#1、进入cmd输入指令" class="headerlink" title="1、进入cmd输入指令"></a>1、进入cmd输入指令</h2><p>1.1 进入cmd输入指令：<code>npm install -g hexo-cli</code>，然后输入<code>hexo -v</code> 查看hexo版本顺便验证是否安装成功。</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">C:\Users\X&gt;npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line">added 53 packages <span class="keyword">in</span> 22s</span><br><span class="line"></span><br><span class="line">14 packages are looking <span class="keyword">for</span> funding</span><br><span class="line">  run `npm fund` <span class="keyword">for</span> details</span><br><span class="line">  </span><br><span class="line">E:\nodejs&gt;hexo -v</span><br><span class="line">hexo-cli: 4.3.2</span><br><span class="line">os: win32 10.0.19045 undefined</span><br><span class="line">node: 20.12.2</span><br><span class="line">acorn: 8.11.3</span><br><span class="line">ada: 2.7.6</span><br><span class="line">ares: 1.27.0</span><br><span class="line"><span class="built_in">base64</span>: 0.5.2</span><br><span class="line">brotli: 1.1.0</span><br><span class="line">cjs_module_lexer: 1.2.2</span><br><span class="line">cldr: 44.1</span><br><span class="line">icu: 74.2</span><br><span class="line">llhttp: 8.1.2</span><br><span class="line">modules: 115</span><br><span class="line">napi: 9</span><br><span class="line">nghttp2: 1.60.0</span><br><span class="line">nghttp3: 0.7.0</span><br><span class="line">ngtcp2: 0.8.1</span><br><span class="line">openssl: 3.0.13+quic</span><br><span class="line">simdutf: 4.0.8</span><br><span class="line">tz: 2024a</span><br><span class="line">undici: 5.28.4</span><br><span class="line">unicode: 15.1</span><br><span class="line">uv: 1.46.0</span><br><span class="line">uvwasi: 0.0.20</span><br><span class="line">v8: 11.3.244.8-node.19</span><br><span class="line">zlib: 1.3.0.1-motley-40e35a7</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="2、创建文件夹并初始化hexo"><a href="#2、创建文件夹并初始化hexo" class="headerlink" title="2、创建文件夹并初始化hexo"></a>2、创建文件夹并初始化hexo</h2><p>2.1 创建一个文件夹Test（这个文件夹用来存放hexo初始化后的文件），并在这个创建好的test文件夹下直接右键git bash打开。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-03_223819.png"
-                     
-                ></p>
-<p>2.2 查看是否能启动成功</p>
-<p><code>hexo s</code></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-03_223925.png"
-                     
-                ></p>
- 
-  <div class="note-large red">
-    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
-      <p>指定文件夹目录</p>
-
-    </div>
-    <div class="notel-content">
-      <p>node_modules: 依赖包</p>
-<p>public：存放生成的页面</p>
-<p>scaffolds：生成文章的一些模板</p>
-<p>source：用来存放你的文章</p>
-<p>themes：主题</p>
-<p><strong>_config.yml: 博客的配置文件</strong></p>
-
-    </div>
-  </div>
-
-
-
-<p>2.3 复制网址打开</p>
-<p><code>http://localhost:4000/</code></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-03_224033.png"
-                     
-                ></p>
-<h1 id="三、将Hexo部署到github"><a href="#三、将Hexo部署到github" class="headerlink" title="三、将Hexo部署到github"></a>三、将Hexo部署到github</h1><h2 id="1、Github创建个人仓库"><a href="#1、Github创建个人仓库" class="headerlink" title="1、Github创建个人仓库"></a>1、Github创建个人仓库</h2>
-  <div class="note p-4 mb-4 rounded-small success">
-    <p>首先，需要有一个github账号。登上账号后建一个仓库：仓库名为你的用户名.github.io，<br>举例如下：<br>创建一个和你用户名相同的仓库，后面加.github.io，<br>只有这样，将来要部署到GitHub的时候，才会被识别，也就是xxxx.github.io，其中xxx就是你注册GitHub的用户名。</p>
-
-  </div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/a.png"
-                     
-                ></p>
-<h2 id="2、生成ssh添加到Github"><a href="#2、生成ssh添加到Github" class="headerlink" title="2、生成ssh添加到Github"></a>2、生成ssh添加到Github</h2>
-  <div class="note p-4 mb-4 rounded-small primary">
-    <p>在Github上创建仓库完成之后，需要设置ssh免密登录</p>
-
-  </div>
-
-
-
-<p>2.1 打开cmd窗口：执行如下命令</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;yourname&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;youremail&quot;</span></span><br></pre></td></tr></table></figure></div>
-
-<p>防止输错可以检查：</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name</span><br><span class="line">git config user.email</span><br></pre></td></tr></table></figure></div>
-
-
-
-<p>2.2 接着进入家目录：C:\Users\X（这是你自己电脑上的家目录），右击打开git bash，输入：</p>
-<p><code>ssh-keygen -t rsa -C 1500937374@qq.com（这里填你自己的QQ邮箱）</code></p>
-<p>然后就敲三次回车：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/b.png"
-                     
-                ></p>
-<p>2.3 接着就会发现C：\Users\X 下多了一个.ssh目录，打开后有一个公钥，一个私钥。id_rsa.pub是公钥，我们需要打开它，复制里面的内容。</p>
-<p>然后进入github：</p>
-<p>点击<strong>setting</strong></p>
-<p>进行以下操作</p>
-<p>找到SSH and GPG keys选项——&gt;点击绿色按钮“New SSH key”——&gt;输入相应的title和key（key为上一步的id_rsa.pub里的内容）——&gt;然后点击Add SSH Key</p>
-<h2 id="3、进行部署"><a href="#3、进行部署" class="headerlink" title="3、进行部署"></a>3、进行部署</h2>
-  <div class="note p-4 mb-4 rounded-small primary">
-    <p>这一步，我们就可以将hexo和GitHub关联起来，也就是将hexo生成的文章部署到GitHub上，打开站点配置文件 _config.yml，翻到最后，修改为YourgithubName（就是你的GitHub账户）。</p>
-
-  </div>
-
-
-
-<p>3.1 修改配置文件，然后修改内容：</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:goubin18/goubin18.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure></div>
-
-
-  <div class="note-large default">
-    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
-      <i class="notel-icon fa-solid fa-info"></i><p>注意</p>
-
-    </div>
-    <div class="notel-content">
-      <p>在这里我们需要注意的是在每一个类型下都有一个空格，因为配置文件<code>_config.redefine.yml</code>使用yaml语法，所以我们需要注意缩进。</p>
-
-    </div>
-  </div>
-
-<p><strong>repo：获取步骤如下</strong></p>
-<p><strong>点进自己刚刚创建的仓库，复制</strong></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-05_154324.png"
-                     
-                ></p>
-<p>3.2 找到自己的博客路径打开，这个时候需要先安装deploy-git ，也就是部署的命令,这样你才能用命令部署到GitHub。</p>
-<p><code>npm install hexo-deployer-git --save</code></p>
-<p>3.3 然后依次执行以下命令：</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean   		#清除缓存文件 db.json 和已生成的静态文件 public</span><br><span class="line">hexo generate       #生成网站静态文件到默认设置的 public 文件夹(hexo generate 的缩写)</span><br><span class="line">hexo deploy			#自动生成网站静态文件，并部署到设定的仓库(hexo deploy 的缩写)</span><br></pre></td></tr></table></figure></div>
-
-<p>注意在输入<code>hexo deploy</code>后会有一个提示让你手动输入yes&#x2F;no，我们直接输入yes。</p>
-<p>最后回到Github上查看自己的仓库：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-05_155620.png"
-                     
-                ></p>
-<p>上传成功。</p>
-<p>现在可以使用xxx.github.io就可以访问你的博客了。</p>
-<h1 id="四、使用Hexo的主题Redefine"><a href="#四、使用Hexo的主题Redefine" class="headerlink" title="四、使用Hexo的主题Redefine"></a>四、使用Hexo的主题Redefine</h1><p>现在我们可以进一步的美化博客，我选择的是Hexo的主题商店里的Redefine。</p>
-<p>Hexo官网主题：<a class="link"   href="https://hexo.io/themes/" >https://hexo.io/themes/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>Redefine部署及使用文档：<a class="link"   href="https://redefine-docs.ohevan.com/introduction" >https://redefine-docs.ohevan.com/introduction <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h2 id="1、安装主题"><a href="#1、安装主题" class="headerlink" title="1、安装主题"></a>1、安装主题</h2><p>在 Hexo 根目录执行以下命令安装主题，有两种方式：npm、git。</p>
-<p>我使用的是npm方式，git方式可以自己去官网文档查看：</p>
-<p><code>npm install hexo-theme-redefine@latest</code></p>
-<h2 id="2、启动主题"><a href="#2、启动主题" class="headerlink" title="2、启动主题"></a>2、启动主题</h2><p>在 Hexo 根目录的 <code>_config.yml</code> 文件中，将 <code>theme</code> 值修改为 <code>redefine</code>。</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">theme: redefine</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="3、创建主题配置文件"><a href="#3、创建主题配置文件" class="headerlink" title="3、创建主题配置文件"></a>3、创建主题配置文件</h2><p>在 Hexo 根目录下创建 <code>_config.redefine.yml</code> 文件。</p>
-<p>并将<a class="link"   href="https://github.com/EvanNotFound/hexo-theme-redefine/blob/main/_config.yml" >此处 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的所有内容复制进去。</p>
-<p>本文件会自动覆盖主题的配置项，创建本文件的目的是为了方便你在升级主题时，不会丢失你的配置。</p>
-<h2 id="4、创建成功"><a href="#4、创建成功" class="headerlink" title="4、创建成功"></a>4、创建成功</h2><p>现在就可以启动Hexo，看看效果了。</p>
-<p>后续的步骤请移步<a class="link"   href="https://redefine-docs.ohevan.com/" >官方文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>仔细查看使用方法。</p>
-<h2 id="5、属于Redefine的Typroa主题"><a href="#5、属于Redefine的Typroa主题" class="headerlink" title="5、属于Redefine的Typroa主题"></a>5、属于Redefine的Typroa主题</h2><p>我们可以在官方文档的写作指南上找到适合写文章的Typroa主题，也可点击 <a class="link"   href="https://github.com/EvanNotFound/typora-theme-redefine" >这里 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 直接进入下载。</p>
-<h1 id="五、关于在博客上使用图片的存储问题"><a href="#五、关于在博客上使用图片的存储问题" class="headerlink" title="五、关于在博客上使用图片的存储问题"></a>五、关于在博客上使用图片的存储问题</h1><p>因为在博客上写文章的时候需要引用自己的图片，所以我们可以使用<strong>阿里云OSS存储+Picgo</strong>的方式。</p>
-<p>具体细节可以参考这一篇文章来进行设置：<a class="link"   href="https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8" >https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>经过上述步骤后，我们就拥有了一个属于自己的个人博客。</p>
-<p><strong>参考文章：</strong>使用Hexo从0到1搭建个人博客详细教程（超详细，超简单）（<a class="link"   href="https://developer.aliyun.com/article/1218122%EF%BC%89" >https://developer.aliyun.com/article/1218122） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>手把手教你搭建阿里云图床(PicGo+Typora+阿里云OSS)，新手小白一看就会（<a class="link"   href="https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8%EF%BC%89" >https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>Redefine官网（<a class="link"   href="https://redefine-docs.ohevan.com/%EF%BC%89" >https://redefine-docs.ohevan.com/） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-]]></content>
-      <categories>
-        <category>搭建个人博客</category>
-      </categories>
-      <tags>
-        <tag>搭建个人博客</tag>
-        <tag>Hexo</tag>
-        <tag>PicGo</tag>
-        <tag>Typora</tag>
       </tags>
   </entry>
   <entry>
@@ -485,6 +886,189 @@
 
 <p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>从0到1使用Hexo+Github Pages+Redefine+阿里云oss+Typora+PicGo搭建一套个人博客</title>
+    <url>/2024/05/05/%E4%BB%8E0%E5%88%B01%E4%BD%BF%E7%94%A8Hexo+Github-Pages+%E9%98%BF%E9%87%8C%E4%BA%91oss+Typora+PicGo%E6%90%AD%E5%BB%BA%E4%B8%80%E5%A5%97%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="一、搭建前的环境准备"><a href="#一、搭建前的环境准备" class="headerlink" title="一、搭建前的环境准备"></a>一、搭建前的环境准备</h1>
+  <div class="note-large blue">
+    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
+      <p>所需环境</p>
+
+    </div>
+    <div class="notel-content">
+      <p>1、Git：官网下载并安装到电脑上：<a class="link"   href="https://git-scm.com/" >https://git-scm.com/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>2、Node.js：官网下载并安装到电脑上：<a class="link"   href="https://nodejs.org/" >https://nodejs.org/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+
+    </div>
+  </div>
+
+
+
+<h1 id="二、安装hexo，并完成简单的本地页面展示"><a href="#二、安装hexo，并完成简单的本地页面展示" class="headerlink" title="二、安装hexo，并完成简单的本地页面展示"></a>二、安装hexo，并完成简单的本地页面展示</h1><h2 id="1、进入cmd输入指令"><a href="#1、进入cmd输入指令" class="headerlink" title="1、进入cmd输入指令"></a>1、进入cmd输入指令</h2><p>1.1 进入cmd输入指令：<code>npm install -g hexo-cli</code>，然后输入<code>hexo -v</code> 查看hexo版本顺便验证是否安装成功。</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">C:\Users\X&gt;npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line">added 53 packages <span class="keyword">in</span> 22s</span><br><span class="line"></span><br><span class="line">14 packages are looking <span class="keyword">for</span> funding</span><br><span class="line">  run `npm fund` <span class="keyword">for</span> details</span><br><span class="line">  </span><br><span class="line">E:\nodejs&gt;hexo -v</span><br><span class="line">hexo-cli: 4.3.2</span><br><span class="line">os: win32 10.0.19045 undefined</span><br><span class="line">node: 20.12.2</span><br><span class="line">acorn: 8.11.3</span><br><span class="line">ada: 2.7.6</span><br><span class="line">ares: 1.27.0</span><br><span class="line"><span class="built_in">base64</span>: 0.5.2</span><br><span class="line">brotli: 1.1.0</span><br><span class="line">cjs_module_lexer: 1.2.2</span><br><span class="line">cldr: 44.1</span><br><span class="line">icu: 74.2</span><br><span class="line">llhttp: 8.1.2</span><br><span class="line">modules: 115</span><br><span class="line">napi: 9</span><br><span class="line">nghttp2: 1.60.0</span><br><span class="line">nghttp3: 0.7.0</span><br><span class="line">ngtcp2: 0.8.1</span><br><span class="line">openssl: 3.0.13+quic</span><br><span class="line">simdutf: 4.0.8</span><br><span class="line">tz: 2024a</span><br><span class="line">undici: 5.28.4</span><br><span class="line">unicode: 15.1</span><br><span class="line">uv: 1.46.0</span><br><span class="line">uvwasi: 0.0.20</span><br><span class="line">v8: 11.3.244.8-node.19</span><br><span class="line">zlib: 1.3.0.1-motley-40e35a7</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="2、创建文件夹并初始化hexo"><a href="#2、创建文件夹并初始化hexo" class="headerlink" title="2、创建文件夹并初始化hexo"></a>2、创建文件夹并初始化hexo</h2><p>2.1 创建一个文件夹Test（这个文件夹用来存放hexo初始化后的文件），并在这个创建好的test文件夹下直接右键git bash打开。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-03_223819.png"
+                     
+                ></p>
+<p>2.2 查看是否能启动成功</p>
+<p><code>hexo s</code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-03_223925.png"
+                     
+                ></p>
+ 
+  <div class="note-large red">
+    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
+      <p>指定文件夹目录</p>
+
+    </div>
+    <div class="notel-content">
+      <p>node_modules: 依赖包</p>
+<p>public：存放生成的页面</p>
+<p>scaffolds：生成文章的一些模板</p>
+<p>source：用来存放你的文章</p>
+<p>themes：主题</p>
+<p><strong>_config.yml: 博客的配置文件</strong></p>
+
+    </div>
+  </div>
+
+
+
+<p>2.3 复制网址打开</p>
+<p><code>http://localhost:4000/</code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-03_224033.png"
+                     
+                ></p>
+<h1 id="三、将Hexo部署到github"><a href="#三、将Hexo部署到github" class="headerlink" title="三、将Hexo部署到github"></a>三、将Hexo部署到github</h1><h2 id="1、Github创建个人仓库"><a href="#1、Github创建个人仓库" class="headerlink" title="1、Github创建个人仓库"></a>1、Github创建个人仓库</h2>
+  <div class="note p-4 mb-4 rounded-small success">
+    <p>首先，需要有一个github账号。登上账号后建一个仓库：仓库名为你的用户名.github.io，<br>举例如下：<br>创建一个和你用户名相同的仓库，后面加.github.io，<br>只有这样，将来要部署到GitHub的时候，才会被识别，也就是xxxx.github.io，其中xxx就是你注册GitHub的用户名。</p>
+
+  </div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/a.png"
+                     
+                ></p>
+<h2 id="2、生成ssh添加到Github"><a href="#2、生成ssh添加到Github" class="headerlink" title="2、生成ssh添加到Github"></a>2、生成ssh添加到Github</h2>
+  <div class="note p-4 mb-4 rounded-small primary">
+    <p>在Github上创建仓库完成之后，需要设置ssh免密登录</p>
+
+  </div>
+
+
+
+<p>2.1 打开cmd窗口：执行如下命令</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;yourname&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;youremail&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>防止输错可以检查：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">git config user.name</span><br><span class="line">git config user.email</span><br></pre></td></tr></table></figure></div>
+
+
+
+<p>2.2 接着进入家目录：C:\Users\X（这是你自己电脑上的家目录），右击打开git bash，输入：</p>
+<p><code>ssh-keygen -t rsa -C 1500937374@qq.com（这里填你自己的QQ邮箱）</code></p>
+<p>然后就敲三次回车：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/b.png"
+                     
+                ></p>
+<p>2.3 接着就会发现C：\Users\X 下多了一个.ssh目录，打开后有一个公钥，一个私钥。id_rsa.pub是公钥，我们需要打开它，复制里面的内容。</p>
+<p>然后进入github：</p>
+<p>点击<strong>setting</strong></p>
+<p>进行以下操作</p>
+<p>找到SSH and GPG keys选项——&gt;点击绿色按钮“New SSH key”——&gt;输入相应的title和key（key为上一步的id_rsa.pub里的内容）——&gt;然后点击Add SSH Key</p>
+<h2 id="3、进行部署"><a href="#3、进行部署" class="headerlink" title="3、进行部署"></a>3、进行部署</h2>
+  <div class="note p-4 mb-4 rounded-small primary">
+    <p>这一步，我们就可以将hexo和GitHub关联起来，也就是将hexo生成的文章部署到GitHub上，打开站点配置文件 _config.yml，翻到最后，修改为YourgithubName（就是你的GitHub账户）。</p>
+
+  </div>
+
+
+
+<p>3.1 修改配置文件，然后修改内容：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:goubin18/goubin18.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure></div>
+
+
+  <div class="note-large default">
+    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
+      <i class="notel-icon fa-solid fa-info"></i><p>注意</p>
+
+    </div>
+    <div class="notel-content">
+      <p>在这里我们需要注意的是在每一个类型下都有一个空格，因为配置文件<code>_config.redefine.yml</code>使用yaml语法，所以我们需要注意缩进。</p>
+
+    </div>
+  </div>
+
+<p><strong>repo：获取步骤如下</strong></p>
+<p><strong>点进自己刚刚创建的仓库，复制</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-05_154324.png"
+                     
+                ></p>
+<p>3.2 找到自己的博客路径打开，这个时候需要先安装deploy-git ，也就是部署的命令,这样你才能用命令部署到GitHub。</p>
+<p><code>npm install hexo-deployer-git --save</code></p>
+<p>3.3 然后依次执行以下命令：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean   		#清除缓存文件 db.json 和已生成的静态文件 public</span><br><span class="line">hexo generate       #生成网站静态文件到默认设置的 public 文件夹(hexo generate 的缩写)</span><br><span class="line">hexo deploy			#自动生成网站静态文件，并部署到设定的仓库(hexo deploy 的缩写)</span><br></pre></td></tr></table></figure></div>
+
+<p>注意在输入<code>hexo deploy</code>后会有一个提示让你手动输入yes&#x2F;no，我们直接输入yes。</p>
+<p>最后回到Github上查看自己的仓库：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/BlogImg/Hexo/2024-05-05_155620.png"
+                     
+                ></p>
+<p>上传成功。</p>
+<p>现在可以使用xxx.github.io就可以访问你的博客了。</p>
+<h1 id="四、使用Hexo的主题Redefine"><a href="#四、使用Hexo的主题Redefine" class="headerlink" title="四、使用Hexo的主题Redefine"></a>四、使用Hexo的主题Redefine</h1><p>现在我们可以进一步的美化博客，我选择的是Hexo的主题商店里的Redefine。</p>
+<p>Hexo官网主题：<a class="link"   href="https://hexo.io/themes/" >https://hexo.io/themes/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>Redefine部署及使用文档：<a class="link"   href="https://redefine-docs.ohevan.com/introduction" >https://redefine-docs.ohevan.com/introduction <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="1、安装主题"><a href="#1、安装主题" class="headerlink" title="1、安装主题"></a>1、安装主题</h2><p>在 Hexo 根目录执行以下命令安装主题，有两种方式：npm、git。</p>
+<p>我使用的是npm方式，git方式可以自己去官网文档查看：</p>
+<p><code>npm install hexo-theme-redefine@latest</code></p>
+<h2 id="2、启动主题"><a href="#2、启动主题" class="headerlink" title="2、启动主题"></a>2、启动主题</h2><p>在 Hexo 根目录的 <code>_config.yml</code> 文件中，将 <code>theme</code> 值修改为 <code>redefine</code>。</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">theme: redefine</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="3、创建主题配置文件"><a href="#3、创建主题配置文件" class="headerlink" title="3、创建主题配置文件"></a>3、创建主题配置文件</h2><p>在 Hexo 根目录下创建 <code>_config.redefine.yml</code> 文件。</p>
+<p>并将<a class="link"   href="https://github.com/EvanNotFound/hexo-theme-redefine/blob/main/_config.yml" >此处 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>的所有内容复制进去。</p>
+<p>本文件会自动覆盖主题的配置项，创建本文件的目的是为了方便你在升级主题时，不会丢失你的配置。</p>
+<h2 id="4、创建成功"><a href="#4、创建成功" class="headerlink" title="4、创建成功"></a>4、创建成功</h2><p>现在就可以启动Hexo，看看效果了。</p>
+<p>后续的步骤请移步<a class="link"   href="https://redefine-docs.ohevan.com/" >官方文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>仔细查看使用方法。</p>
+<h2 id="5、属于Redefine的Typroa主题"><a href="#5、属于Redefine的Typroa主题" class="headerlink" title="5、属于Redefine的Typroa主题"></a>5、属于Redefine的Typroa主题</h2><p>我们可以在官方文档的写作指南上找到适合写文章的Typroa主题，也可点击 <a class="link"   href="https://github.com/EvanNotFound/typora-theme-redefine" >这里 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 直接进入下载。</p>
+<h1 id="五、关于在博客上使用图片的存储问题"><a href="#五、关于在博客上使用图片的存储问题" class="headerlink" title="五、关于在博客上使用图片的存储问题"></a>五、关于在博客上使用图片的存储问题</h1><p>因为在博客上写文章的时候需要引用自己的图片，所以我们可以使用<strong>阿里云OSS存储+Picgo</strong>的方式。</p>
+<p>具体细节可以参考这一篇文章来进行设置：<a class="link"   href="https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8" >https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>经过上述步骤后，我们就拥有了一个属于自己的个人博客。</p>
+<p><strong>参考文章：</strong>使用Hexo从0到1搭建个人博客详细教程（超详细，超简单）（<a class="link"   href="https://developer.aliyun.com/article/1218122%EF%BC%89" >https://developer.aliyun.com/article/1218122） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>手把手教你搭建阿里云图床(PicGo+Typora+阿里云OSS)，新手小白一看就会（<a class="link"   href="https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8%EF%BC%89" >https://developer.aliyun.com/article/1465963?spm=a2c6h.12873639.article-detail.24.e9234aefLQGLq8） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>Redefine官网（<a class="link"   href="https://redefine-docs.ohevan.com/%EF%BC%89" >https://redefine-docs.ohevan.com/） <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+]]></content>
+      <categories>
+        <category>搭建个人博客</category>
+      </categories>
+      <tags>
+        <tag>搭建个人博客</tag>
+        <tag>Hexo</tag>
+        <tag>PicGo</tag>
+        <tag>Typora</tag>
+      </tags>
   </entry>
   <entry>
     <title>博客写作模板</title>
