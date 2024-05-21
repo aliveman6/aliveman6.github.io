@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="StreamCons">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://aliveman6.github.io/2024/05/16/2024-05-16-关于使用prometheus+grafana监控构建我的hexo个人博客（一）/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="本文旨在记录使用Docker在我的个人博客中构建Promtheus+Grafana监控系统的心路历程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于使用Prometheus+Grafana监控构建我的hexo个人博客（一）">
+<meta property="og:url" content="https://aliveman6.github.io/2024/05/16/2024-05-16-%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8Prometheus+Grafana%E7%9B%91%E6%8E%A7%E6%9E%84%E5%BB%BA%E6%88%91%E7%9A%84hexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本文旨在记录使用Docker在我的个人博客中构建Promtheus+Grafana监控系统的心路历程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-16T11:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-18T15:58:18.572Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Prometheus">
+<meta property="article:tag" content="Grafana">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/ninja.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/ninja.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/ninja.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            关于使用Prometheus+Grafana监控构建我的hexo个人博客（一） -
+        
+        X Blog
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+        <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    
+<script src="/js/libs/anime.min.js"></script>
+
+    <h1 class="ml13">
+        X Blog
+    </h1>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+
+        anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [100,0],
+                translateZ: 0,
+                opacity: [0,1],
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i
+            }).add({
+            targets: '.ml13 .letter',
+            translateY: [0,-100],
+            opacity: [1,0],
+            easing: "easeInExpo",
+            duration: 1200,
+            delay: (el, i) => 100 + 30 * i
+        });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            hidePreloaderAfterTimeout(1000); // Hide after 1000 milliseconds once the window has loaded
+        });
+
+        // Backup failsafe: Hide preloader after a maximum of 5000 milliseconds, regardless of the window load event
+        hidePreloaderAfterTimeout(5000);
+
+        function hidePreloaderAfterTimeout(delay) {
+            setTimeout(function () {
+                var preloader = document.querySelector('.preloader');
+                preloader.style.opacity = '0';
+                setTimeout(function () {
+                    preloader.style.display = 'none';
+                }, 200);
+            }, delay);
+        }
+    </script>
+</div>
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    <!--- Font Part-->
+    
+    
+    
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    
+
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"aliveman6.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"5rem","h2":"4rem","h3":"2.8rem","h4":"2.5rem","h5":"2.2rem","h6":"2rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":6,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap"},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/home_1.jpg","dark":"https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/dark_1.jpg"},"title":"这是一个没想好名字的标题","subtitle":{"text":["我 亦 无 他 , 惟 手 熟 尔 。"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/aliveman6","instagram":null,"zhihu":"https://www.zhihu.com/people/zhui-sha-zhe-hao-tian-ling","twitter":"https://twitter.com/Streamconsciou2","email":"1500937374@qq.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.1","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":40},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/index.html","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Links":{"icon":"fa-regular fa-link","submenus":{"Github":"https://github.com/aliveman6","Blog":"https://aliveman6.github.io","Tags":"/tags/","Photos":"/masonry/"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"right","first_item":"menu","announcement":"Debian，yyds!!","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2024/5/4 00:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":true};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+        
+<link rel="stylesheet" href="/fontawesome/sharp-solid.min.css">
+
+    
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Debian.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                X Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/index.html"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-link fa-fw"></i>
+                                    链接
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://github.com/aliveman6">
+                                                    GITHUB
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="https://aliveman6.github.io">
+                                                    BLOG
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/tags/">
+                                                    标签
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/masonry/">
+                                                    PHOTOS
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/index.html"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-Links"
+                        >
+                            <span>
+                                链接
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-Links">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://github.com/aliveman6">GITHUB</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="https://aliveman6.github.io">BLOG</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/tags/">标签</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/masonry/">PHOTOS</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">17</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">17</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">关于使用Prometheus+Grafana监控构建我的hexo个人博客（一）</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.png">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">StreamCons</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-05-16 19:00</span>
+        <span class="mobile">2024-05-16 19:00</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-18 23:58:18</span>
+            <span class="mobile">2024-05-18 23:58:18</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">博客迁移</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Prometheus/">Prometheus</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Grafana/">Grafana</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Docker/">Docker</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>1.7k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>6 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <h1 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h1><p>近期因为总是觉得我每次都需要进云服务器中查看服务器和Docker容器的性能指标太过于麻烦，因此打算使用一台监控系统来直接监视我每次需要查看的这些指标，经过了多次参考，最终选择了Prometheus+Grafana的监控体系来完成这一需求。</p>
+<p>优点：</p>
+<ol>
+<li>可直接使用Docker进行创造镜像及构建</li>
+<li>可扩展性极强</li>
+<li>面板的可视化大大方便了我的监测</li>
+<li>能够自由进行个性化配置</li>
+</ol>
+<p>下面是我的安装过程：</p>
+<h2 id="1、安装Docker"><a href="#1、安装Docker" class="headerlink" title="1、安装Docker"></a>1、安装Docker</h2><p>如果你的服务器上还没有安装 Docker，可以使用以下命令安装：</p>
+<div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install -y docker.io</span><br></pre></td></tr></table></figure></div>
+
+<p>在我的服务器中，因为安装了旧版本的docker，后面我尝试着使用<code>docker pull</code>命令也无法成功pull，所以我选择了先卸掉旧版本的docker，然后再安装最新版本的docker：</p>
+<h3 id="1、移除旧版本的Docker"><a href="#1、移除旧版本的Docker" class="headerlink" title="1、移除旧版本的Docker"></a>1、移除旧版本的Docker</h3><p>首先，删除旧版本的 Docker 及其相关的依赖包：</p>
+<div class="highlight-container" data-rel="Sh"><figure class="iseeu highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo yum remove docker \</span><br><span class="line">                docker-client \</span><br><span class="line">                docker-client-latest \</span><br><span class="line">                docker-common \</span><br><span class="line">                docker-latest \</span><br><span class="line">                docker-latest-logrotate \</span><br><span class="line">                docker-logrotate \</span><br><span class="line">                docker-engine</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="2、安装Docker-CE"><a href="#2、安装Docker-CE" class="headerlink" title="2、安装Docker CE"></a>2、安装Docker CE</h3><p>执行以下步骤来安装 Docker CE：</p>
+<h4 id="1、设置Docker仓库"><a href="#1、设置Docker仓库" class="headerlink" title="1、设置Docker仓库"></a>1、设置Docker仓库</h4><div class="highlight-container" data-rel="Sh"><figure class="iseeu highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y yum-utils</span><br><span class="line">sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure></div>
+
+<h4 id="2、安装Docker-CE-1"><a href="#2、安装Docker-CE-1" class="headerlink" title="2、安装Docker CE"></a>2、安装Docker CE</h4><div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure></div>
+
+<h4 id="3、启动Docker并设置开机自启"><a href="#3、启动Docker并设置开机自启" class="headerlink" title="3、启动Docker并设置开机自启"></a>3、启动Docker并设置开机自启</h4><div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">start</span> docker</span><br><span class="line">sudo systemctl enable docker</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="3、验证安装"><a href="#3、验证安装" class="headerlink" title="3、验证安装"></a>3、验证安装</h3><div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="4、关于在旧版本中Docker的镜像以及容器问题"><a href="#4、关于在旧版本中Docker的镜像以及容器问题" class="headerlink" title="4、关于在旧版本中Docker的镜像以及容器问题"></a>4、关于在旧版本中Docker的镜像以及容器问题</h3><p>我们在移除旧版本的 Docker 时，系统会删除 Docker 的相关文件，但不会删除 Docker 的镜像和容器数据。为了确保你的 Docker 镜像和容器在移除和重新安装 Docker 之后<strong>仍然保留</strong>，我们需要先进行备份后再进行安装，最后安装完后再将镜像以及数据迁移过去：</p>
+<h4 id="1、备份Docker数据"><a href="#1、备份Docker数据" class="headerlink" title="1、备份Docker数据"></a>1、备份Docker数据</h4><p>默认情况下，Docker 数据存储在 <code>/var/lib/docker</code> 目录下。在移除 Docker 之前，你可以备份这个目录：</p>
+<div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp -r /var/lib/docker /var/lib/docker_backup</span><br></pre></td></tr></table></figure></div>
+
+<h4 id="2、安装完之后使用cp命令还原数据"><a href="#2、安装完之后使用cp命令还原数据" class="headerlink" title="2、安装完之后使用cp命令还原数据"></a>2、安装完之后使用cp命令还原数据</h4><div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp -r -f -v /var/lib/docker_backup /var/lib/docker</span><br></pre></td></tr></table></figure></div>
+
+<p>关于<code>cp</code>命令：</p>
+<p>参数说明：</p>
+<ul>
+<li><code>-r</code> 或 <code>-R</code>：递归地复制目录及其所有内容。</li>
+<li><code>-f</code>：强制复制，覆盖目标位置的现有文件而不提示。</li>
+<li><code>-v</code>：显示详细信息，打印出正在复制的文件和目录。</li>
+</ul>
+<h4 id="3、验证Docker镜像和容器："><a href="#3、验证Docker镜像和容器：" class="headerlink" title="3、验证Docker镜像和容器："></a>3、验证Docker镜像和容器：</h4><p>检查 Docker 镜像和容器是否保留：</p>
+<div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br><span class="line">docker ps -a</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="2、拉去所需要的镜像"><a href="#2、拉去所需要的镜像" class="headerlink" title="2、拉去所需要的镜像"></a>2、拉去所需要的镜像</h2><h3 id="1、拉取镜像"><a href="#1、拉取镜像" class="headerlink" title="1、拉取镜像"></a>1、拉取镜像</h3><p>我们需要从docker仓库中拉取所需镜像：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker pull prom/prometheus</span><br><span class="line">docker pull grafana/grafana</span><br><span class="line">docker pull prom/node-exporter</span><br><span class="line">docker pull google/cadvisor</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="2、验证是否拉取成功"><a href="#2、验证是否拉取成功" class="headerlink" title="2、验证是否拉取成功"></a>2、验证是否拉取成功</h3><div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@SC /]# docker images</span><br><span class="line">REPOSITORY           TAG       IMAGE ID       CREATED       SIZE</span><br><span class="line">grafana/grafana      latest    cd2b3782ca63   <span class="number">4</span> days ago    <span class="number">429</span>MB</span><br><span class="line">hexo-image           latest    <span class="number">9</span>e1281bc9afc   <span class="number">6</span> days ago    <span class="number">1</span>.<span class="number">13</span>GB</span><br><span class="line">prom/prometheus      latest    ecb74a3b23a9   <span class="number">9</span> days ago    <span class="number">272</span>MB</span><br><span class="line">prom/node-exporter   latest    <span class="number">9</span>b82e0f21071   <span class="number">3</span> weeks ago   <span class="number">23</span>.<span class="number">3</span>MB</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="3、启动所需镜像"><a href="#3、启动所需镜像" class="headerlink" title="3、启动所需镜像"></a>3、启动所需镜像</h3><p>使用docker ps -a命令查看镜像是否被启动成功：</p>
+<div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@SC /]# docker ps -a</span><br><span class="line">CONTAINER ID   IMAGE                COMMAND                  CREATED        STATUS        PORTS                                       NAMES</span><br><span class="line">a87dc5357f15   prom/prometheus      &quot;/bin/prometheus --c…&quot;   <span class="number">9</span> hours ago    Up <span class="number">9</span> hours    <span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>:<span class="number">1111</span>-&gt;<span class="number">1111</span>/tcp, :::<span class="number">1111</span>-&gt;<span class="number">1111</span>/tcp   prometheus</span><br><span class="line">dd2adfd01f3f   google/cadvisor      &quot;/usr/bin/cadvisor -…&quot;   <span class="number">9</span> hours ago    Up <span class="number">9</span> hours    <span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>:<span class="number">2222</span>-&gt;<span class="number">2222</span>/tcp, :::<span class="number">2222</span>-&gt;<span class="number">2222</span>/tcp   cadvisor</span><br><span class="line">e2510459cba2   grafana/grafana      &quot;/run.sh&quot;                <span class="number">12</span> hours ago   Up <span class="number">12</span> hours   <span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>:<span class="number">3333</span>-&gt;<span class="number">3333</span>/tcp, :::<span class="number">3333</span>-&gt;<span class="number">3333</span>/tcp   grafana</span><br><span class="line"><span class="number">1</span>ad25759c5a9   prom/node-exporter   &quot;/bin/node_exporter&quot;     <span class="number">12</span> hours ago   Up <span class="number">9</span> hours    <span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>:<span class="number">4444</span>-&gt;<span class="number">4444</span>/tcp, :::<span class="number">4444</span>-&gt;<span class="number">4444</span>/tcp   node_exporter</span><br><span class="line">d4fd59bef37e   hexo-image           &quot;docker-entrypoint.s…&quot;   <span class="number">6</span> days ago     Up <span class="number">11</span> hours   <span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>:<span class="number">5555</span>-&gt;<span class="number">5555</span>/tcp, :::<span class="number">5555</span>-&gt;<span class="number">5555</span>/tcp   hexo-blog</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+
+<h1 id="二、cAdvisor和Node-exporter"><a href="#二、cAdvisor和Node-exporter" class="headerlink" title="二、cAdvisor和Node_exporter"></a>二、cAdvisor和Node_exporter</h1><h2 id="选择原因"><a href="#选择原因" class="headerlink" title="选择原因"></a>选择原因</h2><p>选择使用 cAdvisor 和 Node Exporter 来监控系统和容器性能指标，是基于它们各自的特点和功能优势：</p>
+<p><strong>cAdvisor（Container Advisor）</strong></p>
+<p><strong>用途：</strong>监控容器性能指标</p>
+<p><strong>优点：</strong></p>
+<ol>
+<li><strong>专为容器设计</strong>：cAdvisor 专注于监控容器化环境中的容器性能指标，能够收集到详细的容器级别的资源使用情况，包括 CPU、内存、网络和磁盘 I&#x2F;O。</li>
+<li><strong>自动发现容器</strong>：cAdvisor 能够自动发现并监控主机上运行的所有容器，无需额外配置。</li>
+<li><strong>详细的容器指标</strong>：cAdvisor 提供丰富的容器级别的性能指标，包括容器启动时间、资源限制、资源请求和资源使用情况。</li>
+<li><strong>简易部署</strong>：cAdvisor 可以很容易地以 Docker 容器的形式部署，并且能够立即开始收集指标数据。</li>
+</ol>
+<p><strong>Node Exporter</strong></p>
+<p><strong>用途：</strong>监控主机系统性能指标</p>
+<p><strong>优点：</strong></p>
+<ol>
+<li><strong>广泛适用</strong>：Node Exporter 是通用的主机监控工具，适用于监控物理机、虚拟机和各种类型的服务器。</li>
+<li><strong>详细的系统指标</strong>：Node Exporter 提供丰富的系统级别的性能指标，包括 CPU 使用率、内存使用情况、磁盘 I&#x2F;O、文件系统使用情况和网络流量等。</li>
+<li><strong>稳定可靠</strong>：Node Exporter 是 Prometheus 官方支持的 Exporter，经过广泛测试和应用，具有高可靠性和稳定性。</li>
+<li><strong>模块化设计</strong>：Node Exporter 使用模块化设计，允许用户根据需要启用或禁用不同的指标收集模块。</li>
+</ol>
+<p>关于我为什么选择cAdvisor和node_exporter来监控容器性能指标和系统性能指标，原因如下：</p>
+<ol>
+<li><strong>专用性和适用性</strong>：cAdvisor 专门用于监控容器性能，能够收集到详细的容器级别指标，而 Node Exporter 则适用于监控主机系统，提供全面的系统级别指标。</li>
+<li><strong>丰富的指标</strong>：cAdvisor 提供容器内的详细性能数据，而 Node Exporter 提供主机系统的详细性能数据，两者结合可以实现全面的监控覆盖。</li>
+<li><strong>易于集成</strong>：两者都与 Prometheus 无缝集成，能够轻松收集、存储和查询性能指标。</li>
+<li><strong>广泛使用和支持</strong>：cAdvisor 和 Node Exporter 都是社区中广泛使用的监控工具，具有良好的支持和文档，可以帮助用户快速部署和解决问题。</li>
+</ol>
+<h2 id="实际应用场景"><a href="#实际应用场景" class="headerlink" title="实际应用场景"></a>实际应用场景</h2><p>我在网上还能看到一些额外的实际应用场景：</p>
+<ul>
+<li><strong>cAdvisor</strong>：适用于需要详细监控 Docker 容器性能的场景，例如 Kubernetes 集群中的容器监控，Docker Swarm 中的服务监控等。</li>
+<li><strong>Node Exporter</strong>：适用于需要全面监控主机系统性能的场景，例如服务器健康监控，物理机和虚拟机的性能监控等。</li>
+</ul>
+<p>通过结合使用 cAdvisor 和 Node Exporter，可以实现对整个基础设施（包括容器和主机）的全面监控，确保系统和应用的健康运行。</p>
+<h1 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h1><p>本文讲述的是我在部署Prometheus+Grafana监控系统前的安装过程以及容器的正常运行，下一篇文章会写我在后面是如何配置文件以实现监控我们的云服务器和容器的性能。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 关于使用Prometheus+Grafana监控构建我的hexo个人博客（一）</li>
+        <li><strong>作者:</strong> StreamCons</li>
+        <li><strong>创建于
+                :</strong> 2024-05-16 19:00:00</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2024-05-18 23:58:18
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://aliveman6.github.io/2024/05/16/2024-05-16-关于使用Prometheus+Grafana监控构建我的hexo个人博客（一）/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/Prometheus/">#Prometheus</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/Grafana/">#Grafana</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/Docker/">#Docker</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2024/05/17/2024-05-17-%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8Prometheus+Grafana%E7%9B%91%E6%8E%A7%E6%9E%84%E5%BB%BA%E6%88%91%E7%9A%84hexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">关于使用Prometheus+Grafana监控构建我的hexo个人博客（二）</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2024/05/15/2024-05-15-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E7%BC%96%E7%A0%81/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">字符串和编码</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">关于使用Prometheus+Grafana监控构建我的hexo个人博客（一）</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%BC%95%E8%A8%80"><span class="nav-text">一、引言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85Docker"><span class="nav-text">1、安装Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E7%A7%BB%E9%99%A4%E6%97%A7%E7%89%88%E6%9C%AC%E7%9A%84Docker"><span class="nav-text">1、移除旧版本的Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85Docker-CE"><span class="nav-text">2、安装Docker CE</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E8%AE%BE%E7%BD%AEDocker%E4%BB%93%E5%BA%93"><span class="nav-text">1、设置Docker仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85Docker-CE-1"><span class="nav-text">2、安装Docker CE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E5%90%AF%E5%8A%A8Docker%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF"><span class="nav-text">3、启动Docker并设置开机自启</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E9%AA%8C%E8%AF%81%E5%AE%89%E8%A3%85"><span class="nav-text">3、验证安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E5%85%B3%E4%BA%8E%E5%9C%A8%E6%97%A7%E7%89%88%E6%9C%AC%E4%B8%ADDocker%E7%9A%84%E9%95%9C%E5%83%8F%E4%BB%A5%E5%8F%8A%E5%AE%B9%E5%99%A8%E9%97%AE%E9%A2%98"><span class="nav-text">4、关于在旧版本中Docker的镜像以及容器问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%A4%87%E4%BB%BDDocker%E6%95%B0%E6%8D%AE"><span class="nav-text">1、备份Docker数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85%E5%AE%8C%E4%B9%8B%E5%90%8E%E4%BD%BF%E7%94%A8cp%E5%91%BD%E4%BB%A4%E8%BF%98%E5%8E%9F%E6%95%B0%E6%8D%AE"><span class="nav-text">2、安装完之后使用cp命令还原数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E9%AA%8C%E8%AF%81Docker%E9%95%9C%E5%83%8F%E5%92%8C%E5%AE%B9%E5%99%A8%EF%BC%9A"><span class="nav-text">3、验证Docker镜像和容器：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E6%8B%89%E5%8E%BB%E6%89%80%E9%9C%80%E8%A6%81%E7%9A%84%E9%95%9C%E5%83%8F"><span class="nav-text">2、拉去所需要的镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="nav-text">1、拉取镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E6%8B%89%E5%8F%96%E6%88%90%E5%8A%9F"><span class="nav-text">2、验证是否拉取成功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%90%AF%E5%8A%A8%E6%89%80%E9%9C%80%E9%95%9C%E5%83%8F"><span class="nav-text">3、启动所需镜像</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81cAdvisor%E5%92%8CNode-exporter"><span class="nav-text">二、cAdvisor和Node_exporter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E5%8E%9F%E5%9B%A0"><span class="nav-text">选择原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">实际应用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-text">三、总结</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2024</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-sync fa-spin" style="--fa-animation-duration: 1.5s; color: #0DEDC4"></i>&nbsp;&nbsp;<a href="/">StreamCons</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 17 篇文章
+                    </span>
+                    
+                        <span>
+                            共 33.7k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.1</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+
+<script src="/js/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+    
+<script src="/js/libs/minimasonry.min.js"></script>
+
+    
+<script src="/js/plugins/masonry.js" type="module"></script>
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>

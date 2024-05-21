@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="StreamCons">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://aliveman6.github.io/2024/05/12/记一次我的博客迁移/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="本文旨在记录本博客的一次重大迁移过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次我的博客迁移">
+<meta property="og:url" content="https://aliveman6.github.io/2024/05/12/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本文旨在记录本博客的一次重大迁移过程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/2024-05-13_114708.png">
+<meta property="og:image" content="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/2024-05-12_021156.png">
+<meta property="og:image" content="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/2024-05-13_113038.png">
+<meta property="article:published_time" content="2024-05-12T11:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-13T04:00:05.078Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="博客迁移">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/2024-05-13_114708.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/ninja.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/ninja.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/ninja.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            记一次我的博客迁移 -
+        
+        X Blog
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+        <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    
+<script src="/js/libs/anime.min.js"></script>
+
+    <h1 class="ml13">
+        X Blog
+    </h1>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+
+        anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [100,0],
+                translateZ: 0,
+                opacity: [0,1],
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i
+            }).add({
+            targets: '.ml13 .letter',
+            translateY: [0,-100],
+            opacity: [1,0],
+            easing: "easeInExpo",
+            duration: 1200,
+            delay: (el, i) => 100 + 30 * i
+        });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            hidePreloaderAfterTimeout(1000); // Hide after 1000 milliseconds once the window has loaded
+        });
+
+        // Backup failsafe: Hide preloader after a maximum of 5000 milliseconds, regardless of the window load event
+        hidePreloaderAfterTimeout(5000);
+
+        function hidePreloaderAfterTimeout(delay) {
+            setTimeout(function () {
+                var preloader = document.querySelector('.preloader');
+                preloader.style.opacity = '0';
+                setTimeout(function () {
+                    preloader.style.display = 'none';
+                }, 200);
+            }, delay);
+        }
+    </script>
+</div>
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    <!--- Font Part-->
+    
+    
+    
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    
+
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"aliveman6.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"5rem","h2":"4rem","h3":"2.8rem","h4":"2.5rem","h5":"2.2rem","h6":"2rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":6,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap"},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/home_1.jpg","dark":"https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/dark_1.jpg"},"title":"这是一个没想好名字的标题","subtitle":{"text":["我 亦 无 他 , 惟 手 熟 尔 。"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/aliveman6","instagram":null,"zhihu":"https://www.zhihu.com/people/zhui-sha-zhe-hao-tian-ling","twitter":"https://twitter.com/Streamconsciou2","email":"1500937374@qq.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.1","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":40},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/index.html","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Links":{"icon":"fa-regular fa-link","submenus":{"Github":"https://github.com/aliveman6","Blog":"https://aliveman6.github.io","Tags":"/tags/","Photos":"/masonry/"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"right","first_item":"menu","announcement":"Debian，yyds!!","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2024/5/4 00:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":true};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+        
+<link rel="stylesheet" href="/fontawesome/sharp-solid.min.css">
+
+    
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Debian.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                X Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/index.html"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-link fa-fw"></i>
+                                    链接
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://github.com/aliveman6">
+                                                    GITHUB
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="https://aliveman6.github.io">
+                                                    BLOG
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/tags/">
+                                                    标签
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/masonry/">
+                                                    PHOTOS
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/index.html"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-Links"
+                        >
+                            <span>
+                                链接
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-Links">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://github.com/aliveman6">GITHUB</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="https://aliveman6.github.io">BLOG</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/tags/">标签</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/masonry/">PHOTOS</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">17</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">17</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">记一次我的博客迁移</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.png">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">StreamCons</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-05-12 19:00</span>
+        <span class="mobile">2024-05-12 19:00</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-13 12:05</span>
+            <span class="mobile">2024-05-13 12:05</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">博客迁移</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">博客迁移</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>3.3k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>16 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>最近打算购入一台云服务器和域名来迁移博客，遂记录一次迁移过程</p>
+<p>为什么迁移博客？</p>
+<p>答：因为之前用Github  pages的方式虽然方便，但是不易维护，而且访问有时会受限，最重要的一点是Github存储库中最大限制为100M，所以为了做一个完成度高的个人博客，打算以下面的架构进行对博客进行完善：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/2024-05-13_114708.png"
+                     
+                ></p>
+<p>现在因为时间问题，我只能先实现简单的前端Hexo，Docker部署环境，域名映射Nginx等要点。后续再将剩下的部分完善。</p>
+<h2 id="1、安装Git"><a href="#1、安装Git" class="headerlink" title="1、安装Git"></a>1、安装Git</h2><h3 id="Git安装过程"><a href="#Git安装过程" class="headerlink" title="Git安装过程"></a>Git安装过程</h3><div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">[root@SC /]# yum install git</span><br><span class="line">Loaded plugins: fastestmirror</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package git.x86_64 <span class="number">0</span>:<span class="number">1</span>.<span class="number">8</span>.<span class="number">3</span>.<span class="number">1</span>-<span class="number">25</span>.el7_9 will be installed</span><br><span class="line">--&gt; Processing Dependency: perl-Git = <span class="number">1</span>.<span class="number">8</span>.<span class="number">3</span>.<span class="number">1</span>-<span class="number">25</span>.el7_9 <span class="keyword">for</span> package: git-<span class="number">1</span>.<span class="number">8</span>.<span class="number">3</span>.<span class="number">1</span>-<span class="number">25</span>.el7_9.x86_64</span><br><span class="line">--&gt; Processing Dependency: perl(Term::ReadKey) <span class="keyword">for</span> package: git-<span class="number">1</span>.<span class="number">8</span>.<span class="number">3</span>.<span class="number">1</span>-<span class="number">25</span>.el7_9.x86_64</span><br><span class="line">--&gt; Processing Dependency: perl(Git) <span class="keyword">for</span> package: git-<span class="number">1</span>.<span class="number">8</span>.<span class="number">3</span>.<span class="number">1</span>-<span class="number">25</span>.el7_9.x86_64</span><br><span class="line">--&gt; Processing Dependency: perl(Error) <span class="keyword">for</span> package: git-<span class="number">1</span>.<span class="number">8</span>.<span class="number">3</span>.<span class="number">1</span>-<span class="number">25</span>.el7_9.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package perl-Error.noarch <span class="number">1</span>:<span class="number">0</span>.<span class="number">17020</span>-<span class="number">2</span>.el7 will be installed</span><br><span class="line">---&gt; Package perl-Git.noarch <span class="number">0</span>:<span class="number">1</span>.<span class="number">8</span>.<span class="number">3</span>.<span class="number">1</span>-<span class="number">25</span>.el7_9 will be installed</span><br><span class="line">---&gt; Package perl-TermReadKey.x86_64 <span class="number">0</span>:<span class="number">2</span>.<span class="number">30</span>-<span class="number">20</span>.el7 will be installed</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line"></span><br><span class="line">Dependencies Resolved</span><br><span class="line"></span><br><span class="line">===============================================================================================================================================================================</span><br><span class="line"> Package                                       Arch                                Version                                          Repository                            Size</span><br><span class="line">===============================================================================================================================================================================</span><br><span class="line"><span class="function">Installing:</span></span><br><span class="line"><span class="function"> <span class="title">git</span>                                           <span class="title">x86_64</span>                              1.8.3.1-25.<span class="title">el7_9</span>                                 <span class="title">updates</span>                              4.4 <span class="title">M</span></span></span><br><span class="line"><span class="function"><span class="title">Installing</span> <span class="title">for</span> <span class="title">dependencies</span>:</span></span><br><span class="line"><span class="function"> <span class="title">perl</span>-<span class="title">Error</span>                                    <span class="title">noarch</span>                              1:0.17020-2.<span class="title">el7</span>                                  <span class="title">base</span>                                  32 <span class="title">k</span></span></span><br><span class="line"><span class="function"> <span class="title">perl</span>-<span class="title">Git</span>                                      <span class="title">noarch</span>                              1.8.3.1-25.<span class="title">el7_9</span>                                 <span class="title">updates</span>                               56 <span class="title">k</span></span></span><br><span class="line"><span class="function"> <span class="title">perl</span>-<span class="title">TermReadKey</span>                              <span class="title">x86_64</span>                              2.30-20.<span class="title">el7</span>                                      <span class="title">base</span>                                  31 <span class="title">k</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Transaction</span> <span class="title">Summary</span></span></span><br><span class="line"><span class="function">===============================================================================================================================================================================</span></span><br><span class="line"><span class="function"><span class="title">Install</span>  1 <span class="title">Package</span> (+3 <span class="title">Dependent</span> <span class="title">packages</span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Total</span> <span class="title">download</span> <span class="title">size</span>: 4.5 <span class="title">M</span></span></span><br><span class="line"><span class="function"><span class="title">Installed</span> <span class="title">size</span>: 22 <span class="title">M</span></span></span><br><span class="line"><span class="function"><span class="title">Is</span> <span class="title">this</span> <span class="title">ok</span> [<span class="title">y</span>/<span class="title">d</span>/<span class="title">N</span>]: <span class="title">y</span></span></span><br><span class="line"><span class="function"><span class="title">Downloading</span> <span class="title">packages</span>:</span></span><br><span class="line"><span class="function">(1/4): <span class="title">perl</span>-<span class="title">TermReadKey</span>-2.30-20.<span class="title">el7.x86_64.rpm</span>                                                                                                          |  31 <span class="title">kB</span>  00:00:00     </span></span><br><span class="line"><span class="function">(2/4): <span class="title">perl</span>-<span class="title">Error</span>-0.17020-2.<span class="title">el7.noarch.rpm</span>                                                                                                              |  32 <span class="title">kB</span>  00:00:00     </span></span><br><span class="line"><span class="function">(3/4): <span class="title">perl</span>-<span class="title">Git</span>-1.8.3.1-25.<span class="title">el7_9.noarch.rpm</span>                                                                                                             |  56 <span class="title">kB</span>  00:00:00     </span></span><br><span class="line"><span class="function">(4/4): <span class="title">git</span>-1.8.3.1-25.<span class="title">el7_9.x86_64.rpm</span>                                                                                                                  | 4.4 <span class="title">MB</span>  00:00:00     </span></span><br><span class="line"><span class="function">-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span></span><br><span class="line"><span class="function"><span class="title">Total</span>                                                                                                                                           19 <span class="title">MB</span>/<span class="title">s</span> | 4.5 <span class="title">MB</span>  00:00:00     </span></span><br><span class="line"><span class="function"><span class="title">Running</span> <span class="title">transaction</span> <span class="title">check</span></span></span><br><span class="line"><span class="function"><span class="title">Running</span> <span class="title">transaction</span> <span class="title">test</span></span></span><br><span class="line"><span class="function"><span class="title">Transaction</span> <span class="title">test</span> <span class="title">succeeded</span></span></span><br><span class="line"><span class="function"><span class="title">Running</span> <span class="title">transaction</span></span></span><br><span class="line"><span class="function">  <span class="title">Installing</span> : 1:<span class="title">perl</span>-<span class="title">Error</span>-0.17020-2.<span class="title">el7.noarch</span>                                                                                                                           1/4 </span></span><br><span class="line"><span class="function">  <span class="title">Installing</span> : <span class="title">perl</span>-<span class="title">TermReadKey</span>-2.30-20.<span class="title">el7.x86_64</span>                                                                                                                         2/4 </span></span><br><span class="line"><span class="function">  <span class="title">Installing</span> : <span class="title">git</span>-1.8.3.1-25.<span class="title">el7_9.x86_64</span>                                                                                                                                 3/4 </span></span><br><span class="line"><span class="function">  <span class="title">Installing</span> : <span class="title">perl</span>-<span class="title">Git</span>-1.8.3.1-25.<span class="title">el7_9.noarch</span>                                                                                                                            4/4 </span></span><br><span class="line"><span class="function">  <span class="title">Verifying</span>  : 1:<span class="title">perl</span>-<span class="title">Error</span>-0.17020-2.<span class="title">el7.noarch</span>                                                                                                                           1/4 </span></span><br><span class="line"><span class="function">  <span class="title">Verifying</span>  : <span class="title">git</span>-1.8.3.1-25.<span class="title">el7_9.x86_64</span>                                                                                                                                 2/4 </span></span><br><span class="line"><span class="function">  <span class="title">Verifying</span>  : <span class="title">perl</span>-<span class="title">Git</span>-1.8.3.1-25.<span class="title">el7_9.noarch</span>                                                                                                                            3/4 </span></span><br><span class="line"><span class="function">  <span class="title">Verifying</span>  : <span class="title">perl</span>-<span class="title">TermReadKey</span>-2.30-20.<span class="title">el7.x86_64</span>                                                                                                                         4/4 </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Installed</span>:</span></span><br><span class="line"><span class="function">  <span class="title">git.x86_64</span> 0:1.8.3.1-25.<span class="title">el7_9</span>                                                                                                                                                </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Dependency</span> <span class="title">Installed</span>:</span></span><br><span class="line"><span class="function">  <span class="title">perl</span>-<span class="title">Error.noarch</span> 1:0.17020-2.<span class="title">el7</span>                       <span class="title">perl</span>-<span class="title">Git.noarch</span> 0:1.8.3.1-25.<span class="title">el7_9</span>                       <span class="title">perl</span>-<span class="title">TermReadKey.x86_64</span> 0:2.30-20.<span class="title">el7</span>                      </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Complete</span>!</span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="2、安装-Docker"><a href="#2、安装-Docker" class="headerlink" title="2、安装 Docker"></a>2、安装 Docker</h2><div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">##	通过 uname -r 命令查看我们当前的内核版本</span><br><span class="line">[root@SC /]# uname -r</span><br><span class="line"><span class="number">3</span>.<span class="number">10</span>.<span class="number">0</span>-<span class="number">1160</span>.<span class="number">114</span>.<span class="number">2</span>.el7.x86_64</span><br><span class="line"></span><br><span class="line">##	将yum包更新到最新</span><br><span class="line">[root@SC /]# yum update</span><br><span class="line">Loaded plugins: fastestmirror</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line">No packages marked <span class="keyword">for</span> update</span><br><span class="line"></span><br><span class="line">##	卸载旧版本（如果安装过旧版本的Docker包的话，我这里是没有安装过的）</span><br><span class="line">[root@SC /]# yum remove docker docker-common docker-selinux docker-engine</span><br><span class="line">Loaded plugins: fastestmirror</span><br><span class="line">No Match <span class="keyword">for</span> argument: docker</span><br><span class="line">No Match <span class="keyword">for</span> argument: docker-common</span><br><span class="line">No Match <span class="keyword">for</span> argument: docker-selinux</span><br><span class="line">No Match <span class="keyword">for</span> argument: docker-engine</span><br><span class="line">No Packages marked <span class="keyword">for</span> removal</span><br><span class="line"></span><br><span class="line">##	 安装需要的软件包，yum-util 提供 yum-config-manager 功能，另外两个是d evicemapper 驱动依赖的包</span><br><span class="line">[root@SC /]# yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line">..............（此处省略过程）</span><br><span class="line"></span><br><span class="line">======================================================================================================================================</span><br><span class="line"> Package                                                Arch                            Version                                       </span><br><span class="line">======================================================================================================================================</span><br><span class="line"><span class="function">Installing:</span></span><br><span class="line"><span class="function"> <span class="title">device</span>-<span class="title">mapper</span>-<span class="title">persistent</span>-<span class="title">data</span>                          <span class="title">x86_64</span>                          0.8.5-3.<span class="title">el7_9</span>.2                               </span></span><br><span class="line"><span class="function"> <span class="title">lvm2</span>                                                   <span class="title">x86_64</span>                          7:2.02.187-6.<span class="title">el7_9</span>.5                          </span></span><br><span class="line"><span class="function"><span class="title">Installing</span> <span class="title">for</span> <span class="title">dependencies</span>:</span></span><br><span class="line"><span class="function"> <span class="title">device</span>-<span class="title">mapper</span>-<span class="title">event</span>                                    <span class="title">x86_64</span>                          7:1.02.170-6.<span class="title">el7_9</span>.5                          </span></span><br><span class="line"><span class="function"> <span class="title">device</span>-<span class="title">mapper</span>-<span class="title">event</span>-<span class="title">libs</span>                               <span class="title">x86_64</span>                          7:1.02.170-6.<span class="title">el7_9</span>.5                          </span></span><br><span class="line"><span class="function"> <span class="title">libaio</span>                                                 <span class="title">x86_64</span>                          0.3.109-13.<span class="title">el7</span>                                </span></span><br><span class="line"><span class="function"> <span class="title">lvm2</span>-<span class="title">libs</span>                                              <span class="title">x86_64</span>                          7:2.02.187-6.<span class="title">el7_9</span>.5                          </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Transaction</span> <span class="title">Summary</span></span></span><br><span class="line"><span class="function">=====================================================================================================================================</span></span><br><span class="line"><span class="function">...............（此处省略过程）</span></span><br><span class="line"><span class="function"><span class="title">Complete</span>!</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">##	设置 <span class="title">yum</span> 源</span></span><br><span class="line"><span class="function"><span class="title">yum</span>-<span class="title">config</span>-<span class="title">manager</span> --<span class="title">add</span>-<span class="title">repo</span> <span class="title">https</span>://<span class="title">download.docker.com</span>/<span class="title">linux</span>/<span class="title">centos</span>/<span class="title">docker</span>-<span class="title">ce.repo</span></span></span><br><span class="line"><span class="function">[<span class="title">root</span>@<span class="title">SC</span> /]# <span class="title">yum</span>-<span class="title">config</span>-<span class="title">manager</span> --<span class="title">add</span>-<span class="title">repo</span> <span class="title">https</span>://<span class="title">download.docker.com</span>/<span class="title">linux</span>/<span class="title">centos</span>/<span class="title">docker</span>-<span class="title">ce.repo</span></span></span><br><span class="line"><span class="function"><span class="title">Loaded</span> <span class="title">plugins</span>: <span class="title">fastestmirror</span></span></span><br><span class="line"><span class="function"><span class="title">adding</span> <span class="title">repo</span> <span class="title">from</span>: <span class="title">https</span>://<span class="title">download.docker.com</span>/<span class="title">linux</span>/<span class="title">centos</span>/<span class="title">docker</span>-<span class="title">ce.repo</span></span></span><br><span class="line"><span class="function"><span class="title">grabbing</span> <span class="title">file</span> <span class="title">https</span>://<span class="title">download.docker.com</span>/<span class="title">linux</span>/<span class="title">centos</span>/<span class="title">docker</span>-<span class="title">ce.repo</span> <span class="title">to</span> /<span class="title">etc</span>/<span class="title">yum.repos.d</span>/<span class="title">docker</span>-<span class="title">ce.repo</span></span></span><br><span class="line"><span class="function"><span class="title">repo</span> <span class="title">saved</span> <span class="title">to</span> /<span class="title">etc</span>/<span class="title">yum.repos.d</span>/<span class="title">docker</span>-<span class="title">ce.repo</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">##	查看 <span class="title">docker</span> <span class="title">list</span>，根据自己的喜欢选择相应版本</span></span><br><span class="line"><span class="function">[<span class="title">root</span>@<span class="title">SC</span> /]# <span class="title">yum</span> <span class="title">list</span> <span class="title">docker</span>-<span class="title">ce</span> --<span class="title">showduplicates</span> | <span class="title">sort</span> -<span class="title">r</span></span></span><br><span class="line"><span class="function"><span class="title">Loading</span> <span class="title">mirror</span> <span class="title">speeds</span> <span class="title">from</span> <span class="title">cached</span> <span class="title">hostfile</span></span></span><br><span class="line"><span class="function"><span class="title">Loaded</span> <span class="title">plugins</span>: <span class="title">fastestmirror</span></span></span><br><span class="line"><span class="function"><span class="title">docker</span>-<span class="title">ce.x86_64</span>            3:26.1.2-1.<span class="title">el7</span>                      <span class="title">docker</span>-<span class="title">ce</span>-<span class="title">stable</span></span></span><br><span class="line"><span class="function"><span class="title">docker</span>-<span class="title">ce.x86_64</span>            3:26.1.1-1.<span class="title">el7</span>                      <span class="title">docker</span>-<span class="title">ce</span>-<span class="title">stable</span></span></span><br><span class="line"><span class="function"><span class="title">docker</span>-<span class="title">ce.x86_64</span>            3:26.1.0-1.<span class="title">el7</span>                      <span class="title">docker</span>-<span class="title">ce</span>-<span class="title">stable</span></span></span><br><span class="line"><span class="function"><span class="title">docker</span>-<span class="title">ce.x86_64</span>            3:26.0.2-1.<span class="title">el7</span>                      <span class="title">docker</span>-<span class="title">ce</span>-<span class="title">stable</span></span></span><br><span class="line"><span class="function"><span class="title">docker</span>-<span class="title">ce.x86_64</span>            3:26.0.1-1.<span class="title">el7</span>                      <span class="title">docker</span>-<span class="title">ce</span>-<span class="title">stable</span></span></span><br><span class="line"><span class="function"><span class="title">docker</span>-<span class="title">ce.x86_64</span>            3:26.0.0-1.<span class="title">el7</span>                      <span class="title">docker</span>-<span class="title">ce</span>-<span class="title">stable</span></span></span><br><span class="line"><span class="function"><span class="title">docker</span>-<span class="title">ce.x86_64</span>            3:25.0.5-1.<span class="title">el7</span>                      <span class="title">docker</span>-<span class="title">ce</span>-<span class="title">stable</span></span></span><br><span class="line"><span class="function"><span class="title">docker</span>-<span class="title">ce.x86_64</span>            3:25.0.4-1.<span class="title">el7</span>                      <span class="title">docker</span>-<span class="title">ce</span>-<span class="title">stable</span></span></span><br><span class="line"><span class="function"><span class="title">docker</span>-<span class="title">ce.x86_64</span>            3:25.0.3-1.<span class="title">el7</span>                      <span class="title">docker</span>-<span class="title">ce</span>-<span class="title">stable</span></span></span><br><span class="line"><span class="function"><span class="title">docker</span>-<span class="title">ce.x86_64</span>            3:25.0.2-1.<span class="title">el7</span>                      <span class="title">docker</span>-<span class="title">ce</span>-<span class="title">stable</span></span></span><br><span class="line"><span class="function"><span class="title">docker</span>-<span class="title">ce.x86_64</span>            3:25.0.1-1.<span class="title">el7</span>                      <span class="title">docker</span>-<span class="title">ce</span>-<span class="title">stable</span></span></span><br><span class="line"><span class="function"><span class="title">docker</span>-<span class="title">ce.x86_64</span>            3:25.0.0-1.<span class="title">el7</span>                      <span class="title">docker</span>-<span class="title">ce</span>-<span class="title">stable</span></span></span><br><span class="line"><span class="function">（可以根据自己的喜好选择相对应的版本，直接安装则是最新版本）</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">##	<span class="title">yum</span> <span class="title">install</span> -<span class="title">y</span> <span class="title">docker</span>-<span class="title">ce</span></span></span><br><span class="line"><span class="function">[<span class="title">root</span>@<span class="title">SC</span> /]# <span class="title">yum</span> <span class="title">install</span> <span class="title">docker</span>-<span class="title">ce</span></span></span><br><span class="line"><span class="function"><span class="title">Loaded</span> <span class="title">plugins</span>: <span class="title">fastestmirror</span></span></span><br><span class="line"><span class="function"><span class="title">Loading</span> <span class="title">mirror</span> <span class="title">speeds</span> <span class="title">from</span> <span class="title">cached</span> <span class="title">hostfile</span></span></span><br><span class="line"><span class="function"><span class="title">Resolving</span> <span class="title">Dependencies</span></span></span><br><span class="line"><span class="function">--&gt; <span class="title">Running</span> <span class="title">transaction</span> <span class="title">check</span></span></span><br><span class="line"><span class="function">---&gt; <span class="title">Package</span> <span class="title">docker</span>-<span class="title">ce.x86_64</span> 3:26.1.2-1.<span class="title">el7</span> <span class="title">will</span> <span class="title">be</span> <span class="title">installed</span></span></span><br><span class="line"><span class="function">.............</span></span><br><span class="line"><span class="function"><span class="title">Installed</span>:</span></span><br><span class="line"><span class="function">  <span class="title">docker</span>-<span class="title">ce.x86_64</span> 3:26.1.2-1.<span class="title">el7</span>   </span></span><br><span class="line"><span class="function">.............</span></span><br><span class="line"><span class="function"><span class="title">Complete</span>!</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">##	启动并加入开机自启动</span></span><br><span class="line"><span class="function">[<span class="title">root</span>@<span class="title">SC</span> /]# <span class="title">systemctl</span> <span class="title">start</span> <span class="title">docker</span></span></span><br><span class="line"><span class="function">[<span class="title">root</span>@<span class="title">SC</span> /]# <span class="title">systemctl</span> <span class="title">enable</span> <span class="title">docker</span></span></span><br><span class="line"><span class="function"><span class="title">Created</span> <span class="title">symlink</span> <span class="title">from</span> /<span class="title">etc</span>/<span class="title">systemd</span>/<span class="title">system</span>/<span class="title">multi</span>-<span class="title">user.target.wants</span>/<span class="title">docker.service</span> <span class="title">to</span> /<span class="title">usr</span>/<span class="title">lib</span>/<span class="title">systemd</span>/<span class="title">system</span>/<span class="title">docker.service</span>.</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">##	验证<span class="title">Docker</span>是否安装成功了（有<span class="title">Client</span>和<span class="title">service</span>两部分即代表成功了）</span></span><br><span class="line"><span class="function">[<span class="title">root</span>@<span class="title">SC</span> /]# <span class="title">docker</span> <span class="title">version</span></span></span><br><span class="line"><span class="function"><span class="title">Client</span>: <span class="title">Docker</span> <span class="title">Engine</span> - <span class="title">Community</span></span></span><br><span class="line"><span class="function"> <span class="title">Version</span>:           26.1.2</span></span><br><span class="line"><span class="function"> <span class="title">API</span> <span class="title">version</span>:       1.45</span></span><br><span class="line"><span class="function"> <span class="title">Go</span> <span class="title">version</span>:        <span class="title">go1</span>.21.10</span></span><br><span class="line"><span class="function"> <span class="title">Git</span> <span class="title">commit</span>:        211<span class="title">e74b</span></span></span><br><span class="line"><span class="function"> <span class="title">Built</span>:             <span class="title">Wed</span> <span class="title">May</span>  8 14:01:02 2024</span></span><br><span class="line"><span class="function"> <span class="title">OS</span>/<span class="title">Arch</span>:           <span class="title">linux</span>/<span class="title">amd64</span></span></span><br><span class="line"><span class="function"> <span class="title">Context</span>:           <span class="title">default</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Server</span>: <span class="title">Docker</span> <span class="title">Engine</span> - <span class="title">Community</span></span></span><br><span class="line"><span class="function"> <span class="title">Engine</span>:</span></span><br><span class="line"><span class="function">  <span class="title">Version</span>:          26.1.2</span></span><br><span class="line"><span class="function">  <span class="title">API</span> <span class="title">version</span>:      1.45 (<span class="title">minimum</span> <span class="title">version</span> 1.24)</span></span><br><span class="line"><span class="function">  <span class="title">Go</span> <span class="title">version</span>:       <span class="title">go1</span>.21.10</span></span><br><span class="line"><span class="function">  <span class="title">Git</span> <span class="title">commit</span>:       <span class="title">qewlkfdnkqeiw1234141cdaqef</span></span></span><br><span class="line"><span class="function">  <span class="title">Built</span>:            <span class="title">Wed</span> <span class="title">May</span>  8 13:59:55 2024</span></span><br><span class="line"><span class="function">  <span class="title">OS</span>/<span class="title">Arch</span>:          <span class="title">linux</span>/<span class="title">amd64</span></span></span><br><span class="line"><span class="function">  <span class="title">Experimental</span>:     <span class="title">false</span></span></span><br><span class="line"><span class="function"> <span class="title">containerd</span>:</span></span><br><span class="line"><span class="function">  <span class="title">Version</span>:          1.6.31</span></span><br><span class="line"><span class="function">  <span class="title">GitCommit</span>:        <span class="title">Sdqwdqwd124312341dedw</span></span></span><br><span class="line"><span class="function"> <span class="title">runc</span>:</span></span><br><span class="line"><span class="function">  <span class="title">Version</span>:          1.1.12</span></span><br><span class="line"><span class="function">  <span class="title">GitCommit</span>:        <span class="title">v1</span>.1.12-0-23<span class="title">sjhdqw</span></span></span><br><span class="line"><span class="function"> <span class="title">docker</span>-<span class="title">init</span>:</span></span><br><span class="line"><span class="function">  <span class="title">Version</span>:          0.19.0</span></span><br><span class="line"><span class="function">  <span class="title">GitCommit</span>:        <span class="title">qwdnqwoidj</span></span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure></div>
+
+<p>​	由于国内网络的问题，我们在Docker上拉取镜像会非常慢，所以我们需要配置加速器来解决，我选择的是网易的Docker镜像源地址：<code>https://hub-mirror.c.163.com</code></p>
+
+  <div class="note-large red">
+    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
+      <p>注意</p>
+
+    </div>
+    <div class="notel-content">
+      <p>我们的新版Docker是使用的<code>/etc/docker/daemon.json</code>配置Daemon<br>我们需要在该配置文件中加入<strong>（如果没有我们需要自己新建一个）</strong></p>
+
+    </div>
+  </div>
+
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@SC /]# vim /etc/docker/daemon.json</span><br><span class="line">[root@SC /]# cat /etc/docker/daemon.json </span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;registry-mirrors&quot;: [&quot;http://hub-mirror.c.163.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line">##	最后刷新配置并重启Docker</span><br><span class="line">[root@SC /]# systemctl daemon-reload</span><br><span class="line">[root@SC /]# systemctl restart docker.service </span><br></pre></td></tr></table></figure></div>
+
+<h2 id="3、Github配置更改"><a href="#3、Github配置更改" class="headerlink" title="3、Github配置更改"></a>3、Github配置更改</h2><p>首先，在服务器上生成一个ssh key</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">##	&quot;your_email@example.com&quot;就是你的Github邮箱</span><br><span class="line">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</span><br><span class="line">##	此时会让你做三个选择：</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/root/.ssh/id_rsa): </span><br><span class="line">Enter passphrase (empty for no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">##	第一个意思就是生成的ssh文件保存在/root/.ssh/id_rsa目录下，第二个选项的意思是是否设置密码，第三个选项的意思是确认密码，你也可以不设置，这样可以直接不需要密码连接，但这种做法非常的不安全。。</span><br><span class="line"></span><br><span class="line">##	然后登陆上你的Github账户后点击“Settings”-&gt;“SSH and GPG keys”—&gt;“New SSH key”—&gt;title随便取，Key type选择Authentication Key，Key填写在云服务器上你保存的路径，像文中保存的是/root/.ssh/id_rsa下的id_rsa.pub文件里的内容。</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="4、Clone-Git库"><a href="#4、Clone-Git库" class="headerlink" title="4、Clone Git库"></a>4、Clone Git库</h2><p>现在我们可以在服务器上直接克隆下来，克隆的库是我们在Github新创建的库</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@SC /]# mkdir usr/Blog		##创建一个存放克隆下的Git库的文件夹</span><br><span class="line">[root@SC /]# cd usr/Blog/		##进入到目录下</span><br><span class="line">##	这里直接使用git clone命令，然后直接去Github项目里面复制ssh的克隆命令</span><br><span class="line">[root@SC MyBlog]# git clone git@github.com:example/example.git</span><br><span class="line">...........</span><br><span class="line">Receiving objects: 100% (835/835), 14.24 MiB | 3.51 MiB/s, done.</span><br><span class="line">Resolving deltas: 100% (332/332), done.</span><br></pre></td></tr></table></figure></div>
+
+<p>至此，Git的准备工作就结束了。</p>
+<h2 id="5、创建Dockerfile并创建容器"><a href="#5、创建Dockerfile并创建容器" class="headerlink" title="5、创建Dockerfile并创建容器"></a>5、创建Dockerfile并创建容器</h2><p>Dockerfile是Docker镜像的描述文件，我们可以通过编写Dockerfile文件就可以配置我们想要的Docker镜像。</p>
+<p>在服务器中的某个目录下，比如~&#x2F;dockerfile&#x2F;中，我们可以创建一个Dockerfile文件：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@SC /]# touch dockerfile/Dockerfile</span><br><span class="line">[root@SC /]# vim dockerfile/Dockerfile </span><br><span class="line">[root@SC /]# cat dockerfile/Dockerfile </span><br><span class="line">###############</span><br><span class="line">FROM node:latest</span><br><span class="line">MAINTAINER Martin &lt;a1500937374@gmail.com&gt;</span><br><span class="line">RUN npm install</span><br><span class="line"># install hexo</span><br><span class="line">RUN npm install hexo-cli -g</span><br><span class="line"># set home dir</span><br><span class="line">WORKDIR /usr/MyBlog/aliveman6.github.io</span><br><span class="line">###############</span><br></pre></td></tr></table></figure></div>
+
+<p>然后我们执行Dockerfile文件，创建我们的Hexo镜像：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">##	最后的这个/dockfile/就是我们在上面存放Dockfile的文件夹</span><br><span class="line">docker build -t hexo-image /dockfile/</span><br><span class="line"></span><br><span class="line">##	成功后它在Shell会提示成功，而且结果也不会有报错，有error会自动停止。</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>创建Docker容器：</p>
+<div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 创建名叫 hexo-blog 的 docker 容器</span><br><span class="line">docker run -itd -p <span class="number">4000</span>:<span class="number">4000</span> -v /usr/Blog/Myblog:/usr/Blog --name hexo-blog hexo-image</span><br><span class="line"></span><br><span class="line">##解释：<span class="number">4000</span>是Hexo默认的端口，-v后的第一个“/usr/Blog/Myblog”指的是我们在Github上克隆下来的库，因为我们在Clone库之后会在原有的文件夹Blog生成一个克隆下来的库名，第二个“/usr/Blog”指的是我们需要存放的Hexo初始化后的文件目录，--name后的“hexo-blog”指的是Docker容器的名称，“hexo-image”指的是刚刚构建的Hexo镜像</span><br><span class="line"></span><br><span class="line">##	检查Docker镜像是否创建成功</span><br><span class="line">[root@SC ~]# docker images</span><br><span class="line">REPOSITORY   TAG       IMAGE ID       CREATED          SIZE</span><br><span class="line">hexo-image   latest    b5ed4f5c8f77   <span class="number">37</span> minutes ago   <span class="number">1</span>.<span class="number">13</span>GB</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##	检查Docker容器是否创建成功</span><br><span class="line">[root@SC ~]# docker ps -a</span><br><span class="line">CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS          PORTS                                       NAMES</span><br><span class="line"><span class="number">57209</span>ce9586e   hexo-image   &quot;docker-entrypoint.s…&quot;   <span class="number">32</span> minutes ago   Up <span class="number">11</span> minutes   <span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>:<span class="number">4000</span>-&gt;<span class="number">4000</span>/tcp, :::<span class="number">4000</span>-&gt;<span class="number">4000</span>/tcp   hexo-blog</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>至此Docker容器已创建成功。</p>
+<h2 id="6、初始化Hexo"><a href="#6、初始化Hexo" class="headerlink" title="6、初始化Hexo"></a>6、初始化Hexo</h2><p>进入Docker容器</p>
+<div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it hexo-blog /bin/bash</span><br><span class="line"></span><br><span class="line">##	接下来我们直接安装hexo-server、hexo hexo-deployer-git组件</span><br><span class="line"><span class="function">root@57209ce9586e:/<span class="title">usr</span>/<span class="title">MyBlog</span># <span class="title">npm</span> <span class="title">install</span> <span class="title">hexo</span>-<span class="title">server</span></span></span><br><span class="line"><span class="function"><span class="title">root</span>@57209<span class="title">ce9586e</span>:/<span class="title">usr</span>/<span class="title">MyBlog</span># <span class="title">npm</span> <span class="title">install</span> <span class="title">hexo</span>-<span class="title">deployer</span>-<span class="title">git</span> --<span class="title">save</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">##	接下来我们开始初始化</span></span><br><span class="line"><span class="function"><span class="title">root</span>@57209<span class="title">ce9586e</span>:/<span class="title">usr</span>/<span class="title">MyBlog</span># <span class="title">hexo</span> <span class="title">init</span></span></span><br><span class="line"><span class="function"><span class="title">root</span>@57209<span class="title">ce9586e</span>:/<span class="title">usr</span>/<span class="title">MyBlog</span># <span class="title">ls</span></span></span><br><span class="line"><span class="function"><span class="title">_config.landscape.yml</span>  <span class="title">_config.yml</span>  <span class="title">db.json</span>  <span class="title">node_modules</span>  <span class="title">package.json</span>  <span class="title">scaffolds</span>  <span class="title">source</span>  <span class="title">themes</span>  <span class="title">yarn.lock</span></span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure></div>
+
+<p>可以看到，我们初始化出了hexo的文件。</p>
+<p>最后使用<code>hexo s</code>（s代表server）命令查看是否能使用<code>域名:4000</code>这样的形式获取Hexo初始界面。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/2024-05-12_021156.png"
+                     
+                ></p>
+<h2 id="7、恢复Hexo博客环境"><a href="#7、恢复Hexo博客环境" class="headerlink" title="7、恢复Hexo博客环境"></a>7、恢复Hexo博客环境</h2><p>接下来我们需要按照之前的步骤进行安装Redefine主题，具体步骤可以参考之前写过的文章</p>
+<p>点击此处跳转</p>
+<h2 id="8、使用Nginx进行映射"><a href="#8、使用Nginx进行映射" class="headerlink" title="8、使用Nginx进行映射"></a>8、使用Nginx进行映射</h2><p>有关Nginx在linux下的安装方法可以参考<strong>这篇文章</strong><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/Colton_Null/article/details/78513268" >Linux系统安装Nginx的方法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>下面是我自己参考文章后的安装过程：</p>
+<div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">##	安装所需环境</span><br><span class="line">yum -y install make zlib zlib-devel gcc-c++ libtool  openssl openssl-devel</span><br><span class="line"></span><br><span class="line">##	下载pcre</span><br><span class="line"><span class="function">root@57209ce9586e:/<span class="title">usr</span>/<span class="title">MyBlog</span># <span class="title">wget</span> <span class="title">https</span>://<span class="title">sourceforge.net</span>/<span class="title">projects</span>/<span class="title">pcre</span>/<span class="title">files</span>/<span class="title">pcre</span>/8.45/<span class="title">pcre</span>-8.45.<span class="title">tar.gz</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">##	解压后安装并编译<span class="title">pcre</span></span></span><br><span class="line"><span class="function"><span class="title">cd</span> <span class="title">pcre</span>-8.45</span></span><br><span class="line"><span class="function">./<span class="title">configure</span></span></span><br><span class="line"><span class="function"><span class="title">make</span> &amp;&amp; <span class="title">make</span> <span class="title">install</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">##	下载<span class="title">Nginx</span></span></span><br><span class="line"><span class="function"><span class="title">root</span>@57209<span class="title">ce9586e</span>:/<span class="title">opt</span># <span class="title">wget</span> <span class="title">http</span>://<span class="title">nginx.org</span>/<span class="title">download</span>/<span class="title">nginx</span>-1.13.6.<span class="title">tar.gz</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">##	解压后安装并编译<span class="title">Nginx</span>，需要注意的是在--<span class="title">with</span>-<span class="title">pcre</span>这个选项后的<span class="title">pcre</span>目录需要是你<span class="title">pcre</span>的安装目录</span></span><br><span class="line"><span class="function"><span class="title">root</span>@57209<span class="title">ce9586e</span>:/<span class="title">opt</span>/<span class="title">nginx</span>-1.13.6# ./<span class="title">configure</span> --<span class="title">prefix</span>=/<span class="title">usr</span>/<span class="title">local</span>/<span class="title">nginx</span> --<span class="title">with</span>-<span class="title">http_stub_status_module</span> --<span class="title">with</span>-<span class="title">http_ssl_module</span> --<span class="title">with</span>-<span class="title">pcre</span>=/<span class="title">opt</span>/<span class="title">pcre</span>-8.45</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Configuration</span> <span class="title">summary</span></span></span><br><span class="line"><span class="function">  + <span class="title">using</span> <span class="title">PCRE</span> <span class="title">library</span>: /<span class="title">opt</span>/<span class="title">pcre</span>-8.45</span></span><br><span class="line"><span class="function">  + <span class="title">using</span> <span class="title">system</span> <span class="title">OpenSSL</span> <span class="title">library</span></span></span><br><span class="line"><span class="function">  + <span class="title">using</span> <span class="title">system</span> <span class="title">zlib</span> <span class="title">library</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">  <span class="title">nginx</span> <span class="title">path</span> <span class="title">prefix</span>: &quot;/<span class="title">usr</span>/<span class="title">local</span>/<span class="title">nginx</span>&quot;</span></span><br><span class="line"><span class="function">  <span class="title">nginx</span> <span class="title">binary</span> <span class="title">file</span>: &quot;/<span class="title">usr</span>/<span class="title">local</span>/<span class="title">nginx</span>/<span class="title">sbin</span>/<span class="title">nginx</span>&quot;</span></span><br><span class="line"><span class="function">  <span class="title">nginx</span> <span class="title">modules</span> <span class="title">path</span>: &quot;/<span class="title">usr</span>/<span class="title">local</span>/<span class="title">nginx</span>/<span class="title">modules</span>&quot;</span></span><br><span class="line"><span class="function">  <span class="title">nginx</span> <span class="title">configuration</span> <span class="title">prefix</span>: &quot;/<span class="title">usr</span>/<span class="title">local</span>/<span class="title">nginx</span>/<span class="title">conf</span>&quot;</span></span><br><span class="line"><span class="function">  <span class="title">nginx</span> <span class="title">configuration</span> <span class="title">file</span>: &quot;/<span class="title">usr</span>/<span class="title">local</span>/<span class="title">nginx</span>/<span class="title">conf</span>/<span class="title">nginx.conf</span>&quot;</span></span><br><span class="line"><span class="function">  <span class="title">nginx</span> <span class="title">pid</span> <span class="title">file</span>: &quot;/<span class="title">usr</span>/<span class="title">local</span>/<span class="title">nginx</span>/<span class="title">logs</span>/<span class="title">nginx.pid</span>&quot;</span></span><br><span class="line"><span class="function">  <span class="title">nginx</span> <span class="title">error</span> <span class="title">log</span> <span class="title">file</span>: &quot;/<span class="title">usr</span>/<span class="title">local</span>/<span class="title">nginx</span>/<span class="title">logs</span>/<span class="title">error.log</span>&quot;</span></span><br><span class="line"><span class="function">  <span class="title">nginx</span> <span class="title">http</span> <span class="title">access</span> <span class="title">log</span> <span class="title">file</span>: &quot;/<span class="title">usr</span>/<span class="title">local</span>/<span class="title">nginx</span>/<span class="title">logs</span>/<span class="title">access.log</span>&quot;</span></span><br><span class="line"><span class="function">  <span class="title">nginx</span> <span class="title">http</span> <span class="title">client</span> <span class="title">request</span> <span class="title">body</span> <span class="title">temporary</span> <span class="title">files</span>: &quot;<span class="title">client_body_temp</span>&quot;</span></span><br><span class="line"><span class="function">  <span class="title">nginx</span> <span class="title">http</span> <span class="title">proxy</span> <span class="title">temporary</span> <span class="title">files</span>: &quot;<span class="title">proxy_temp</span>&quot;</span></span><br><span class="line"><span class="function">  <span class="title">nginx</span> <span class="title">http</span> <span class="title">fastcgi</span> <span class="title">temporary</span> <span class="title">files</span>: &quot;<span class="title">fastcgi_temp</span>&quot;</span></span><br><span class="line"><span class="function">  <span class="title">nginx</span> <span class="title">http</span> <span class="title">uwsgi</span> <span class="title">temporary</span> <span class="title">files</span>: &quot;<span class="title">uwsgi_temp</span>&quot;</span></span><br><span class="line"><span class="function">  <span class="title">nginx</span> <span class="title">http</span> <span class="title">scgi</span> <span class="title">temporary</span> <span class="title">files</span>: &quot;<span class="title">scgi_temp</span>&quot;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">root</span>@57209<span class="title">ce9586e</span>:/<span class="title">opt</span>/<span class="title">nginx</span>-1.13.6# <span class="title">make</span></span></span><br><span class="line"><span class="function"><span class="title">root</span>@57209<span class="title">ce9586e</span>:/<span class="title">opt</span>/<span class="title">nginx</span>-1.13.6# <span class="title">make</span> <span class="title">install</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">##	成功后我们进入&quot;/<span class="title">usr</span>/<span class="title">local</span>/<span class="title">nginx</span>/<span class="title">sbin</span>/&quot;下使用&quot;./<span class="title">Nginx</span>&quot;命令启动</span></span><br><span class="line"><span class="function">[<span class="title">root</span>@<span class="title">SC</span> <span class="title">sbin</span>]# ./<span class="title">nginx</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">##	然后使用<span class="title">ps</span> -<span class="title">ef</span> | <span class="title">grep</span> &quot;<span class="title">Nginx</span>&quot;命令查看<span class="title">Nginx</span>是否可开启成功</span></span><br><span class="line"><span class="function">[<span class="title">root</span>@<span class="title">SC</span> <span class="title">sbin</span>]# <span class="title">ps</span> -<span class="title">ef</span> | <span class="title">grep</span> &quot;<span class="title">nginx</span>&quot;</span></span><br><span class="line"><span class="function"><span class="title">root</span>     30017     1  0 12:22 ?        00:00:00 <span class="title">nginx</span>: <span class="title">master</span> <span class="title">process</span> ./<span class="title">nginx</span></span></span><br><span class="line"><span class="function"><span class="title">nobody</span>   30018 30017  0 12:22 ?        00:00:00 <span class="title">nginx</span>: <span class="title">worker</span> <span class="title">process</span></span></span><br><span class="line"><span class="function"><span class="title">root</span>     30021  8788  0 12:22 <span class="title">pts</span>/0    00:00:00 <span class="title">grep</span> --<span class="title">color</span>=<span class="title">auto</span> <span class="title">nginx</span></span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure></div>
+
+<p>安装Nginx后我们需要进行在<code>/usr/local/nginx/conf/nginx.conf</code>路径下配置<code>nginx.conf</code>文件：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">##	找到下面的这个server项，然后listen指的是我们需要让Nginx监听哪个端口，server_name可以设置为已有的域名或者云服务器IP地址</span><br><span class="line">   server &#123;</span><br><span class="line">        listen       4000;				##	hexo默认运行端口为4000</span><br><span class="line">        server_name  www.streamcons.love;</span><br><span class="line"></span><br><span class="line">        #charset koi8-r;</span><br><span class="line"></span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">##	这里的root位置需要填写的是你的云服务器主机下个人博客的public文件夹路径（如果是在Docker下装的Nginx，则需要对应的是Docker镜像下的public文件夹路径），而public文件夹是在我们常规的执行hexo server命令后，会生成一个public目录，这个public目录下的所有静态文件都是网站上线后所需的资源文件，同时也是github仓库上存储的文件。</span><br><span class="line">##	index位置填写的是我们指定Nginx访问的主页</span><br><span class="line">        location / &#123;</span><br><span class="line">            root   /usr/MyBlog/MyBlog/Index/public;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">##	最后我们在Nginx的sbin目录中执行下面这个命令，重新加载Nginx配置就大功告成了</span><br><span class="line">[root@SC sbin]# ./nginx -s reload</span><br></pre></td></tr></table></figure></div>
+
+
+
+<h2 id="9、关于域名DNS解析与ICP备案"><a href="#9、关于域名DNS解析与ICP备案" class="headerlink" title="9、关于域名DNS解析与ICP备案"></a>9、关于域名DNS解析与ICP备案</h2><p>因为我买的是阿里云的云服务器，所以我同时也在阿里云上购买了域名，我们需要在云服务器ECS上的云服务器管理控制台上找到”<strong>ICP备案</strong>“一项，将域名按要求进行实名认证（过程略微繁琐，不过如今的网络世界也都应该实名上网），然后等待备案通过就可以直接输入域名访问我们的个人博客了。</p>
+<h2 id="10、最终效果"><a href="#10、最终效果" class="headerlink" title="10、最终效果"></a>10、最终效果</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/2024-05-13_113038.png"
+                     
+                ></p>
+<p>迁移完成。</p>
+<p>参考文章：<a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/Colton_Null/article/details/93805908" >https://blog.csdn.net/Colton_Null/article/details/93805908 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 记一次我的博客迁移</li>
+        <li><strong>作者:</strong> StreamCons</li>
+        <li><strong>创建于
+                :</strong> 2024-05-12 19:00:00</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2024-05-13 12:00:05
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://aliveman6.github.io/2024/05/12/记一次我的博客迁移/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">#博客迁移</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2024/05/13/2024-05-13-%E5%85%B3%E4%BA%8E%E6%88%91%E5%9C%A8%E5%8D%9A%E5%AE%A2%E4%B8%8A%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0%E7%9A%84%E7%AE%80%E5%8C%96%E6%95%99%E7%A8%8B/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">关于我在博客上发布文章的简化教程</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2024/05/11/hello-world/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Hello World</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">记一次我的博客迁移</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-text">引言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85Git"><span class="nav-text">1、安装Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B"><span class="nav-text">Git安装过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85-Docker"><span class="nav-text">2、安装 Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81Github%E9%85%8D%E7%BD%AE%E6%9B%B4%E6%94%B9"><span class="nav-text">3、Github配置更改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81Clone-Git%E5%BA%93"><span class="nav-text">4、Clone Git库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E5%88%9B%E5%BB%BADockerfile%E5%B9%B6%E5%88%9B%E5%BB%BA%E5%AE%B9%E5%99%A8"><span class="nav-text">5、创建Dockerfile并创建容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96Hexo"><span class="nav-text">6、初始化Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E6%81%A2%E5%A4%8DHexo%E5%8D%9A%E5%AE%A2%E7%8E%AF%E5%A2%83"><span class="nav-text">7、恢复Hexo博客环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81%E4%BD%BF%E7%94%A8Nginx%E8%BF%9B%E8%A1%8C%E6%98%A0%E5%B0%84"><span class="nav-text">8、使用Nginx进行映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9%E3%80%81%E5%85%B3%E4%BA%8E%E5%9F%9F%E5%90%8DDNS%E8%A7%A3%E6%9E%90%E4%B8%8EICP%E5%A4%87%E6%A1%88"><span class="nav-text">9、关于域名DNS解析与ICP备案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C"><span class="nav-text">10、最终效果</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2024</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-sync fa-spin" style="--fa-animation-duration: 1.5s; color: #0DEDC4"></i>&nbsp;&nbsp;<a href="/">StreamCons</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 17 篇文章
+                    </span>
+                    
+                        <span>
+                            共 33.7k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.1</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+
+<script src="/js/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+    
+<script src="/js/libs/minimasonry.min.js"></script>
+
+    
+<script src="/js/plugins/masonry.js" type="module"></script>
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>

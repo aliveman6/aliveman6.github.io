@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="StreamCons">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://aliveman6.github.io/2024/05/14/2024-05-14-linux系统学习笔记（一）/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="本文旨在记录Linux系统下各个文件的作用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统学习笔记（一）">
+<meta property="og:url" content="https://aliveman6.github.io/2024/05/14/2024-05-14-Linux%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本文旨在记录Linux系统下各个文件的作用。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-14T13:34:00.000Z">
+<meta property="article:modified_time" content="2024-05-14T15:57:40.858Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/ninja.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/ninja.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/ninja.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Linux系统学习笔记（一） -
+        
+        X Blog
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+        <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    
+<script src="/js/libs/anime.min.js"></script>
+
+    <h1 class="ml13">
+        X Blog
+    </h1>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+
+        anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [100,0],
+                translateZ: 0,
+                opacity: [0,1],
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i
+            }).add({
+            targets: '.ml13 .letter',
+            translateY: [0,-100],
+            opacity: [1,0],
+            easing: "easeInExpo",
+            duration: 1200,
+            delay: (el, i) => 100 + 30 * i
+        });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            hidePreloaderAfterTimeout(1000); // Hide after 1000 milliseconds once the window has loaded
+        });
+
+        // Backup failsafe: Hide preloader after a maximum of 5000 milliseconds, regardless of the window load event
+        hidePreloaderAfterTimeout(5000);
+
+        function hidePreloaderAfterTimeout(delay) {
+            setTimeout(function () {
+                var preloader = document.querySelector('.preloader');
+                preloader.style.opacity = '0';
+                setTimeout(function () {
+                    preloader.style.display = 'none';
+                }, 200);
+            }, delay);
+        }
+    </script>
+</div>
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    <!--- Font Part-->
+    
+    
+    
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    
+
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"aliveman6.github.io","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"5rem","h2":"4rem","h3":"2.8rem","h4":"2.5rem","h5":"2.2rem","h6":"2rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":6,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap"},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/home_1.jpg","dark":"https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/dark_1.jpg"},"title":"这是一个没想好名字的标题","subtitle":{"text":["我 亦 无 他 , 惟 手 熟 尔 。"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/aliveman6","instagram":null,"zhihu":"https://www.zhihu.com/people/zhui-sha-zhe-hao-tian-ling","twitter":"https://twitter.com/Streamconsciou2","email":"1500937374@qq.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.1","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":40},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/index.html","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Links":{"icon":"fa-regular fa-link","submenus":{"Github":"https://github.com/aliveman6","Blog":"https://aliveman6.github.io","Tags":"/tags/","Photos":"/masonry/"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"right","first_item":"menu","announcement":"Debian，yyds!!","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2024/5/4 00:00:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":true};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+        
+<link rel="stylesheet" href="/fontawesome/sharp-solid.min.css">
+
+    
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/Debian.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                X Blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/index.html"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-link fa-fw"></i>
+                                    链接
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://github.com/aliveman6">
+                                                    GITHUB
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="https://aliveman6.github.io">
+                                                    BLOG
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/tags/">
+                                                    标签
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/masonry/">
+                                                    PHOTOS
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/index.html"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-Links"
+                        >
+                            <span>
+                                链接
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-Links">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://github.com/aliveman6">GITHUB</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="https://aliveman6.github.io">BLOG</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/tags/">标签</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/masonry/">PHOTOS</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">17</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">17</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">Linux系统学习笔记（一）</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="https://streamcons.oss-cn-guangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.png">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">StreamCons</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-05-14 21:34</span>
+        <span class="mobile">2024-05-14 21:34</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-14 23:57:40</span>
+            <span class="mobile">2024-05-14 23:57:40</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/Linux/">Linux</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Linux/">Linux</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>3.3k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>12 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <h1 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h1><p>​	今天在梳理linux系统下的文件目录时发现了一篇很好的文章，遂打算记录下来文章的内容顺便写写自己的一些理解。</p>
+<h2 id="1、Tree命令"><a href="#1、Tree命令" class="headerlink" title="1、Tree命令"></a>1、Tree命令</h2><p>首先我们要更直观的了解linux下的文件目录，我们需要先安装一些工具，比如<code>tree</code>，下面是每个系统安装<code>tree</code>命令的方式：</p>
+<p>在Ubuntu或者Debian下：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install tree</span><br></pre></td></tr></table></figure></div>
+
+<p>在Red hat或者Fedora下：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf install tree</span><br></pre></td></tr></table></figure></div>
+
+<p>在Arch下：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S tree</span><br></pre></td></tr></table></figure></div>
+
+<p>在Centos下：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install tree</span><br></pre></td></tr></table></figure></div>
+
+<p>安装好后，我们在终端窗口运行<code>tree</code>命令：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tree /</span><br></pre></td></tr></table></figure></div>
+
+<p>上面的指令中，&#x2F;指的是根目录，系统中的其他目录都是从我们的根目录下的，当我们运行tree命令，并从它从根目录，我们可以看到整个目录树，系统中的所有目录以及子目录，还有它们的文件。</p>
+<p>但在我们的centos上执行这条命令，它会把整个根目录下的文件都打印出来，所以我们需要开始输入筛选命令。</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">tree -L 1 /</span><br><span class="line">[root@localhost x]<span class="comment"># tree -L 1 /</span></span><br><span class="line">/</span><br><span class="line">├── bin -&gt; usr/bin</span><br><span class="line">├── boot</span><br><span class="line">├── dev</span><br><span class="line">├── etc</span><br><span class="line">├── home</span><br><span class="line">├── lib -&gt; usr/lib</span><br><span class="line">├── lib64 -&gt; usr/lib64</span><br><span class="line">├── media</span><br><span class="line">├── mnt</span><br><span class="line">├── opt</span><br><span class="line">├── proc</span><br><span class="line">├── root</span><br><span class="line">├── run</span><br><span class="line">├── sbin -&gt; usr/sbin</span><br><span class="line">├── srv</span><br><span class="line">├── sys</span><br><span class="line">├── tmp</span><br><span class="line">├── usr</span><br><span class="line">└── var</span><br></pre></td></tr></table></figure></div>
+
+<p>上面的指令指的是：只显示<code>/</code>（根目录）开头的目录树的第一级。<code>-L</code>选项告诉树你想看到多少层目录。</p>
+<h2 id="2、目录详解"><a href="#2、目录详解" class="headerlink" title="2、目录详解"></a>2、目录详解</h2><h3 id=""><a href="#" class="headerlink" title="&#x2F;"></a>&#x2F;</h3><p>根目录，位于Linux文件系统目录结构的顶层，一般根目录下只存放目录。</p>
+<h3 id="bin"><a href="#bin" class="headerlink" title="&#x2F;bin"></a>&#x2F;bin</h3><p><code>/bin</code>目录是包含一些二进制文件的目录，同时包含了供系统管理员及普通用户使用的重要linux命令和二进制（可执行）文件，包含shell解释器等。</p>
+<h3 id="boot"><a href="#boot" class="headerlink" title="&#x2F;boot"></a>&#x2F;boot</h3><p><code>/boot</code>目录包含着启动系统所需的文件。它包含了Linux内核，最初的RAM磁盘镜像，以及启动加载程序。常用的文件譬如<code>/boot/grub/grub.conf</code>或<code>menu.lst</code>等就是用来配置启动加载程序；<code>/boot/vmlinuz</code>为linux的内核文件，一般都是单独分区，分区大小为200M即可。</p>
+<h3 id="dev"><a href="#dev" class="headerlink" title="&#x2F;dev"></a>&#x2F;dev</h3><p><code>/dev</code>目录存放Linux下的设备文件。其中的许多是在启动时或者是在运行时生成的。例如将新的网络摄像头或USB设备连接上机器，则会自动弹出一个新的设备条目。</p>
+<p>我们访问该目录下的某个文件，想当于访问某个设备，存放连接到计算机上的设备（终端、磁盘驱动器、光驱、网卡等）的对应文件，常用的是挂在光驱：<code>mount /dev/cdrom /mnt</code></p>
+<h3 id="etc"><a href="#etc" class="headerlink" title="&#x2F;etc"></a>&#x2F;etc</h3><p><code>/etc</code>目录是”配置的所有内容“，包含大部分的系统配置文件。例如，包含系统名称、用户及其密码、网络上计算机的名称以及硬盘上分区的安装位置和时间的文件。</p>
+<p>它同时也包含了了一系列shell脚本，系统的每次启动时，这些shell脚本都会打开每个系统服务。该目录中包含的内容都应该是可读的文本文件。①<code>/etc/crontab</code>,该文件定义了自动化任务运行的时间；②<code>/etc/fstab</code>,存储设备以及相关挂载点的列表 ；③<code>/etc/passward</code>，用户账号列表。etc的含义是Et cetera，表示一些相关的其他东西，&#x2F;etc从UNIX早期开始就被用来存放配置文件，一直沿用至今。需要注意的是，&#x2F;etc中存放的是<strong>系统配置文件</strong>，<strong>特定用户的配置文件</strong>放在每个用户的<code>/home</code>目录下。</p>
+<h3 id="home"><a href="#home" class="headerlink" title="&#x2F;home"></a>&#x2F;home</h3><p><code>/home</code>是我们可以找到个人目录下的地方。</p>
+<p>通常的配置下，每个用户都会在<code>/home</code>目录中拥有一个属于自己的目录。普通用户只能在自己的主目录中创建文件。这一限制可以保护系统免遭错误的用户行为的破坏。</p>
+<h3 id="lib"><a href="#lib" class="headerlink" title="&#x2F;lib"></a>&#x2F;lib</h3><p><code>/lib</code>是库文件所在的地方。库是包含应用程序可以使用的代码文件。它们包含应用程序用于在桌面上绘制窗口、控制外围设备或将文件发送到硬盘的代码片段。</p>
+<p>在文件系统周围散布着更多的<code>lib</code>目录，但是直接挂载在<code>/</code>的<code>lib</code>目录是特殊的，除此之外，它包含了所有重要的内核模块。 内核模块是使你的显卡、声卡、WiFi、打印机等工作的驱动程序。</p>
+<p>&#x2F;lib目录下的库映像文件可以用来启动系统并执行一些命令，目录&#x2F;lib&#x2F;modules包含了可加载的内核模块，&#x2F;lib目录存放了所有重要的库文件，其他的库文件则大部分存放在&#x2F;usr&#x2F;lib目录下。这与Windows系统中的DLL类似。</p>
+<h3 id="lost-found"><a href="#lost-found" class="headerlink" title="&#x2F;lost+found"></a>&#x2F;lost+found</h3><p>当系统意外崩溃或关机时，会产生一些文件碎片，这个目录就是用来存放这些文件碎片的。当系统启动时，fsck工具会对这个文件夹进行检查，并且会对损坏的文件系统进行修复。这个目录只在每个分区中出现，比如&#x2F;lost+found就是根分区的备份恢复目录，&#x2F;boot&#x2F;lost+found就是在&#x2F;boot分区的备份恢复目录。</p>
+<h3 id="media"><a href="#media" class="headerlink" title="&#x2F;media"></a>&#x2F;media</h3><p>在<code>/media</code>目录中，当你插入外部存储器试图访问它时，将自动挂载它，系统会在&#x2F;media下自动创建子目录，之后就可以通过访问这个子目录来访问媒介。比如你在电脑上插入CD，在&#x2F;media目录下就会自动生成一个子目录，你可以通过访问这个子目录来访问CD的内容。</p>
+<h3 id="mnt"><a href="#mnt" class="headerlink" title="&#x2F;mnt"></a>&#x2F;mnt</h3><p><code>/mnt</code> 目录是一些过去的残余。这是你手动挂载存储设备或分区的地方。各种设备挂载到系统后，会在&#x2F;mnt目录下生成相应设备的目录，比如挂载光驱、文件系统、CD等。</p>
+<h3 id="opt"><a href="#opt" class="headerlink" title="&#x2F;opt"></a>&#x2F;opt</h3><p><code>/opt</code> 目录通常是你编译软件（即，你从源代码构建，并不是从你的系统的软件库中安装软件）的地方。应用程序最终会出现在 <code>/opt/bin</code> 目录，库会在 <code>/opt/lib</code> 目录中出现。</p>
+<p>应用程序和库的另一个地方是 <code>/usr/local</code>，在这里安装软件时，也会有 <code>/usr/local/bin</code> 和 <code>/usr/local/lib</code> 目录。开发人员如何配置文件来控制编译和安装过程，这就决定了软件安装到哪个地方。</p>
+<h3 id="proc"><a href="#proc" class="headerlink" title="&#x2F;proc"></a>&#x2F;proc</h3><p><code>/proc</code>，就像 <code>/dev</code> 是一个虚拟目录。它包含有关你的计算机的信息，例如关于你的 CPU 和你的 Linux 系统正在运行的内核的信息。与 <code>/dev</code> 一样，文件和目录是在计算机启动或运行时生成的，因为你的系统正在运行且会发生变化。</p>
+<p>从文件角度来讲，它不是存储在硬盘中的真正的文件系统，反而是一个Linux内核维护的虚拟文件系统。它包含的文件是内核的窥视孔。该文件是可读的，从中可以看到内核是如何监管计算的。</p>
+<h3 id="root"><a href="#root" class="headerlink" title="&#x2F;root"></a>&#x2F;root</h3><p><code>/root</code> 是系统的超级用户（也称为“管理员”）的主目录。</p>
+<h3 id="run"><a href="#run" class="headerlink" title="&#x2F;run"></a>&#x2F;run</h3><p><code>/run</code> 目录用来存放应用程序在运行期间需要的一些短暂存在的文件，比如socket和pid文件，这些文件对这些应用程序的运行很重要，因此不能把他们放在<code>/tmp</code>目录下，因为<code>/tmp</code>目录下的文件有可能会被系统清空。</p>
+<h3 id="sbin"><a href="#sbin" class="headerlink" title="&#x2F;sbin"></a>&#x2F;sbin</h3><p><code>/sbin</code> 与 <code>/bin</code> 类似，但它包含的应用程序只有超级用户（即首字母的 <code>s</code> ）才需要。你可以使用 <code>sudo</code> 命令使用这些应用程序，该命令暂时允许你在许多 Linux 发行版上拥有超级用户权限。<code>/sbin</code> 目录通常包含可以安装、删除和格式化各种东西的工具。</p>
+<h3 id="srv"><a href="#srv" class="headerlink" title="&#x2F;srv"></a>&#x2F;srv</h3><p><code>/srv</code> 目录主要用来存放一些系统提供的网络服务的数据。如果你正在 Linux 机器上运行 Web 服务器，你网站的 HTML文件将放到 <code>/srv/http</code>（或 <code>/srv/www</code>）。 如果你正在运行 FTP 服务器，则你的文件将放到 <code>/srv/ftp</code>。</p>
+<h3 id="sys"><a href="#sys" class="headerlink" title="&#x2F;sys"></a>&#x2F;sys</h3><p><code>/sys</code> 是另一个类似 <code>/proc</code> 和 <code>/dev</code> 的虚拟文件系统，它还包含连接到计算机的设备的信息。都是保存在内存当中，主要是保存一些和内核相关的信息。挂载sysfs 虚拟文件系统，我们可以通过sysfs 文件系统访问 Linux 内核。</p>
+<h3 id="tmp"><a href="#tmp" class="headerlink" title="&#x2F;tmp"></a>&#x2F;tmp</h3><p><code>/tmp</code> 包含临时文件，通常由正在运行的应用程序放置。文件和目录通常（并非总是）包含应用程序现在不需要但以后可能需要的数据。</p>
+<p>你还可以使用 <code>/tmp</code> 来存储你自己的临时文件 。</p>
+<h3 id="usr"><a href="#usr" class="headerlink" title="&#x2F;usr"></a>&#x2F;usr</h3><p><code>/usr</code> 包含了大量目录，而这些目录又包含了应用程序、库、文档、壁纸、图标和许多其他需要应用程序和服务共享的内容。</p>
+<p>我们还可以在 <code>/usr</code> 目录下找到 <code>bin</code>，<code>sbin</code>，<code>lib</code> 目录，它们与挂载到根目录下的那些有什么区别呢？现在的区别不是很大。在早期，<code>/bin</code> 目录（挂载在根目录下的）只会包含一些基本的命令，例如 <code>ls</code>、<code>mv</code> 和 <code>rm</code> ；这是一些在安装系统的时候就会预装的一些命令，用于维护系统的一个基本的命令。 而 <code>/usr/bin</code> 目录则包含了用户自己安装和用于工作的软件，例如文字处理器，浏览器和一些其他的软件。</p>
+<p>但是许多现代的 Linux 发行版只是把所有的东西都放到 <code>/usr/bin</code> 中，并让 <code>/bin</code> 指向 <code>/usr/bin</code>，以防彻底删除它会破坏某些东西。因此，Debian、Ubuntu 和 Mint 仍然保持 <code>/bin</code> 和 <code>/usr/bin</code> （和 <code>/sbin</code> 和 <code>/usr/sbin</code> ）分离；其他的，比如 Arch 和它衍生版，只是有一个“真实”存储二进制程序的目录，<code>/usr/bin</code>，其余的任何 <code>bin</code> 目录是指向 <code>/usr/</code>bin&#96; 的“假”目录。</p>
+<p>可以很明显地发现，Linux将普通用户和系统使用的程序分开存放，比如上面提到过，系统使用的一些重要程序存放在<code>/bin</code>，而那些不重要的程序就被放在<code>/usr/bin</code>。不太重要的系统管理程序存放在&#x2F;usr&#x2F;sbin而不是&#x2F;sbin。usr也被称为UNIX Software Resource，这是比较早期的说法。下面是&#x2F;usr目录下常见的几个子目录的含义。</p>
+<h3 id="usr-local"><a href="#usr-local" class="headerlink" title="&#x2F;usr&#x2F;local"></a>&#x2F;usr&#x2F;local</h3><p>这是系统预设的让你安装你后来升级的套件的目录。例如，当你发现有更新的 Web 套件（如 Apache ）可以安装，而你又不想以 rpm 的方式升级你的套件，则你可以将 apache 这个套件安装在 &#x2F;usr&#x2F;local 底下。安装在这里有个好处，因为目前大家的系统都是差不多的，所以如果你的系统要让别人接管的话，也比较容易上手！也比较容易找的到数据！因此，如果你有需要的话，通常都会将 &#x2F;usr&#x2F;local&#x2F;bin 这个路径加到 path 中。</p>
+<h3 id="usr-include"><a href="#usr-include" class="headerlink" title="&#x2F;usr&#x2F;include"></a>&#x2F;usr&#x2F;include</h3><p>存放编程语言的头文件和包含文件</p>
+<h3 id="usr-share"><a href="#usr-share" class="headerlink" title="&#x2F;usr&#x2F;share"></a>&#x2F;usr&#x2F;share</h3><p>包含了&#x2F;usr&#x2F;bin中的程序所使用的的全部共享数据，这包含默认配置文件、图标、屏幕背景、音频文件等。</p>
+<h3 id="usr-src"><a href="#usr-src" class="headerlink" title="&#x2F;usr&#x2F;src"></a>&#x2F;usr&#x2F;src</h3><p>存放源码</p>
+<h3 id="usr-share-man或-usr-local-man"><a href="#usr-share-man或-usr-local-man" class="headerlink" title="&#x2F;usr&#x2F;share&#x2F;man或&#x2F;usr&#x2F;local&#x2F;man"></a>&#x2F;usr&#x2F;share&#x2F;man或&#x2F;usr&#x2F;local&#x2F;man</h3><p>程序说明文件存放目录，使用 <code>man</code>、 <code>ls</code>时会查询<code>/usr/share/man/man1/ls.1.gz</code>的内容，建议单独分区，设置较大的磁盘空间。这两个目录为放置各类套件说明档的地方，如果执行 <code>man man</code>，则系统会自动去找这两个目录下的所有说明文件。</p>
+<h3 id="var"><a href="#var" class="headerlink" title="&#x2F;var"></a>&#x2F;var</h3><p><code>/var</code> 目录包含了放在 <code>/var/log</code> 子目录的日志文件之类。日志是记录系统中发生的事件的文件。如果内核中出现了什么问题，它将被记录到 <code>/var/log</code> 下的文件中；如果有人试图从外部侵入你的计算机，你的防火墙也将记录尝试。它还包含用于任务的假脱机程序。这些“任务”可以是你发送给共享打印机必须等待执行的任务，因为另一个用户正在打印一个长文档，或者是等待递交给系统上的用户的邮件。</p>
+<h3 id="var-log"><a href="#var-log" class="headerlink" title="&#x2F;var&#x2F;log"></a>&#x2F;var&#x2F;log</h3><p>包含的日志文件，记录了各种系统活动。这些文件非常重要，并且应该时不时监控它们。其中最有用的文件是<code>/var/log/messages</code>。安全起见，只有超级用户才能查看日志文件。</p>
+<h1 id="二、总结"><a href="#二、总结" class="headerlink" title="二、总结"></a>二、总结</h1><p>这次的文章主要是记录一下别人文章里的linux文件系统的各项解释，方便以后自己日常查看。</p>
+<p>参考文章：</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.hanhongju.com/linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9B%AE%E5%BD%95%E7%9A%84%E5%86%85%E5%AE%B9%E8%AF%A6%E8%A7%A3/" >Linux系统中目录的内容详解 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://linux.cn/article-9798-1.html" >Linux文件系统详解 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> Linux系统学习笔记（一）</li>
+        <li><strong>作者:</strong> StreamCons</li>
+        <li><strong>创建于
+                :</strong> 2024-05-14 21:34:00</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2024-05-14 23:57:40
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://aliveman6.github.io/2024/05/14/2024-05-14-Linux系统学习笔记（一）/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/Linux/">#Linux</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2024/05/15/2024-05-15-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E7%BC%96%E7%A0%81/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">字符串和编码</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2024/05/13/2024-05-13-%E5%85%B3%E4%BA%8E%E6%88%91%E5%9C%A8%E5%8D%9A%E5%AE%A2%E4%B8%8A%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0%E7%9A%84%E7%AE%80%E5%8C%96%E6%95%99%E7%A8%8B/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">关于我在博客上发布文章的简化教程</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">Linux系统学习笔记（一）</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%BC%95%E8%A8%80"><span class="nav-text">一、引言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81Tree%E5%91%BD%E4%BB%A4"><span class="nav-text">1、Tree命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%9B%AE%E5%BD%95%E8%AF%A6%E8%A7%A3"><span class="nav-text">2、目录详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bin"><span class="nav-text">&#x2F;bin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#boot"><span class="nav-text">&#x2F;boot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dev"><span class="nav-text">&#x2F;dev</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc"><span class="nav-text">&#x2F;etc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#home"><span class="nav-text">&#x2F;home</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lib"><span class="nav-text">&#x2F;lib</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lost-found"><span class="nav-text">&#x2F;lost+found</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#media"><span class="nav-text">&#x2F;media</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mnt"><span class="nav-text">&#x2F;mnt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#opt"><span class="nav-text">&#x2F;opt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proc"><span class="nav-text">&#x2F;proc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#root"><span class="nav-text">&#x2F;root</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run"><span class="nav-text">&#x2F;run</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sbin"><span class="nav-text">&#x2F;sbin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#srv"><span class="nav-text">&#x2F;srv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sys"><span class="nav-text">&#x2F;sys</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tmp"><span class="nav-text">&#x2F;tmp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usr"><span class="nav-text">&#x2F;usr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usr-local"><span class="nav-text">&#x2F;usr&#x2F;local</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usr-include"><span class="nav-text">&#x2F;usr&#x2F;include</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usr-share"><span class="nav-text">&#x2F;usr&#x2F;share</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usr-src"><span class="nav-text">&#x2F;usr&#x2F;src</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usr-share-man%E6%88%96-usr-local-man"><span class="nav-text">&#x2F;usr&#x2F;share&#x2F;man或&#x2F;usr&#x2F;local&#x2F;man</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#var"><span class="nav-text">&#x2F;var</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#var-log"><span class="nav-text">&#x2F;var&#x2F;log</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-text">二、总结</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2024</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-sync fa-spin" style="--fa-animation-duration: 1.5s; color: #0DEDC4"></i>&nbsp;&nbsp;<a href="/">StreamCons</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 17 篇文章
+                    </span>
+                    
+                        <span>
+                            共 33.7k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.1</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+
+<script src="/js/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+    
+<script src="/js/libs/minimasonry.min.js"></script>
+
+    
+<script src="/js/plugins/masonry.js" type="module"></script>
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>
